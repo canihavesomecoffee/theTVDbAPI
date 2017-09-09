@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<ruleset name="CanIHaveSomeCoffee">
+    <description>A mix between the standard of PHP Code Sniffer and PSR2</description>
+    <exclude-pattern>*/Tests/*</exclude-pattern>
+
+    <rule ref="PHPCS">
+        <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
+        <exclude name="PEAR.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
+        <exclude name="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing"/>
+        <exclude name="Squiz.Commenting.InlineComment.DocBlock"/>
+        <exclude name="Generic.Commenting.Todo.TaskFound"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
+        <exclude name="Squiz.Operators.ComparisonOperatorUsage.ImplicitTrue"/>
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose"/>
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.After"/><!-- Collides with PSR-2 on end of file -->
+        <exclude name="Squiz.PHP.DisallowInlineIf.Found"/>
+        <exclude name="Squiz.ControlStructures.ElseIfDeclaration.NotAllowed"/><!-- Collides with PSR-2 -->
+    </rule>
+    <rule ref="PSR1">
+        <!--
+        <exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace" />
+        -->
+    </rule>
+    <rule ref="PSR2">
+
+        <!--
+        <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps"/>
+
+        <exclude name="Squiz.NamingConventions.ConstantCase.Found"/>
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose"/>
+        -->
+    </rule>
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <properties>
+            <property name="indent" value="4"/>
+        </properties>
+    </rule>
+</ruleset>
