@@ -1,0 +1,23 @@
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/deployment.xml
+.idea/dictionaries/
+.idea/copyright/
+.idea/php-test-framework.xml
+
+# Sensitive or high-churn files:
+.idea/dataSources/
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/dataSources.local.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+
+# Build results
+build
+# Vendor
+vendor
+# Composer lock
+composer.lock
