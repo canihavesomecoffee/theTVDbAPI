@@ -39,7 +39,7 @@ class UsersRouteTest extends BaseRouteTest
     public function testRetrieveUserData()
     {
         $this->parent->expects(static::exactly(1))->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/user')
         )->willReturn(['favoritesDisplaymode' => 'foo', 'language' => 'en', 'userName' => 'foo_bar']);
         $instance = new UsersRoute($this->parent);
@@ -51,7 +51,7 @@ class UsersRouteTest extends BaseRouteTest
     {
         $favourites = ['123', '124', '9999'];
         $this->parent->expects(static::exactly(1))->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/user/favorites')
         )->willReturn(['favorites' => $favourites]);
         $instance = new UsersRoute($this->parent);
@@ -86,7 +86,7 @@ class UsersRouteTest extends BaseRouteTest
     public function testRetrieveAllRatings()
     {
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/user/ratings')
         )->willReturn(
             [
@@ -114,7 +114,7 @@ class UsersRouteTest extends BaseRouteTest
     public function testRetrieveSeriesRatings()
     {
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/user/ratings/query'),
             static::equalTo(['query' => ['itemType' => Rating::RATING_TYPE_SERIES]])
         )->willReturn(

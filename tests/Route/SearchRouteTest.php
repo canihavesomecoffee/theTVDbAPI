@@ -41,7 +41,7 @@ class SearchRouteTest extends BaseRouteTest
     {
         $this->parent->method('performAPICallWithJsonResponse')->willReturn($return);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/search/series'),
             static::equalTo($options)
         );

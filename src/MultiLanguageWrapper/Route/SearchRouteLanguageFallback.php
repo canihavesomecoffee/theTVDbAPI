@@ -63,7 +63,7 @@ class SearchRouteLanguageFallback extends SearchRoute
         $parent  = $this->parent;
         $closure = function ($language) use ($options) {
             $json = $this->parent->performAPICallWithJsonResponse(
-                'getUserData',
+                'get',
                 '/search/series',
                 array_merge($options, ['headers' => ['Accept-Language' => $language]])
             );

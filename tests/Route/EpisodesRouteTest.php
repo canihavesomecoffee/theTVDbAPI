@@ -36,7 +36,7 @@ class EpisodesRouteTest extends BaseRouteTest
         $overview = 'foo bar baz';
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['id' => $episode_id, 'overview' => $overview]);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/episodes/'.$episode_id)
         );
         $instance = new EpisodesRoute($this->parent);

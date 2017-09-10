@@ -58,7 +58,7 @@ class UpdatesRoute extends AbstractRoute
             $options['query']['toTime'] = $toTime->getTimestamp();
         }
 
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/updated/query', $options);
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/updated/query', $options);
         return DataParser::parseDataArray($json, UpdateInfo::class);
     }
 }

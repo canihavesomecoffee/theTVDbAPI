@@ -56,7 +56,7 @@ class LanguagesRoute extends AbstractRoute
      */
     public function getAvailable(): array
     {
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/languages');
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/languages');
         return DataParser::parseDataArray($json, Language::class);
     }
 
@@ -73,7 +73,7 @@ class LanguagesRoute extends AbstractRoute
      */
     public function getLanguage(int $identifier): Language
     {
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', sprintf('/languages/%d', $identifier));
+        $json = $this->parent->performAPICallWithJsonResponse('get', sprintf('/languages/%d', $identifier));
         return DataParser::parseData($json, Language::class);
     }
 }

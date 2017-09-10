@@ -60,7 +60,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
         $series_id = $id;
         $closure = function ($language) use ($series_id) {
             $json = $this->parent->performAPICallWithJsonResponse(
-                'getUserData',
+                'get',
                 '/series/' . $series_id,
                 [
                     'headers' => ['Accept-Language' => $language]
@@ -90,7 +90,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
         $closure = function ($language) use ($series_id, $options) {
             $options['headers'] = ['Accept-Language' => $language];
             $json = $this->parent->performAPICallWithJsonResponse(
-                'getUserData',
+                'get',
                 '/series/' . $series_id . '/episodes',
                 $options
             );
@@ -121,7 +121,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
         $closure = function ($language) use ($series_id, $options) {
             $options['headers'] = ['Accept-Language' => $language];
             $json = $this->parent->performAPICallWithJsonResponse(
-                'getUserData',
+                'get',
                 '/series/' . $series_id . '/episodes/query',
                 $options
             );

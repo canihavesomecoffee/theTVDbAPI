@@ -58,7 +58,7 @@ class EpisodesRoute extends AbstractRoute
      */
     public function byId(int $episodeId): Episode
     {
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/episodes/'.$episodeId);
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/episodes/'.$episodeId);
         return DataParser::parseData($json, Episode::class);
     }
 }

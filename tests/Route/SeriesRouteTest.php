@@ -45,7 +45,7 @@ class SeriesRouteTest extends BaseRouteTest
         $series_id = 1337;
         $overview = 'foo bar baz';
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id)
         )->willReturn(['id' => $series_id, 'overview' => $overview]);
         $instance = new SeriesRoute($this->parent);
@@ -58,7 +58,7 @@ class SeriesRouteTest extends BaseRouteTest
     public function testGetLastModified()
     {
         $series_id = 1337;
-        $last_modified = DateTimeImmutable::createFromMutable(new DateTime());
+        $last_modified = DateTimeImmutable::createFromMutable(DateTime::createFromFormat('U', '1505036194'));
         $wrong_last = 'fail to parse';
         $this->parent->expects(static::exactly(3))->method('requestHeaders')->with(
             static::equalTo('head'),
@@ -95,7 +95,7 @@ class SeriesRouteTest extends BaseRouteTest
     {
         $series_id = 1337;
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/actors')
         )->willReturn(
             [['id' => 123, 'name' => 'foo bar'], ['id' => 124, 'name' => 'bar baz']]
@@ -111,7 +111,7 @@ class SeriesRouteTest extends BaseRouteTest
         $page = 1;
         $options = ['query' => ['page' => $page]];
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/episodes'),
             static::equalTo($options)
         )->willReturn(
@@ -131,7 +131,7 @@ class SeriesRouteTest extends BaseRouteTest
         $series_id = 1337;
         $parameters = ['foo', 'bar', 'baz'];
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/episodes/query/params')
         )->willReturn($parameters);
         $instance = new SeriesRoute($this->parent);
@@ -145,7 +145,7 @@ class SeriesRouteTest extends BaseRouteTest
         $parameters = ['foo', 'bar', 'baz'];
         $options = ['query' => $parameters];
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/episodes/query'),
             static::equalTo($options)
         )->willReturn(
@@ -164,7 +164,7 @@ class SeriesRouteTest extends BaseRouteTest
     {
         $series_id = 1337;
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/episodes/summary')
         )->willReturn(['airedSeasons' => 0]);
         $instance = new SeriesRoute($this->parent);
@@ -177,7 +177,7 @@ class SeriesRouteTest extends BaseRouteTest
         $series_id = 1337;
         $parameters = ['foo', 'bar', 'baz'];
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/filter/params')
         )->willReturn($parameters);
         $instance = new SeriesRoute($this->parent);
@@ -190,7 +190,7 @@ class SeriesRouteTest extends BaseRouteTest
         $series_id = 1337;
         $parameters = ['foo', 'bar', 'baz'];
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/filter'),
             ['query' => ['keys' => join(',', $parameters)]]
         )->willReturn($parameters);
@@ -203,7 +203,7 @@ class SeriesRouteTest extends BaseRouteTest
     {
         $series_id = 1337;
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/images')
         )->willReturn(['fanart' => 1]);
         $instance = new SeriesRoute($this->parent);
@@ -216,7 +216,7 @@ class SeriesRouteTest extends BaseRouteTest
         $series_id = 1337;
         $parameters = [['keyType' => 'foo'], ['keyType' => 'bar']];
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/images/query/params')
         )->willReturn($parameters);
         $instance = new SeriesRoute($this->parent);
@@ -229,7 +229,7 @@ class SeriesRouteTest extends BaseRouteTest
         $series_id = 1337;
         $parameters = ['foo' => 'bar'];
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/images/query'),
             ['query' => $parameters]
         )->willReturn(

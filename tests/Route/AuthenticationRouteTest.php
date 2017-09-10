@@ -92,7 +92,7 @@ class AuthenticationRouteTest extends BaseRouteTest
         $expected_token = 'bar';
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['token' => $expected_token]);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/refresh_token')
         );
         $instance = new AuthenticationRoute($this->parent);
@@ -104,7 +104,7 @@ class AuthenticationRouteTest extends BaseRouteTest
     {
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['error' => '']);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/refresh_token')
         );
         $instance = new AuthenticationRoute($this->parent);

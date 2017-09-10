@@ -51,7 +51,7 @@ class UsersRoute extends AbstractRoute
      */
     public function getUserData(): UserData
     {
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/user');
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/user');
         return DataParser::parseData($json, UserData::class);
     }
 
@@ -62,7 +62,7 @@ class UsersRoute extends AbstractRoute
      */
     public function getFavorites(): array
     {
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/user/favorites');
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/user/favorites');
         return $json['favorites'];
     }
 
@@ -106,12 +106,12 @@ class UsersRoute extends AbstractRoute
                 throw new InvalidArgumentException('Invalid rating type');
             }
             $json = $this->parent->performAPICallWithJsonResponse(
-                'getUserData',
+                'get',
                 '/user/ratings/query',
                 ['query' => ['itemType' => $type]]
             );
         } else {
-            $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/user/ratings');
+            $json = $this->parent->performAPICallWithJsonResponse('get', '/user/ratings');
         }
 
         return new PaginatedResults(DataParser::parseDataArray($json, Rating::class), $this->parent->getLastLinks());

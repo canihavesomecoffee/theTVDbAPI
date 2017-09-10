@@ -66,7 +66,7 @@ class EpisodesRouteLanguageFallback extends EpisodesRoute
         $episode_id = $episodeId;
         $closure    = function ($language) use ($episode_id) {
             $json = $this->parent->performAPICallWithJsonResponse(
-                'getUserData',
+                'get',
                 '/episodes/'.$episode_id,
                 [
                     'headers' => ['Accept-Language' => $language]

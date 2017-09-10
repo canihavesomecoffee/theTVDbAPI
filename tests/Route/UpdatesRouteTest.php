@@ -41,7 +41,7 @@ class UpdatesRouteTest extends BaseRouteTest
         $options = ['query' => ['fromTime' => $from_time]];
         $options_both = ['query' => ['fromTime' => $from_time, 'toTime' => $to_time]];
         $this->parent->expects(static::exactly(2))->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/updated/query'),
             static::logicalOr($options, $options_both)
         )->willReturn([['id' => 123, 'lastUpdated' => 1495295674], ['id' => 124, 'lastUpdated' => 1495295874]]);

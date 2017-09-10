@@ -37,7 +37,7 @@ class LanguagesRouteTest extends BaseRouteTest
             ['id' => 2, 'name' => 'English']
         ]);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/languages')
         );
         $instance = new LanguagesRoute($this->parent);
@@ -51,7 +51,7 @@ class LanguagesRouteTest extends BaseRouteTest
         $name = 'foo bar baz';
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['id' => $language_id, 'name' => $name]);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('getUserData'),
+            static::equalTo('get'),
             static::equalTo('/languages/'.$language_id)
         );
         $instance = new LanguagesRoute($this->parent);

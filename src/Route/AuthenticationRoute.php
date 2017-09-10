@@ -92,7 +92,7 @@ class AuthenticationRoute extends AbstractRoute
      */
     public function refreshToken()
     {
-        $data = $this->parent->performAPICallWithJsonResponse('getUserData', '/refresh_token');
+        $data = $this->parent->performAPICallWithJsonResponse('get', '/refresh_token');
 
         if (array_key_exists('token', $data)) {
             return $data['token'];

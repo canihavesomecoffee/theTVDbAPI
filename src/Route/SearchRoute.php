@@ -69,7 +69,7 @@ class SearchRoute extends AbstractRoute
         }
         $options = ['query' => [$identifier => $searchQuery]];
 
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/search/series', $options);
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/search/series', $options);
         return DataParser::parseDataArray($json, BasicSeries::class);
     }
 

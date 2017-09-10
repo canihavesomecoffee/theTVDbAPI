@@ -63,7 +63,7 @@ class SeriesRoute extends AbstractRoute
      */
     public function getById(int $id): Series
     {
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/series/'.$id);
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/series/'.$id);
         return DataParser::parseData($json, Series::class);
     }
 
@@ -104,7 +104,7 @@ class SeriesRoute extends AbstractRoute
      */
     public function getActors(int $id): array
     {
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/series/'.$id.'/actors');
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/series/'.$id.'/actors');
         return DataParser::parseDataArray($json, Actor::class);
     }
 
@@ -120,7 +120,7 @@ class SeriesRoute extends AbstractRoute
     {
         $options = ['query' => ['page' => $page]];
 
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/series/'.$id.'/episodes', $options);
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/series/'.$id.'/episodes', $options);
 
         return new PaginatedResults(
             DataParser::parseDataArray($json, BasicEpisode::class),
@@ -137,7 +137,7 @@ class SeriesRoute extends AbstractRoute
      */
     public function getEpisodesQueryParams(int $id): array
     {
-        return $this->parent->performAPICallWithJsonResponse('getUserData', '/series/'.$id.'/episodes/query/params');
+        return $this->parent->performAPICallWithJsonResponse('get', '/series/'.$id.'/episodes/query/params');
     }
 
     /**
@@ -151,7 +151,7 @@ class SeriesRoute extends AbstractRoute
     public function getEpisodesWithQuery(int $id, array $query): PaginatedResults
     {
         $json = $this->parent->performAPICallWithJsonResponse(
-            'getUserData',
+            'get',
             '/series/'.$id.'/episodes/query',
             ['query' => $query]
         );
@@ -171,7 +171,7 @@ class SeriesRoute extends AbstractRoute
      */
     public function getEpisodesSummary(int $id): SeriesStatistics
     {
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/series/'.$id.'/episodes/summary');
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/series/'.$id.'/episodes/summary');
 
         return DataParser::parseData($json, SeriesStatistics::class);
     }
@@ -185,7 +185,7 @@ class SeriesRoute extends AbstractRoute
      */
     public function getFilterParams(int $id): array
     {
-        return $this->parent->performAPICallWithJsonResponse('getUserData', '/series/'.$id.'/filter/params');
+        return $this->parent->performAPICallWithJsonResponse('get', '/series/'.$id.'/filter/params');
     }
 
     /**
@@ -199,7 +199,7 @@ class SeriesRoute extends AbstractRoute
     public function getWithFilter(int $id, array $keys): array
     {
         return $this->parent->performAPICallWithJsonResponse(
-            'getUserData',
+            'get',
             '/series/'.$id.'/filter',
             [
                 'query' => ['keys' => join(',', $keys)]
@@ -216,7 +216,7 @@ class SeriesRoute extends AbstractRoute
      */
     public function getImages(int $id): ImageStatistics
     {
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/series/'.$id.'/images');
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/series/'.$id.'/images');
 
         return DataParser::parseData($json, ImageStatistics::class);
     }
@@ -231,7 +231,7 @@ class SeriesRoute extends AbstractRoute
      */
     public function getImagesQueryParams(int $id): array
     {
-        $json = $this->parent->performAPICallWithJsonResponse('getUserData', '/series/'.$id.'/images/query/params');
+        $json = $this->parent->performAPICallWithJsonResponse('get', '/series/'.$id.'/images/query/params');
 
         return DataParser::parseDataArray($json, ImageQueryParams::class);
     }
@@ -253,7 +253,7 @@ class SeriesRoute extends AbstractRoute
     public function getImagesWithQuery(int $id, array $query): array
     {
         $json = $this->parent->performAPICallWithJsonResponse(
-            'getUserData',
+            'get',
             '/series/'.$id.'/images/query',
             ['query' => $query]
         );
