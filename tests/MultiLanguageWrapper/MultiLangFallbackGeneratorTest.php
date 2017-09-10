@@ -54,7 +54,7 @@ class MultiLangFallbackGeneratorTest extends BaseUnitTest
         $validator = $this->createMock(ClassValidator::class);
         $validator->expects(static::never())->method('merge');
         $validator->expects(static::once())->method('isValid')->with($class, $instance)->willReturn(true);
-        $closure = $this->getMockBuilder('object')->setMethods(['__invoke'])->getMock();
+        $closure = $this->getMockBuilder(\stdClass::class)->setMethods(['__invoke'])->getMock();
         $closure->expects(static::once())->method('__invoke')->with($languages[0])->willReturn($instance);
         /** @var ClassValidator $validator */
         $generator = new MultiLanguageFallbackGenerator($validator);
@@ -78,7 +78,7 @@ class MultiLangFallbackGeneratorTest extends BaseUnitTest
             [$class, $null_instance],
             [$class, $instance]
         )->willReturn(false, true);
-        $closure = $this->getMockBuilder('object')->setMethods(['__invoke'])->getMock();
+        $closure = $this->getMockBuilder(\stdClass::class)->setMethods(['__invoke'])->getMock();
         $closure->expects(static::exactly(2))->method('__invoke')->withConsecutive(
             [$languages[0]],
             [$languages[1]]
