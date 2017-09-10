@@ -3,6 +3,7 @@
 [![Packagist](https://img.shields.io/packagist/v/canihavesomecoffee/thetvdbapi.svg)](https://packagist.org/packages/canihavesomecoffee/thetvdbapi)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-green.svg)](https://php.net/)
 [![Build status](https://api.travis-ci.org/canihavesomecoffee/theTVDbAPI.svg?branch=master)](https://travis-ci.org/canihavesomecoffee/theTVDbAPI)
+[![codecov](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI)
 
 This is an API client for the thetvdb.com website. It's using the 2nd, improved API version (RESTful). In order to be
  able to access this API you'll need to register for to use this package.
