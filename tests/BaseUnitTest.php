@@ -123,4 +123,38 @@ abstract class BaseUnitTest extends TestCase
         static::assertArrayHasKey($needle, $hayStack);
         static::assertNotEquals($value, $hayStack[$needle]);
     }
+
+    /**
+     * Asserts that a private attribute (object type) has an attribute that matches the given one.
+     *
+     * @param mixed  $expected              The internal attribute's expected value
+     * @param string $internalAttributeName The internal attribute to compare to
+     * @param string $attributeName         The name of the attribute
+     * @param mixed  $classOrObject         The instance of the object to search into
+     *
+     * @return void
+     */
+    public static function assertAttributeHasEqualAttribute($expected, string $internalAttributeName, string $attributeName, $classOrObject)
+    {
+        $property = static::readAttribute($classOrObject, $attributeName);
+        static::assertObjectHasAttribute($internalAttributeName, $property);
+        static::assertAttributeEquals($expected, $internalAttributeName, $property);
+    }
+
+    /**
+     * Asserts that a private attribute (object type) has an attribute that matches the given type.
+     *
+     * @param string $expected              The expected type
+     * @param string $internalAttributeName The internal attribute to check the type of
+     * @param string $attributeName         The name of the attribute
+     * @param mixed $classOrObject          The instance of the object to search into
+     *
+     * @return void
+     */
+    public static function assertAttributeHasAttributeType(string $expected, string $internalAttributeName, string $attributeName, $classOrObject)
+    {
+        $property = static::readAttribute($classOrObject, $attributeName);
+        static::assertObjectHasAttribute($internalAttributeName, $property);
+        static::assertAttributeInstanceOf($expected, $internalAttributeName, $property);
+    }
 }
