@@ -40,7 +40,6 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Route\UpdatesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\UsersRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
 use GuzzleHttp\Client;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the LanguageFallBack class.

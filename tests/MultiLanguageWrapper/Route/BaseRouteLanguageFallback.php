@@ -10,26 +10,36 @@
  * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
- *
- * Bootstrap for test suite.
- *
- * PHP version 7.1
+ */
+
+declare(strict_types=1);
+
+namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route;
+
+use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
+use CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route\BaseRouteTest;
+use PHPUnit_Framework_MockObject_MockObject;
+
+/**
+ * Class BaseRouteLanguageFallback
  *
  * @category TheTVDbAPI
+ * @package  CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route
  * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-declare(strict_types = 1);
+class BaseRouteLanguageFallback extends BaseRouteTest
+{
+    /**
+     * Mock for the parent of the route
+     *
+     * @var PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $parent;
 
-if (file_exists(__DIR__.'/../vendor/autoload.php')) {
-    require_once __DIR__.'/../vendor/autoload.php';
-} elseif (file_exists(__DIR__.'/../../autoload.php')) {
-    require_once __DIR__.'/../../autoload.php';
-} else {
-    throw new Exception('Could not find Composer\'s autoload.php file.');
+    public function setUp()
+    {
+        $this->parent = static::getMockBuilder(TheTVDbAPILanguageFallback::class)->getMock();
+    }
 }
-
-require_once __DIR__.'/BaseUnitTest.php';
-require_once __DIR__.'/Route/BaseRouteTest.php';
-require_once __DIR__.'/MultiLanguageWrapper/Route/BaseRouteLanguageFallback.php';

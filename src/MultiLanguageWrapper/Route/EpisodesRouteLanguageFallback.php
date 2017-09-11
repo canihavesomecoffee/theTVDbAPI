@@ -33,6 +33,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
+use Closure;
 use Exception;
 
 /**
@@ -62,9 +63,23 @@ class EpisodesRouteLanguageFallback extends EpisodesRoute
     public function byId(int $episodeId): Episode
     {
         /** @var TheTVDbAPILanguageFallback $parent */
-        $parent     = $this->parent;
+        $parent  = $this->parent;
+        $closure = $this->getClosureById($episodeId);
+        return $parent->getGenerator()->create($closure, Episode::class, $this->parent->getAcceptedLanguages());
+    }
+
+    /**
+     * Returns the closure used to fetch an episode by id
+     * for a single language.
+     *
+     * @param int $episodeId The episode to fetch.
+     *
+     * @return Closure
+     */
+    public function getClosureById(int $episodeId): Closure
+    {
         $episode_id = $episodeId;
-        $closure    = function ($language) use ($episode_id) {
+        return function ($language) use ($episode_id) {
             $json = $this->parent->performAPICallWithJsonResponse(
                 'get',
                 '/episodes/'.$episode_id,
@@ -74,6 +89,5 @@ class EpisodesRouteLanguageFallback extends EpisodesRoute
             );
             return DataParser::parseData($json, Episode::class);
         };
-        return $parent->getGenerator()->create($closure, Episode::class, $this->parent->getAcceptedLanguages());
     }
 }

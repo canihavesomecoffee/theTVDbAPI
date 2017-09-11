@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
+use CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPI;
 use PHPUnit_Framework_MockObject_MockObject;
 
 /**
@@ -39,6 +40,6 @@ class BaseRouteTest extends BaseUnitTest
 
     public function setUp()
     {
-        $this->parent = static::getMockBuilder('CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPIInterface')->getMock();
+        $this->parent = static::getMockBuilder(TheTVDbAPI::class)->getMock();
     }
 }
