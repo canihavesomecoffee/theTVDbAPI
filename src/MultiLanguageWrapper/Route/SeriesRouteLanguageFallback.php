@@ -32,6 +32,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SeriesRoute;
+use Closure;
 
 /**
  * Class SeriesRouteLanguageFallback
@@ -56,12 +57,25 @@ class SeriesRouteLanguageFallback extends SeriesRoute
     public function getById(int $id): Series
     {
         /** @var TheTVDbAPILanguageFallback $parent */
-        $parent = $this->parent;
-        $series_id = $id;
-        $closure = function ($language) use ($series_id) {
+        $parent  = $this->parent;
+        $closure = $this->getClosureById($id);
+
+        return $parent->getGenerator()->create($closure, Series::class, $this->parent->getAcceptedLanguages());
+    }
+
+    /**
+     * Returns the closure used to retrieve a series with a given id for a single language.
+     *
+     * @param int $series_id The ID of the series to retrieve.
+     *
+     * @return Closure
+     */
+    public function getClosureById(int $series_id): Closure
+    {
+        return function ($language) use ($series_id) {
             $json = $this->parent->performAPICallWithJsonResponse(
                 'get',
-                '/series/' . $series_id,
+                '/series/'.$series_id,
                 [
                     'headers' => ['Accept-Language' => $language]
                 ]
@@ -69,8 +83,6 @@ class SeriesRouteLanguageFallback extends SeriesRoute
 
             return DataParser::parseData($json, Series::class);
         };
-
-        return $parent->getGenerator()->create($closure, Series::class, $this->parent->getAcceptedLanguages());
     }
 
     /**
@@ -84,19 +96,8 @@ class SeriesRouteLanguageFallback extends SeriesRoute
     public function getEpisodes(int $id, int $page = 1): PaginatedResults
     {
         /** @var TheTVDbAPILanguageFallback $parent */
-        $parent = $this->parent;
-        $series_id = $id;
-        $options = ['query' => ['page' => $page]];
-        $closure = function ($language) use ($series_id, $options) {
-            $options['headers'] = ['Accept-Language' => $language];
-            $json = $this->parent->performAPICallWithJsonResponse(
-                'get',
-                '/series/' . $series_id . '/episodes',
-                $options
-            );
-
-            return DataParser::parseDataArray($json, BasicEpisode::class);
-        };
+        $parent  = $this->parent;
+        $closure = $this->getClosureForEpisodes($id, ['query' => ['page' => $page]]);
 
         return new PaginatedResults(
             $parent->getGenerator()->create($closure, BasicEpisode::class, $this->parent->getAcceptedLanguages()),
@@ -105,9 +106,31 @@ class SeriesRouteLanguageFallback extends SeriesRoute
     }
 
     /**
+     * Returns the closure used to retrieve a set of episodes for a series for a single language.
+     *
+     * @param int   $series_id The series id
+     * @param array $options   The options (pagination, ...)
+     *
+     * @return Closure
+     */
+    public function getClosureForEpisodes(int $series_id, array $options): Closure
+    {
+        return function ($language) use ($series_id, $options) {
+            $options['headers'] = ['Accept-Language' => $language];
+            $json = $this->parent->performAPICallWithJsonResponse(
+                'get',
+                '/series/'.$series_id.'/episodes',
+                $options
+            );
+
+            return DataParser::parseDataArray($json, BasicEpisode::class);
+        };
+    }
+
+    /**
      * Fetches episodes filtered on the given query.
      *
-     * @param int $id The series id.
+     * @param int   $id    The series id.
      * @param array $query The query parameters to filter episodes on.
      *
      * @return PaginatedResults The paginated episodes that match the query.
@@ -115,23 +138,34 @@ class SeriesRouteLanguageFallback extends SeriesRoute
     public function getEpisodesWithQuery(int $id, array $query): PaginatedResults
     {
         /** @var TheTVDbAPILanguageFallback $parent */
-        $parent = $this->parent;
-        $series_id = $id;
-        $options = ['query' => $query];
-        $closure = function ($language) use ($series_id, $options) {
-            $options['headers'] = ['Accept-Language' => $language];
-            $json = $this->parent->performAPICallWithJsonResponse(
-                'get',
-                '/series/' . $series_id . '/episodes/query',
-                $options
-            );
-
-            return DataParser::parseDataArray($json, BasicEpisode::class);
-        };
+        $parent  = $this->parent;
+        $closure = $this->getClosureForEpisodesWithQuery($id, ['query' => $query]);
 
         return new PaginatedResults(
             $parent->getGenerator()->create($closure, BasicEpisode::class, $this->parent->getAcceptedLanguages()),
             $this->parent->getLastLinks()
         );
+    }
+
+    /**
+     * Returns the closure used to retrieve a set of episodes for a series with a certain query for a single language.
+     *
+     * @param int   $series_id The series id
+     * @param array $options   The options (pagination, ...)
+     *
+     * @return Closure
+     */
+    public function getClosureForEpisodesWithQuery(int $series_id, array $options): Closure
+    {
+        return function ($language) use ($series_id, $options) {
+            $options['headers'] = ['Accept-Language' => $language];
+            $json = $this->parent->performAPICallWithJsonResponse(
+                'get',
+                '/series/'.$series_id.'/episodes/query',
+                $options
+            );
+
+            return DataParser::parseDataArray($json, BasicEpisode::class);
+        };
     }
 }
