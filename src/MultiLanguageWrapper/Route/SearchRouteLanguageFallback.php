@@ -30,6 +30,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
+use Closure;
 use InvalidArgumentException;
 
 /**
@@ -61,7 +62,20 @@ class SearchRouteLanguageFallback extends SearchRoute
         $options = ['query' => [$identifier => $searchQuery]];
         /** @var TheTVDbAPILanguageFallback $parent */
         $parent  = $this->parent;
-        $closure = function ($language) use ($options) {
+        $closure = $this->getClosureForSearch($options);
+        return $parent->getGenerator()->create($closure, BasicSeries::class, $this->parent->getAcceptedLanguages());
+    }
+
+    /**
+     * Returns the closure used to execute a search for a single language.
+     *
+     * @param array $options The options for the search.
+     *
+     * @return Closure
+     */
+    public function getClosureForSearch(array $options): Closure
+    {
+        return function ($language) use ($options) {
             $json = $this->parent->performAPICallWithJsonResponse(
                 'get',
                 '/search/series',
@@ -69,6 +83,5 @@ class SearchRouteLanguageFallback extends SearchRoute
             );
             return DataParser::parseDataArray($json, BasicSeries::class);
         };
-        return $parent->getGenerator()->create($closure, BasicSeries::class, $this->parent->getAcceptedLanguages());
     }
 }

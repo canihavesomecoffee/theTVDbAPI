@@ -76,7 +76,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
     /**
      * All episodes for a given series. Paginated with 100 results per page.
      *
-     * @param int $id The id of the series to retrieve.
+     * @param int $id   The id of the series to retrieve.
      * @param int $page The page to start with (defaults to 1).
      *
      * @return PaginatedResults An instance of PaginatedResults.
