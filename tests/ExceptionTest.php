@@ -20,7 +20,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ConflictException;
-
+use function GuzzleHttp\Psr7\parse_query;
 
 /**
  * Class ExceptionTest
@@ -33,57 +33,148 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ConflictException;
  */
 class ExceptionTest extends BaseUnitTest
 {
-    public function testCredentialsException()
+
+
+    /**
+     * Test that for a correct error message can be constructed.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testCreateErrorMessage(): void
+    {
+        $base       = "Error.";
+        $path       = "foo/bar/baz";
+        $parameters = ['foo' => 'bar', 'baz'];
+        static::assertEquals($base, ResourceNotFoundException::createErrorMessage($base));
+        $expectedError = $base.sprintf(ResourceNotFoundException::PATH_MESSAGE, $path, '');
+        static::assertEquals($expectedError, ResourceNotFoundException::createErrorMessage($base, $path));
+        $expectedError = $base.sprintf(
+            ResourceNotFoundException::PATH_MESSAGE,
+            $path,
+            \GuzzleHttp\Psr7\build_query($parameters)
+        );
+        static::assertEquals($expectedError, ResourceNotFoundException::createErrorMessage($base, $path, $parameters));
+    }
+
+    /**
+     * Test that a credential exception has the correct type and error message.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testCredentialsException(): void
     {
         static::expectException(UnauthorizedException::class);
         static::expectExceptionMessage(UnauthorizedException::CREDENTIALS_MESSAGE);
         throw UnauthorizedException::invalidCredentials();
     }
 
-    public function testTokenException()
+    /**
+     * Test that a token exception has the correct type and error message.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testTokenException(): void
     {
         static::expectException(UnauthorizedException::class);
         static::expectExceptionMessage(UnauthorizedException::TOKEN_MESSAGE);
         throw UnauthorizedException::invalidToken();
     }
 
-    public function testCreateErrorMessage()
-    {
-        $base = "Error.";
-        $path = "foo/bar/baz";
-        $parameters = ['foo' => 'bar', 'baz'];
-        static::assertEquals($base, ResourceNotFoundException::createErrorMessage($base));
-        $expected_error = $base . sprintf(ResourceNotFoundException::PATH_MESSAGE, $path, '');
-        static::assertEquals($expected_error, ResourceNotFoundException::createErrorMessage($base, $path));
-        $expected_error = $base . sprintf(ResourceNotFoundException::PATH_MESSAGE, $path,
-                \GuzzleHttp\Psr7\build_query($parameters));
-        static::assertEquals($expected_error, ResourceNotFoundException::createErrorMessage($base, $path, $parameters));
-    }
-
-    public function testNotFoundException()
+    /**
+     * Test that a not found exception has the correct type and error message.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testNotFoundException(): void
     {
         static::expectException(ResourceNotFoundException::class);
         static::expectExceptionMessage(
-            ResourceNotFoundException::createErrorMessage(ResourceNotFoundException::NOT_FOUND_MESSAGE));
+            ResourceNotFoundException::createErrorMessage(ResourceNotFoundException::NOT_FOUND_MESSAGE)
+        );
         throw ResourceNotFoundException::notFound();
     }
 
-    public function testNoTranslationException()
+    /**
+     * Test that a not found exception (including a query) has the correct type and error message.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testNotFoundExceptionWithQuery(): void
+    {
+        $path    = "some/long/path";
+        $options = ['query' => ['foobar']];
+        static::expectException(ResourceNotFoundException::class);
+        static::expectExceptionMessage(
+            ResourceNotFoundException::createErrorMessage(
+                ResourceNotFoundException::NOT_FOUND_MESSAGE,
+                $path,
+                $options['query']
+            )
+        );
+        throw ResourceNotFoundException::notFound($path, $options);
+    }
+
+    /**
+     * Test that an exception for missing translations has the correct type and error message.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testNoTranslationException(): void
     {
         static::expectException(ResourceNotFoundException::class);
         static::expectExceptionMessage(
-            ResourceNotFoundException::createErrorMessage(ResourceNotFoundException::NO_TRANSLATION_MESSAGE));
+            ResourceNotFoundException::createErrorMessage(ResourceNotFoundException::NO_TRANSLATION_MESSAGE)
+        );
         throw ResourceNotFoundException::noTranslationAvailable();
     }
 
-    public function testDecodeException()
+    /**
+     * Test that an exception (including a query) for missing translations has the correct type and error message.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testNoTranslationExceptionWithQuery(): void
+    {
+        $path    = "some/long/path";
+        $options = ['query' => ['foobar']];
+        static::expectException(ResourceNotFoundException::class);
+        static::expectExceptionMessage(
+            ResourceNotFoundException::createErrorMessage(
+                ResourceNotFoundException::NO_TRANSLATION_MESSAGE,
+                $path,
+                $options['query']
+            )
+        );
+        throw ResourceNotFoundException::noTranslationAvailable($path, $options);
+    }
+
+    /**
+     * Test that a decoding exception has the correct type and error message.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testDecodeException(): void
     {
         static::expectException(ParseException::class);
         static::expectExceptionMessage(ParseException::DECODE_MESSAGE);
         throw ParseException::decode();
     }
 
-    public function testMissingHeaderException()
+    /**
+     * Test that a missing header exception has the correct type and error message.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testMissingHeaderException(): void
     {
         $header = 'ABC';
         static::expectException(ParseException::class);
@@ -91,7 +182,13 @@ class ExceptionTest extends BaseUnitTest
         throw ParseException::missingHeader($header);
     }
 
-    public function testFailedTimestampException()
+    /**
+     * Test that an exception for an invalid timestamp has the correct type and error message.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testFailedTimestampException(): void
     {
         $timestamp = '2017-05-05 13...';
         static::expectException(ParseException::class);
@@ -99,7 +196,13 @@ class ExceptionTest extends BaseUnitTest
         throw ParseException::lastModified($timestamp);
     }
 
-    public function testConflictException()
+    /**
+     * Test that a conflict exception has the correct type and error message.
+     *
+     * @return void
+     * @throws UnauthorizedException
+     */
+    public function testConflictException(): void
     {
         static::expectException(ConflictException::class);
         static::expectExceptionMessage(ConflictException::CONFLICT_MESSAGE);

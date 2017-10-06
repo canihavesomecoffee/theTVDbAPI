@@ -63,15 +63,15 @@ class ResourceNotFoundException extends Exception
      */
     public static function createErrorMessage(string $baseMessage, string $path = null, array $parameters = []): string
     {
-        $error_message = $baseMessage;
+        $errorMessage = $baseMessage;
         if ($path !== null) {
-            $error_message .= sprintf(
+            $errorMessage .= sprintf(
                 static::PATH_MESSAGE,
                 $path,
                 \GuzzleHttp\Psr7\build_query($parameters)
             );
         }
-        return $error_message;
+        return $errorMessage;
     }
 
     /**
@@ -84,11 +84,11 @@ class ResourceNotFoundException extends Exception
      */
     public static function notFound(string $path = null, array $options = []): ResourceNotFoundException
     {
-        return new static(static::createErrorMessage(
-            static::NOT_FOUND_MESSAGE,
-            $path,
-            array_key_exists('query', $options) ? $options['query'] : []
-        ));
+        $query = [];
+        if (array_key_exists('query', $options)) {
+            $query = $options['query'];
+        }
+        return new static(static::createErrorMessage(static::NOT_FOUND_MESSAGE, $path, $query));
     }
 
     /**
@@ -101,10 +101,10 @@ class ResourceNotFoundException extends Exception
      */
     public static function noTranslationAvailable(string $path = null, array $options = []): ResourceNotFoundException
     {
-        return new static(static::createErrorMessage(
-            static::NO_TRANSLATION_MESSAGE,
-            $path,
-            array_key_exists('query', $options) ? $options['query'] : []
-        ));
+        $query = [];
+        if (array_key_exists('query', $options)) {
+            $query = $options['query'];
+        }
+        return new static(static::createErrorMessage(static::NO_TRANSLATION_MESSAGE, $path, $query));
     }
 }
