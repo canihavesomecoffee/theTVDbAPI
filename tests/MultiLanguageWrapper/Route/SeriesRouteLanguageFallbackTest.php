@@ -24,6 +24,8 @@
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route;
 
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
+use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route\SeriesRouteLanguageFallback;
 
 /**
@@ -38,4 +40,38 @@ use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route\SeriesRouteLanguage
 class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
 {
 
+
+    public function testGetClosureById()
+    {
+        $seriesId = 1337;
+        $language = 'en';
+        $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
+            static::equalTo('get'),
+            static::equalTo('/series/'.$seriesId),
+            static::equalTo(['headers' => ['Accept-Language' => $language]])
+        )->willReturn(['id' => 123, 'title' => 'foo']);
+        $route    = new SeriesRouteLanguageFallback($this->parent);
+        $instance = $route->getClosureById($seriesId);
+        static::assertInstanceOf(\Closure::class, $instance);
+        $return = $instance($language);
+        static::assertInstanceOf(Series::class, $return);
+    }
+
+    public function testRetrieveSeriesById()
+    {
+        $accepted = ['nl', 'en'];
+        $result   = new Series();
+        // Mock generator.
+        $mockGenerator = $this->createMock(MultiLanguageFallbackGenerator::class);
+        $mockGenerator->expects(static::once())->method('create')->with(
+            static::isInstanceOf(\Closure::class),
+            static::equalTo(Series::class),
+            static::equalTo($accepted)
+        )->willReturn($result);
+        $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
+        $this->parent->expects(static::once())->method('getGenerator')->willReturn($mockGenerator);
+        $instance = new SeriesRouteLanguageFallback($this->parent);
+        $return   = $instance->getById(1337);
+        static::assertInstanceOf(Series::class, $return);
+    }
 }
