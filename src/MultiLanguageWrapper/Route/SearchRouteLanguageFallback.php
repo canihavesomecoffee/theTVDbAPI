@@ -63,7 +63,7 @@ class SearchRouteLanguageFallback extends SearchRoute
         /** @var TheTVDbAPILanguageFallback $parent */
         $parent  = $this->parent;
         $closure = $this->getClosureForSearch($options);
-        return $parent->getGenerator()->create($closure, BasicSeries::class, $this->parent->getAcceptedLanguages());
+        return $parent->getGenerator()->create($closure, BasicSeries::class, $this->parent->getAcceptedLanguages(), true);
     }
 
     /**

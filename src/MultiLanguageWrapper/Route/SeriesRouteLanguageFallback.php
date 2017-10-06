@@ -60,7 +60,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
         $parent  = $this->parent;
         $closure = $this->getClosureById($id);
 
-        return $parent->getGenerator()->create($closure, Series::class, $this->parent->getAcceptedLanguages());
+        return $parent->getGenerator()->create($closure, Series::class, $this->parent->getAcceptedLanguages(), true);
     }
 
     /**
@@ -100,7 +100,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
         $closure = $this->getClosureForEpisodes($id, ['query' => ['page' => $page]]);
 
         return new PaginatedResults(
-            $parent->getGenerator()->create($closure, BasicEpisode::class, $this->parent->getAcceptedLanguages()),
+            $parent->getGenerator()->create($closure, BasicEpisode::class, $this->parent->getAcceptedLanguages(), true),
             $this->parent->getLastLinks()
         );
     }
@@ -142,7 +142,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
         $closure = $this->getClosureForEpisodesWithQuery($id, ['query' => $query]);
 
         return new PaginatedResults(
-            $parent->getGenerator()->create($closure, BasicEpisode::class, $this->parent->getAcceptedLanguages()),
+            $parent->getGenerator()->create($closure, BasicEpisode::class, $this->parent->getAcceptedLanguages(), true),
             $this->parent->getLastLinks()
         );
     }

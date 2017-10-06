@@ -65,7 +65,7 @@ class EpisodesRouteLanguageFallback extends EpisodesRoute
         /** @var TheTVDbAPILanguageFallback $parent */
         $parent  = $this->parent;
         $closure = $this->getClosureById($episodeId);
-        return $parent->getGenerator()->create($closure, Episode::class, $this->parent->getAcceptedLanguages());
+        return $parent->getGenerator()->create($closure, Episode::class, $this->parent->getAcceptedLanguages(), true);
     }
 
     /**
