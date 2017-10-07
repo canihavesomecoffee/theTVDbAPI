@@ -49,7 +49,9 @@
         <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing"/>
     </rule>
     <rule ref="Squiz.ControlStructures.ControlSignature" />
-    <rule ref="Squiz.ControlStructures.ElseIfDeclaration" />
+    <rule ref="Squiz.ControlStructures.ElseIfDeclaration">
+        <exclude name="Squiz.ControlStructures.ElseIfDeclaration.NotAllowed"/>
+    </rule>
     <rule ref="Squiz.Commenting.BlockComment">
         <exclude name="Squiz.Commenting.BlockComment.SingleLine"/>
     </rule>
