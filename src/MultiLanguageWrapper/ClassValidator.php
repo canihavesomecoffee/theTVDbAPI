@@ -44,17 +44,17 @@ class ClassValidator implements ClassValidatorInterface
     /**
      * Checks if for a given instance the required fields are not null.
      *
-     * @param string       $return_type_class The class type of the instance.
-     * @param object|array $instance          The instance to check.
+     * @param string       $returnTypeClass The class type of the instance.
+     * @param object|array $instance        The instance to check.
      *
      * @return bool
      */
-    public function isValid(string $return_type_class, $instance): bool
+    public function isValid(string $returnTypeClass, $instance): bool
     {
-        if (array_key_exists($return_type_class, $this->getRequiredFields()) === false) {
+        if (array_key_exists($returnTypeClass, $this->getRequiredFields()) === false) {
             return false;
         }
-        foreach ($this->getRequiredFields()[$return_type_class] as $property) {
+        foreach ($this->getRequiredFields()[$returnTypeClass] as $property) {
             if (is_array($instance)) {
                 foreach ($instance as $item) {
                     if ($item->{$property} === null) {
@@ -71,31 +71,31 @@ class ClassValidator implements ClassValidatorInterface
     /**
      * Merges two instances together by replacing missing values that are required.
      *
-     * @param string       $return_type_class The class type of the instances.
-     * @param object|array $existing_instance The instance that already exists.
-     * @param object|array $new_instance      The instance to be merged.
+     * @param string       $returnTypeClass  The class type of the instances.
+     * @param object|array $existingInstance The instance that already exists.
+     * @param object|array $newInstance      The instance to be merged.
      *
      * @return mixed
      */
-    public function merge(string $return_type_class, $existing_instance, $new_instance)
+    public function merge(string $returnTypeClass, $existingInstance, $newInstance)
     {
-        if ($existing_instance === null) {
-            return $new_instance;
+        if ($existingInstance === null) {
+            return $newInstance;
         }
-        if (array_key_exists($return_type_class, $this->getRequiredFields()) && $new_instance !== null) {
-            foreach ($this->getRequiredFields()[$return_type_class] as $property) {
-                if (is_array($existing_instance)) {
-                    for ($index = 0; $index < sizeof($existing_instance); $index++) {
-                        if ($existing_instance[$index]->{$property} === null) {
-                            $existing_instance[$index]->{$property} = $new_instance[$index]->{$property};
+        if (array_key_exists($returnTypeClass, $this->getRequiredFields()) && $newInstance !== null) {
+            foreach ($this->getRequiredFields()[$returnTypeClass] as $property) {
+                if (is_array($existingInstance)) {
+                    for ($index = 0; $index < sizeof($existingInstance); $index++) {
+                        if ($existingInstance[$index]->{$property} === null) {
+                            $existingInstance[$index]->{$property} = $newInstance[$index]->{$property};
                         }
                     }
-                } elseif ($existing_instance->{$property} === null) {
-                    $existing_instance->{$property} = $new_instance->{$property};
+                } elseif ($existingInstance->{$property} === null) {
+                    $existingInstance->{$property} = $newInstance->{$property};
                 }
             }
         }
-        return $existing_instance;
+        return $existingInstance;
     }
 
     /**

@@ -52,7 +52,7 @@ class JSONError
     /**
      * The error type.
      *
-     * @var int
+     * @var integer
      */
     private $type;
 

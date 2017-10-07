@@ -60,10 +60,15 @@ class SearchRouteLanguageFallback extends SearchRoute
             throw new InvalidArgumentException('Given search identifier is invalid!');
         }
         $options = ['query' => [$identifier => $searchQuery]];
-        /** @var TheTVDbAPILanguageFallback $parent */
+        /* @var TheTVDbAPILanguageFallback $parent */
         $parent  = $this->parent;
         $closure = $this->getClosureForSearch($options);
-        return $parent->getGenerator()->create($closure, BasicSeries::class, $this->parent->getAcceptedLanguages(), true);
+        return $parent->getGenerator()->create(
+            $closure,
+            BasicSeries::class,
+            $this->parent->getAcceptedLanguages(),
+            true
+        );
     }
 
     /**

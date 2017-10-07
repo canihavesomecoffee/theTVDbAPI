@@ -57,7 +57,7 @@ class BasicSeries
     /**
      * The id of the serie.
      *
-     * @var int
+     * @var integer
      */
     public $id;
     /**

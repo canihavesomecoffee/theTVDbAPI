@@ -60,18 +60,20 @@ class TheTVDbAPILanguageFallback extends TheTVDbAPI
     /**
      * TheTVDbAPILanguageFallback constructor.
      *
-     * @param ClassValidatorInterface $class_validator Optional parameter. If you want more fields to be checked for
-     * null values when performing requests, pass in your own implementation.
-     * @param Client                  $client          Optional parameter. If you pass one in you need to ensure that
-     * 'base_uri' and the content-type of the headers are set in the options.
+     * @param ClassValidatorInterface $classValidator Optional parameter. If you want more fields to be checked for
+     *                                                null values when performing requests, pass in your own
+     *                                                implementation.
+     * @param Client                  $client         Optional parameter. If you pass one in you need to ensure that
+     *                                                'base_uri' and the content-type of the headers are set in the
+     *                                                options.
      */
-    public function __construct(ClassValidatorInterface $class_validator = null, Client $client = null)
+    public function __construct(ClassValidatorInterface $classValidator = null, Client $client = null)
     {
         parent::__construct($client);
-        if ($class_validator === null) {
-            $class_validator = new ClassValidator();
+        if ($classValidator === null) {
+            $classValidator = new ClassValidator();
         }
-        $this->generator = new MultiLanguageFallbackGenerator($class_validator);
+        $this->generator = new MultiLanguageFallbackGenerator($classValidator);
     }
 
     /**

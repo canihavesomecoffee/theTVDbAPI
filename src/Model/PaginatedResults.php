@@ -122,6 +122,10 @@ class PaginatedResults
      */
     private function getLinkElement(string $key): int
     {
-        return (array_key_exists($key, $this->links) ? intval($this->links[$key], 10) : -1);
+        $link = -1;
+        if (array_key_exists($key, $this->links)) {
+            $link = intval($this->links[$key], 10);
+        }
+        return $link;
     }
 }

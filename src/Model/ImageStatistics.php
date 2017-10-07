@@ -39,31 +39,31 @@ class ImageStatistics
     /**
      * Amount of images for fan art.
      *
-     * @var int
+     * @var integer
      */
     public $fanart;
     /**
      * Amount of posters.
      *
-     * @var int
+     * @var integer
      */
     public $poster;
     /**
      * Amount of images for a season.
      *
-     * @var int
+     * @var integer
      */
     public $season;
     /**
      * Amount of images for all seasons.
      *
-     * @var int
+     * @var integer
      */
     public $seasonwide;
     /**
      * Amount of images for the series.
      *
-     * @var int
+     * @var integer
      */
     public $series;
 }

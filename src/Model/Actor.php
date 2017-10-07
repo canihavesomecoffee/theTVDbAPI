@@ -39,7 +39,7 @@ class Actor
     /**
      * The id of the actor.
      *
-     * @var int
+     * @var integer
      */
     public $id;
     /**
@@ -57,7 +57,7 @@ class Actor
     /**
      * The id of the author that added the image.
      *
-     * @var int
+     * @var integer
      */
     public $imageAuthor;
     /**
@@ -81,13 +81,13 @@ class Actor
     /**
      * The id of the series.
      *
-     * @var int
+     * @var integer
      */
     public $seriesId;
     /**
      * The sort order of the actors?
      *
-     * @var int
+     * @var integer
      */
     public $sortOrder;
 }

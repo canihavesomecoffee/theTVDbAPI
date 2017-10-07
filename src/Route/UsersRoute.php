@@ -69,26 +69,26 @@ class UsersRoute extends AbstractRoute
     /**
      * Remove series from favorites.
      *
-     * @param int $series_id The id of the series to remove.
+     * @param int $seriesId The id of the series to remove.
      *
      * @return bool True if the series was removed from the user's favourites.
      */
-    public function removeFavorite(int $series_id): bool
+    public function removeFavorite(int $seriesId): bool
     {
-        $response = $this->parent->performAPICall('delete', '/user/favorites/'.$series_id);
+        $response = $this->parent->performAPICall('delete', '/user/favorites/'.$seriesId);
         return $response->getStatusCode() === 200;
     }
 
     /**
      * Add series to favorites.
      *
-     * @param int $series_id The id of the series to add.
+     * @param int $seriesId The id of the series to add.
      *
      * @return array An array with the user's favourites.
      */
-    public function addFavorite(int $series_id): array
+    public function addFavorite(int $seriesId): array
     {
-        $json = $this->parent->performAPICallWithJsonResponse('put', '/user/favorites/'.$series_id);
+        $json = $this->parent->performAPICallWithJsonResponse('put', '/user/favorites/'.$seriesId);
         return $json['favorites'];
     }
 

@@ -69,7 +69,7 @@ class Series extends BasicSeries
     /**
      * The unix timestamp when the series was last updated.
      *
-     * @var int
+     * @var integer
      */
     public $lastUpdated;
     /**
@@ -93,19 +93,19 @@ class Series extends BasicSeries
     /**
      * The series id. The same as the id?
      *
-     * @var int
+     * @var integer
      */
     public $seriesId;
     /**
      * The rating given by the TVDb users.
      *
-     * @var int
+     * @var integer
      */
     public $siteRating;
     /**
      * The number of people that voted for the rating.
      *
-     * @var int
+     * @var integer
      */
     public $siteRatingCount;
     /**

@@ -56,7 +56,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
      */
     public function getById(int $id): Series
     {
-        /** @var TheTVDbAPILanguageFallback $parent */
+        /* @var TheTVDbAPILanguageFallback $parent */
         $parent  = $this->parent;
         $closure = $this->getClosureById($id);
 
@@ -66,16 +66,16 @@ class SeriesRouteLanguageFallback extends SeriesRoute
     /**
      * Returns the closure used to retrieve a series with a given id for a single language.
      *
-     * @param int $series_id The ID of the series to retrieve.
+     * @param int $seriesId The ID of the series to retrieve.
      *
      * @return Closure
      */
-    public function getClosureById(int $series_id): Closure
+    public function getClosureById(int $seriesId): Closure
     {
-        return function ($language) use ($series_id) {
+        return function ($language) use ($seriesId) {
             $json = $this->parent->performAPICallWithJsonResponse(
                 'get',
-                '/series/'.$series_id,
+                '/series/'.$seriesId,
                 [
                     'headers' => ['Accept-Language' => $language]
                 ]
@@ -95,7 +95,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
      */
     public function getEpisodes(int $id, int $page = 1): PaginatedResults
     {
-        /** @var TheTVDbAPILanguageFallback $parent */
+        /* @var TheTVDbAPILanguageFallback $parent */
         $parent  = $this->parent;
         $closure = $this->getClosureForEpisodes($id, ['query' => ['page' => $page]]);
 
@@ -108,18 +108,18 @@ class SeriesRouteLanguageFallback extends SeriesRoute
     /**
      * Returns the closure used to retrieve a set of episodes for a series for a single language.
      *
-     * @param int   $series_id The series id
-     * @param array $options   The options (pagination, ...)
+     * @param int   $seriesId The series id
+     * @param array $options  The options (pagination, ...)
      *
      * @return Closure
      */
-    public function getClosureForEpisodes(int $series_id, array $options): Closure
+    public function getClosureForEpisodes(int $seriesId, array $options): Closure
     {
-        return function ($language) use ($series_id, $options) {
+        return function ($language) use ($seriesId, $options) {
             $options['headers'] = ['Accept-Language' => $language];
             $json = $this->parent->performAPICallWithJsonResponse(
                 'get',
-                '/series/'.$series_id.'/episodes',
+                '/series/'.$seriesId.'/episodes',
                 $options
             );
 
@@ -137,7 +137,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
      */
     public function getEpisodesWithQuery(int $id, array $query): PaginatedResults
     {
-        /** @var TheTVDbAPILanguageFallback $parent */
+        /* @var TheTVDbAPILanguageFallback $parent */
         $parent  = $this->parent;
         $closure = $this->getClosureForEpisodesWithQuery($id, ['query' => $query]);
 
@@ -150,18 +150,18 @@ class SeriesRouteLanguageFallback extends SeriesRoute
     /**
      * Returns the closure used to retrieve a set of episodes for a series with a certain query for a single language.
      *
-     * @param int   $series_id The series id
-     * @param array $options   The options (pagination, ...)
+     * @param int   $seriesId The series id
+     * @param array $options  The options (pagination, ...)
      *
      * @return Closure
      */
-    public function getClosureForEpisodesWithQuery(int $series_id, array $options): Closure
+    public function getClosureForEpisodesWithQuery(int $seriesId, array $options): Closure
     {
-        return function ($language) use ($series_id, $options) {
+        return function ($language) use ($seriesId, $options) {
             $options['headers'] = ['Accept-Language' => $language];
             $json = $this->parent->performAPICallWithJsonResponse(
                 'get',
-                '/series/'.$series_id.'/episodes/query',
+                '/series/'.$seriesId.'/episodes/query',
                 $options
             );
 

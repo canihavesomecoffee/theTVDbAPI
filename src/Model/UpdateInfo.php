@@ -39,13 +39,13 @@ class UpdateInfo
     /**
      * The id of the series that was updated.
      *
-     * @var int
+     * @var integer
      */
     public $id;
     /**
      * The epoch timestamp of the last update.
      *
-     * @var int
+     * @var integer
      */
     public $lastUpdated;
 }

@@ -62,7 +62,7 @@ class EpisodesRouteLanguageFallback extends EpisodesRoute
      */
     public function byId(int $episodeId): Episode
     {
-        /** @var TheTVDbAPILanguageFallback $parent */
+        /* @var TheTVDbAPILanguageFallback $parent */
         $parent  = $this->parent;
         $closure = $this->getClosureById($episodeId);
         return $parent->getGenerator()->create($closure, Episode::class, $this->parent->getAcceptedLanguages(), true);
@@ -78,11 +78,10 @@ class EpisodesRouteLanguageFallback extends EpisodesRoute
      */
     public function getClosureById(int $episodeId): Closure
     {
-        $episode_id = $episodeId;
-        return function ($language) use ($episode_id) {
+        return function ($language) use ($episodeId) {
             $json = $this->parent->performAPICallWithJsonResponse(
                 'get',
-                '/episodes/'.$episode_id,
+                '/episodes/'.$episodeId,
                 [
                     'headers' => ['Accept-Language' => $language]
                 ]

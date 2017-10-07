@@ -107,7 +107,7 @@ class TheTVDbAPI implements TheTVDbAPIInterface
      * TheTVDbAPI constructor.
      *
      * @param Client $client Optional parameter. If you pass one in you need to ensure that 'base_uri' and the
-     * content-type of the headers are set in the options.
+     *                       content-type of the headers are set in the options.
      */
     public function __construct(Client $client = null)
     {
@@ -259,9 +259,9 @@ class TheTVDbAPI implements TheTVDbAPIInterface
             $headers['Authorization'] = 'Bearer '.$this->token;
         }
 
-        $accept_language_in_options = (array_key_exists('headers', $options) &&
+        $languagesInOptions = (array_key_exists('headers', $options) &&
             array_key_exists('Accept-Language', $options['headers']));
-        if ($this->languages !== null && $accept_language_in_options === false) {
+        if ($this->languages !== null && $languagesInOptions === false) {
             $headers['Accept-Language'] = join(', ', $this->languages);
         }
 
@@ -289,7 +289,7 @@ class TheTVDbAPI implements TheTVDbAPIInterface
     {
         $options = $this->getDefaultHttpClientOptions($options);
 
-        /** @type Response $response */
+        /* @type Response $response */
         $response = $this->httpClient->{$method}($path, $options);
 
         if ($response->getStatusCode() === 401) {
@@ -320,7 +320,7 @@ class TheTVDbAPI implements TheTVDbAPIInterface
         // Reset Link section.
         $this->links = [];
 
-        /** @type Response $response */
+        /* @type Response $response */
         $response = $this->httpClient->{$method}($path, $options);
 
         if ($response->getStatusCode() === 401) {

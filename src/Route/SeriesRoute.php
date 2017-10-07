@@ -80,16 +80,16 @@ class SeriesRoute extends AbstractRoute
         $headers = $this->parent->requestHeaders('head', '/series/'.$id);
 
         if (array_key_exists('Last-Modified', $headers) && array_key_exists(0, $headers['Last-Modified'])) {
-            $last_modified = DateTimeImmutable::createFromFormat(
+            $lastModified = DateTimeImmutable::createFromFormat(
                 static::LAST_MODIFIED_FORMAT,
                 $headers['Last-Modified'][0]
             );
 
-            if ($last_modified === false) {
+            if ($lastModified === false) {
                 throw ParseException::lastModified($headers['Last-Modified'][0]);
             }
 
-            return $last_modified;
+            return $lastModified;
         }
 
         throw ParseException::missingHeader('Last-Modified');

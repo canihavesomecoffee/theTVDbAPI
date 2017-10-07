@@ -45,7 +45,7 @@ class Image
     /**
      * The id of the image
      *
-     * @var int
+     * @var integer
      */
     public $id;
     /**
@@ -57,7 +57,7 @@ class Image
     /**
      * The language id.
      *
-     * @var int
+     * @var integer
      */
     public $languageId;
     /**

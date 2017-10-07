@@ -51,30 +51,30 @@ class DataParser
     /**
      * Parses the given JSON data into an instance of return_class.
      *
-     * @param array  $json         The JSON data. Must be valid
-     * @param string $return_class The expected return class
+     * @param array  $json        The JSON data. Must be valid
+     * @param string $returnClass The expected return class
      *
      * @return mixed
      */
-    public static function parseData(array $json, string $return_class)
+    public static function parseData(array $json, string $returnClass)
     {
-        return static::getSerializer()->denormalize($json, $return_class);
+        return static::getSerializer()->denormalize($json, $returnClass);
     }
 
     /**
      * Parses the given JSON data into an array of return_class instances.
      *
-     * @param object $json         The JSON data. Must be valid
-     * @param string $return_class The expected return class
+     * @param object $json        The JSON data. Must be valid
+     * @param string $returnClass The expected return class
      *
      * @return array
      */
-    public static function parseDataArray($json, string $return_class): array
+    public static function parseDataArray($json, string $returnClass): array
     {
         $result = [];
         if (is_array($json)) {
-            foreach ($json as $result_entry) {
-                $result[] = static::parseData($result_entry, $return_class);
+            foreach ($json as $entry) {
+                $result[] = static::parseData($entry, $returnClass);
             }
         }
         return $result;

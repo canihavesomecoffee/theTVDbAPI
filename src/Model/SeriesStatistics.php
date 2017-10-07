@@ -45,7 +45,7 @@ class SeriesStatistics
     /**
      * The number of aired episodes.
      *
-     * @var int
+     * @var integer
      */
     public $airedEpisodes;
     /**
@@ -57,7 +57,7 @@ class SeriesStatistics
     /**
      * The number of aired episodes on DVD.
      *
-     * @var int
+     * @var integer
      */
     public $dvdEpisodes;
 }

@@ -65,13 +65,13 @@ class Rating
     /**
      * The rating
      *
-     * @var int
+     * @var integer
      */
     public $rating;
     /**
      * The rating item id.
      *
-     * @var int
+     * @var integer
      */
     public $ratingItemId;
     /**

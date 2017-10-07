@@ -59,8 +59,8 @@ class RouteFactory
     public static function getRouteInstance(TheTVDbAPIInterface $parent, string $routeClassName)
     {
         if (array_key_exists($routeClassName, static::$routeInstances) === false) {
-            $class_implements = class_implements($routeClassName);
-            if (in_array('CanIHaveSomeCoffee\TheTVDbAPI\Route\RouteInterface', $class_implements) === false) {
+            $classImplements = class_implements($routeClassName);
+            if (in_array('CanIHaveSomeCoffee\TheTVDbAPI\Route\RouteInterface', $classImplements) === false) {
                 throw new InvalidArgumentException('Class does not implement the RouteInterface!');
             }
             $args = [$parent];

@@ -39,37 +39,37 @@ class BasicEpisode
     /**
      * TVDb episode id.
      *
-     * @var int
+     * @var integer
      */
     public $id;
     /**
      * Absolute episode number for series.
      *
-     * @var int
+     * @var integer
      */
     public $absoluteNumber;
     /**
      * Aired season relative episode number.
      *
-     * @var int
+     * @var integer
      */
     public $airedEpisodeNumber;
     /**
      * Aired season number.
      *
-     * @var int
+     * @var integer
      */
     public $airedSeason;
     /**
      * DVD season relative episode number.
      *
-     * @var int
+     * @var integer
      */
     public $dvdEpisodeNumber;
     /**
      * DVD season number.
      *
-     * @var int
+     * @var integer
      */
     public $dvdSeason;
     /**
@@ -93,7 +93,7 @@ class BasicEpisode
     /**
      * Unix timestamp of last update.
      *
-     * @var int
+     * @var integer
      */
     public $lastUpdated;
 }

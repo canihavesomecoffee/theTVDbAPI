@@ -59,32 +59,32 @@ class MultiLanguageFallbackGenerator
     /**
      * Creates an object using the provided closure, and keeps using fallback languages while the object isn't valid.
      *
-     * @param Closure $perform_request   The closure that calls the API and returns an object of the provided class. The
-     * function call must accept only one parameter: the language for the request.
-     * @param string  $return_type_class The type of class instance that should be returned.
-     * @param array   $languages         The languages that should be tried.
-     * @param bool    $merge             Merge the results in different languages together?
+     * @param Closure $performRequest  The closure that calls the API and returns an object of the provided class. The
+     *                                 function call must accept only one parameter: the language for the request.
+     * @param string  $returnTypeClass The type of class instance that should be returned.
+     * @param array   $languages       The languages that should be tried.
+     * @param bool    $merge           Merge the results in different languages together?
      *
      * @return mixed
      */
     public function create(
-        Closure $perform_request,
-        string $return_type_class,
+        Closure $performRequest,
+        string $returnTypeClass,
         array $languages,
         bool $merge = false
     ) {
-        $language_idx = 0;
-        $return_value = null;
-        $lang_length  = sizeof($languages);
+        $languageIdx = 0;
+        $returnValue = null;
+        $langLength  = sizeof($languages);
         do {
-            $result = $perform_request($languages[$language_idx]);
-            $language_idx++;
-            if ($language_idx > 0 && $merge) {
-                $return_value = $this->validator->merge($return_type_class, $return_value, $result);
+            $result = $performRequest($languages[$languageIdx]);
+            $languageIdx++;
+            if ($languageIdx > 0 && $merge) {
+                $returnValue = $this->validator->merge($returnTypeClass, $returnValue, $result);
             } else {
-                $return_value = $result;
+                $returnValue = $result;
             }
-        } while ($this->validator->isValid($return_type_class, $result) === false && $language_idx < $lang_length);
-        return $return_value;
+        } while ($this->validator->isValid($returnTypeClass, $result) === false && $languageIdx < $langLength);
+        return $returnValue;
     }
 }

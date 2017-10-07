@@ -48,21 +48,21 @@ interface ClassValidatorInterface
     /**
      * Checks if for a given instance the required fields are not null.
      *
-     * @param string       $return_type_class The class type of the instance.
-     * @param object|array $instance          The instance to check.
+     * @param string       $returnTypeClass The class type of the instance.
+     * @param object|array $instance        The instance to check.
      *
      * @return bool
      */
-    public function isValid(string $return_type_class, $instance): bool;
+    public function isValid(string $returnTypeClass, $instance): bool;
 
     /**
      * Merges two instances together by replacing missing values that are required.
      *
-     * @param string       $return_type_class The class type of the instances.
-     * @param object|array $existing_instance The instance that already exists.
-     * @param object|array $new_instance      The instance to be merged.
+     * @param string       $returnTypeClass  The class type of the instances.
+     * @param object|array $existingInstance The instance that already exists.
+     * @param object|array $newInstance      The instance to be merged.
      *
      * @return mixed
      */
-    public function merge(string $return_type_class, $existing_instance, $new_instance);
+    public function merge(string $returnTypeClass, $existingInstance, $newInstance);
 }

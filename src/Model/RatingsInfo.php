@@ -39,13 +39,13 @@ class RatingsInfo
     /**
      * The average rating.
      *
-     * @var int
+     * @var integer
      */
     public $average;
     /**
      * The rating count.
      *
-     * @var int
+     * @var integer
      */
     public $count;
 }

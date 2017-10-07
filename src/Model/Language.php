@@ -39,7 +39,7 @@ class Language
     /**
      * The language id.
      *
-     * @var int
+     * @var integer
      */
     public $id;
     /**

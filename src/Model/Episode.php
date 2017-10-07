@@ -88,7 +88,7 @@ class Episode extends BasicEpisode
     /**
      * The TVDb id of the series.
      *
-     * @var int
+     * @var integer
      */
     public $seriesId;
     /**
@@ -100,25 +100,25 @@ class Episode extends BasicEpisode
     /**
      * Indicates if the special aired after said season.
      *
-     * @var int
+     * @var integer
      */
     public $airsAfterSeason;
     /**
      * Indicates if the special aired before said season.
      *
-     * @var int
+     * @var integer
      */
     public $airsBeforeSeason;
     /**
      * Indicates if a special aired before a certain episode.
      *
-     * @var int
+     * @var integer
      */
     public $airsBeforeEpisode;
     /**
      * User id of the author of the thumbnail.
      *
-     * @var int
+     * @var integer
      */
     public $thumbAuthor;
     /**
@@ -130,13 +130,13 @@ class Episode extends BasicEpisode
     /**
      * The width of the thumbnail in pixels.
      *
-     * @var int
+     * @var integer
      */
     public $thumbWidth;
     /**
      * Height of thumbnail in pixels.
      *
-     * @var int
+     * @var integer
      */
     public $thumbHeight;
     /**
@@ -154,7 +154,7 @@ class Episode extends BasicEpisode
     /**
      * The amount of persons that voted.
      *
-     * @var int
+     * @var integer
      */
     public $siteRatingCount;
 
