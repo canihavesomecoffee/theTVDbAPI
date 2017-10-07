@@ -24,6 +24,8 @@
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route;
 
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route\SeriesRouteLanguageFallback;
@@ -41,6 +43,11 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
 {
 
 
+    /**
+     * Test to check if the closure to retrieve a series by id functions correctly.
+     *
+     * @return void
+     */
     public function testGetClosureById()
     {
         $seriesId = 1337;
@@ -57,6 +64,11 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         static::assertInstanceOf(Series::class, $return);
     }
 
+    /**
+     * Test to check if retrieving a series by id functions correctly.
+     *
+     * @return void
+     */
     public function testRetrieveSeriesById()
     {
         $accepted = ['nl', 'en'];
@@ -73,5 +85,107 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         $instance = new SeriesRouteLanguageFallback($this->parent);
         $return   = $instance->getById(1337);
         static::assertInstanceOf(Series::class, $return);
+    }
+
+    /**
+     * Test to check if the closure to retrieve episodes for a series functions correctly.
+     *
+     * @return void
+     */
+    public function testClosureForEpisodes()
+    {
+        $seriesId = 1337;
+        $options  = ['foo' => 'bar'];
+        $language = 'en';
+        $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
+            static::equalTo('get'),
+            static::equalTo('/series/'.$seriesId.'/episodes'),
+            static::equalTo(array_merge(['headers' => ['Accept-Language' => $language]], $options))
+        )->willReturn([['id' => 123, 'title' => 'foo']]);
+        $route    = new SeriesRouteLanguageFallback($this->parent);
+        $instance = $route->getClosureForEpisodes($seriesId, $options);
+        static::assertInstanceOf(\Closure::class, $instance);
+        $return = $instance($language);
+        static::assertTrue(is_array($return));
+        static::assertCount(1, $return);
+        static::assertContainsOnly(BasicEpisode::class, $return);
+    }
+
+    /**
+     * Test to check if retrieving episodes for a series functions correctly.
+     *
+     * @return void
+     */
+    public function testRetrieveEpisodesForSeries()
+    {
+        $accepted = ['nl', 'en'];
+        $result   = [new BasicEpisode(), new BasicEpisode()];
+        // Mock generator.
+        $mockGenerator = $this->createMock(MultiLanguageFallbackGenerator::class);
+        $mockGenerator->expects(static::once())->method('create')->with(
+            static::isInstanceOf(\Closure::class),
+            static::equalTo(BasicEpisode::class),
+            static::equalTo($accepted)
+        )->willReturn($result);
+        $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
+        $this->parent->expects(static::once())->method('getGenerator')->willReturn($mockGenerator);
+        $instance = new SeriesRouteLanguageFallback($this->parent);
+        $return   = $instance->getEpisodes(1337);
+        static::assertInstanceOf(PaginatedResults::class, $return);
+        $return = $return->getData();
+        static::assertTrue(is_array($return));
+        static::assertCount(2, $return);
+        static::assertContainsOnly(BasicEpisode::class, $return);
+    }
+
+    /**
+     * Test to check if the closure to retrieve episodes for a series functions correctly.
+     *
+     * @return void
+     */
+    public function testClosureForEpisodesWithQuery()
+    {
+        $seriesId = 1337;
+        $options  = ['foo' => 'bar'];
+        $language = 'en';
+        $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
+            static::equalTo('get'),
+            static::equalTo('/series/'.$seriesId.'/episodes/query'),
+            static::equalTo(array_merge(['headers' => ['Accept-Language' => $language]], $options))
+        )->willReturn([['id' => 123, 'title' => 'foo']]);
+        $route    = new SeriesRouteLanguageFallback($this->parent);
+        $instance = $route->getClosureForEpisodesWithQuery($seriesId, $options);
+        static::assertInstanceOf(\Closure::class, $instance);
+        $return = $instance($language);
+        static::assertTrue(is_array($return));
+        static::assertCount(1, $return);
+        static::assertContainsOnly(BasicEpisode::class, $return);
+    }
+
+    /**
+     * Test to check if retrieving episodes for a series functions correctly.
+     *
+     * @return void
+     */
+    public function testRetrieveEpisodesWithQuery()
+    {
+        $accepted = ['nl', 'en'];
+        $result   = [new BasicEpisode(), new BasicEpisode()];
+        // Mock generator.
+        $mockGenerator = $this->createMock(MultiLanguageFallbackGenerator::class);
+        $mockGenerator->expects(static::once())->method('create')->with(
+            static::isInstanceOf(\Closure::class),
+            static::equalTo(BasicEpisode::class),
+            static::equalTo($accepted)
+        )->willReturn($result);
+        $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
+        $this->parent->expects(static::once())->method('getGenerator')->willReturn($mockGenerator);
+        $instance = new SeriesRouteLanguageFallback($this->parent);
+        $return   = $instance->getEpisodesWithQuery(1337, ['foo' => 'bar']);
+        static::assertInstanceOf(PaginatedResults::class, $return);
+        $return = $return->getData();
+        static::assertTrue(is_array($return));
+        static::assertCount(2, $return);
+        static::assertContainsOnly(BasicEpisode::class, $return);
     }
 }
