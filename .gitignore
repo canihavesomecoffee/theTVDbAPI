@@ -5,6 +5,7 @@
 .idea/dictionaries/
 .idea/copyright/
 .idea/php-test-framework.xml
+.idea/codeStyles/
 
 # Sensitive or high-churn files:
 .idea/dataSources/
