@@ -63,7 +63,7 @@ class BasicEpisode
     /**
      * DVD season relative episode number.
      *
-     * @var integer
+     * @var float|integer
      */
     public $dvdEpisodeNumber;
     /**

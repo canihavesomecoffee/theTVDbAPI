@@ -76,7 +76,7 @@ class Episode extends BasicEpisode
     /**
      * The chapter number on the DVD.
      *
-     * @var float
+     * @var float|integer
      */
     public $dvdChapter;
     /**
@@ -148,7 +148,7 @@ class Episode extends BasicEpisode
     /**
      * The average rating on TVDb for this episode.
      *
-     * @var float
+     * @var float|integer
      */
     public $siteRating;
     /**

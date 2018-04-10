@@ -45,10 +45,13 @@ class DataParserTest extends BaseUnitTest
 
     public function testParseImage()
     {
-        $json   = json_decode('{ "id": 845571, "keyType": "series", "subKey": "graphical", "fileName": "graphical/236061-g.jpg", "resolution": "", "ratingsInfo": { "average": 8, "count": 5 }, "thumbnail": "_cache/graphical/236061-g.jpg"}', true);
+        $json   = [
+            json_decode('{ "id": 845571, "keyType": "series", "subKey": "graphical", "fileName": "graphical/236061-g.jpg", "resolution": "", "ratingsInfo": { "average": 8, "count": 5 }, "thumbnail": "_cache/graphical/236061-g.jpg"}', true),
+            json_decode('{ "id": 845571, "keyType": "series", "subKey": "graphical", "fileName": "graphical/236061-g.jpg", "resolution": "", "ratingsInfo": { "average": 8.5, "count": 5 }, "thumbnail": "_cache/graphical/236061-g.jpg"}', true)
+        ];
         /** @var Image $return */
-        $return = DataParser::parseData($json, Image::class);
-        static::assertInstanceOf(Image::class, $return);
-        static::assertInstanceOf(RatingsInfo::class, $return->ratingsInfo);
+        $return = DataParser::parseDataArray($json, Image::class);
+        static::assertContainsOnlyInstancesOf(Image::class, $return);
+        static::assertInstanceOf(RatingsInfo::class, $return[0]->ratingsInfo);
     }
 }
