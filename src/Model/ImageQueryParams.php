@@ -43,7 +43,7 @@ class ImageQueryParams
      */
     public $keyType;
     /**
-     * Unknown??
+     * The language of the art-work.
      *
      * @var string
      */

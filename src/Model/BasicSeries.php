@@ -69,13 +69,13 @@ class BasicSeries
     /**
      * A summary of the serie.
      *
-     * @var string
+     * @var string|null
      */
     public $overview;
     /**
      * The name of the serie.
      *
-     * @var string
+     * @var string|null
      */
     public $seriesName;
     /**

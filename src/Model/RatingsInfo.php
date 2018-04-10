@@ -39,7 +39,7 @@ class RatingsInfo
     /**
      * The average rating.
      *
-     * @var integer
+     * @var float
      */
     public $average;
     /**

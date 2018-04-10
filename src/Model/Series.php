@@ -99,7 +99,7 @@ class Series extends BasicSeries
     /**
      * The rating given by the TVDb users.
      *
-     * @var integer
+     * @var float
      */
     public $siteRating;
     /**
