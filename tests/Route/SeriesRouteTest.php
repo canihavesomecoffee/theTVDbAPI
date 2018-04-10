@@ -166,7 +166,7 @@ class SeriesRouteTest extends BaseRouteTest
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('get'),
             static::equalTo('/series/'.$series_id.'/episodes/summary')
-        )->willReturn(['airedSeasons' => 0]);
+        )->willReturn(['airedSeasons' => ["0", "1"]]);
         $instance = new SeriesRoute($this->parent);
         $stats = $instance->getEpisodesSummary($series_id);
         static::assertInstanceOf(SeriesStatistics::class, $stats);

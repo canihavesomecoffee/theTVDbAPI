@@ -19,6 +19,8 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests;
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\RatingsInfo;
 
 /**
  * Class DataParserTest
@@ -39,5 +41,14 @@ class DataParserTest extends BaseUnitTest
         ];
         $return = DataParser::parseDataArray($json, BasicEpisode::class);
         static::assertContainsOnlyInstancesOf(BasicEpisode::class, $return);
+    }
+
+    public function testParseImage()
+    {
+        $json   = json_decode('{ "id": 845571, "keyType": "series", "subKey": "graphical", "fileName": "graphical/236061-g.jpg", "resolution": "", "ratingsInfo": { "average": 8, "count": 5 }, "thumbnail": "_cache/graphical/236061-g.jpg"}', true);
+        /** @var Image $return */
+        $return = DataParser::parseData($json, Image::class);
+        static::assertInstanceOf(Image::class, $return);
+        static::assertInstanceOf(RatingsInfo::class, $return->ratingsInfo);
     }
 }

@@ -75,19 +75,19 @@ class BasicEpisode
     /**
      * Episode name.
      *
-     * @var string
+     * @var string|null
      */
     public $episodeName;
     /**
      * Episode short description.
      *
-     * @var string
+     * @var string|null
      */
     public $overview;
     /**
      * Y-m-d string value of first time the episode aired.
      *
-     * @var string
+     * @var string|null
      */
     public $firstAired;
     /**

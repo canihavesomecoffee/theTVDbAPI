@@ -25,6 +25,8 @@ declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI;
 
+use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
+use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -88,7 +90,10 @@ class DataParser
     private static function getSerializer(): Serializer
     {
         if (static::$serializer === null) {
-            static::$serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
+            static::$serializer = new Serializer(
+                [new ObjectNormalizer(null, null, null, new PhpDocExtractor())],
+                [new JsonEncoder()]
+            );
         }
         return static::$serializer;
     }
