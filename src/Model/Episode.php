@@ -76,7 +76,7 @@ class Episode extends BasicEpisode
     /**
      * The chapter number on the DVD.
      *
-     * @var float|integer
+     * @var float|integer|null
      */
     public $dvdChapter;
     /**
@@ -100,19 +100,19 @@ class Episode extends BasicEpisode
     /**
      * Indicates if the special aired after said season.
      *
-     * @var integer
+     * @var integer|null
      */
     public $airsAfterSeason;
     /**
      * Indicates if the special aired before said season.
      *
-     * @var integer
+     * @var integer|null
      */
     public $airsBeforeSeason;
     /**
      * Indicates if a special aired before a certain episode.
      *
-     * @var integer
+     * @var integer|null
      */
     public $airsBeforeEpisode;
     /**
@@ -130,13 +130,13 @@ class Episode extends BasicEpisode
     /**
      * The width of the thumbnail in pixels.
      *
-     * @var integer
+     * @var integer|null
      */
     public $thumbWidth;
     /**
      * Height of thumbnail in pixels.
      *
-     * @var integer
+     * @var integer|null
      */
     public $thumbHeight;
     /**

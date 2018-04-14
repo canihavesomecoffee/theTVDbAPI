@@ -45,7 +45,7 @@ class BasicEpisode
     /**
      * Absolute episode number for series.
      *
-     * @var integer
+     * @var integer|null
      */
     public $absoluteNumber;
     /**
@@ -63,13 +63,13 @@ class BasicEpisode
     /**
      * DVD season relative episode number.
      *
-     * @var float|integer
+     * @var float|integer|null
      */
     public $dvdEpisodeNumber;
     /**
      * DVD season number.
      *
-     * @var integer
+     * @var integer|null
      */
     public $dvdSeason;
     /**
