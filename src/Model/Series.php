@@ -91,9 +91,9 @@ class Series extends BasicSeries
      */
     public $runtime;
     /**
-     * The series id. The same as the id?
+     * The series id. Seems to be a string version of the id.
      *
-     * @var integer
+     * @var int|string
      */
     public $seriesId;
     /**
