@@ -57,7 +57,7 @@ class BasicEpisode
     /**
      * Aired season number.
      *
-     * @var integer
+     * @var integer|null
      */
     public $airedSeason;
     /**
