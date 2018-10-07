@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI)
 
 This is an API client for the thetvdb.com website. It's using the 2nd, improved API version (RESTful). In order to be
- able to access this API you'll need to register for to use this package.
+ able to access this API you'll have to register on theTVDb first.
 
 This API implementation can be considered a mix between adrenth/thetvdb2 and Moinax/TvDb.
 
