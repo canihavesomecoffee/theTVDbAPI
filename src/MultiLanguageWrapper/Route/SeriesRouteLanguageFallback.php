@@ -28,6 +28,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
@@ -166,6 +167,51 @@ class SeriesRouteLanguageFallback extends SeriesRoute
             );
 
             return DataParser::parseDataArray($json, BasicEpisode::class);
+        };
+    }
+
+    /**
+     * Query images for the given series ID.
+     *
+     * E.g.: $query = [
+     *      'keyType' => 'fanart',
+     *      'resolution' => '1920x1080',
+     *      'subKey' => 'graphical'
+     * ]
+     *
+     * @param int   $id    The series id.
+     * @param array $query The query parameters.
+     *
+     * @return array A list of found images
+     */
+    public function getImagesWithQuery(int $id, array $query): array
+    {
+        /* @var TheTVDbAPILanguageFallback $parent */
+        $parent  = $this->parent;
+        $closure = $this->getClosureForImagesWithQuery($id, ['query' => $query]);
+
+        return $parent->getGenerator()->create($closure, Image::class, $this->parent->getAcceptedLanguages(), true);
+    }
+
+    /**
+     * Returns the closure used to retrieve search images for a series with a certain query for a single language.
+     *
+     * @param int   $seriesId The series id
+     * @param array $options  The options (pagination, ...)
+     *
+     * @return Closure
+     */
+    public function getClosureForImagesWithQuery(int $seriesId, array $options): Closure
+    {
+        return function ($language) use ($seriesId, $options) {
+            $options['headers'] = ['Accept-Language' => $language];
+            $json = $this->parent->performAPICallWithJsonResponse(
+                'get',
+                '/series/'.$seriesId.'/images/query',
+                $options
+            );
+
+            return DataParser::parseDataArray($json, Image::class);
         };
     }
 }

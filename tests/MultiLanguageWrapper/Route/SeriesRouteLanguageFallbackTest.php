@@ -25,6 +25,7 @@
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
@@ -187,5 +188,56 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         static::assertTrue(is_array($return));
         static::assertCount(2, $return);
         static::assertContainsOnly(BasicEpisode::class, $return);
+    }
+
+    /**
+     * Test to check if the closure to retrieve images with a query for a series functions correctly.
+     *
+     * @return void
+     */
+    public function testClosureForImagesWithQuery()
+    {
+        $seriesId = 1337;
+        $options  = ['foo' => 'bar'];
+        $language = 'en';
+        $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
+            static::equalTo('get'),
+            static::equalTo('/series/'.$seriesId.'/images/query'),
+            static::equalTo(array_merge(['headers' => ['Accept-Language' => $language]], $options))
+        )->willReturn([['id' => 123, 'fileName' => 'foo']]);
+        $route    = new SeriesRouteLanguageFallback($this->parent);
+        $instance = $route->getClosureForImagesWithQuery($seriesId, $options);
+        static::assertInstanceOf(\Closure::class, $instance);
+        $return = $instance($language);
+        static::assertTrue(is_array($return));
+        static::assertCount(1, $return);
+        static::assertContainsOnly(Image::class, $return);
+    }
+
+    /**
+     * Test to check if retrieving images with a query for a series functions correctly.
+     *
+     * @return void
+     */
+    public function testRetrieveImagesWithQuery()
+    {
+        $accepted = ['nl', 'en'];
+        $result   = [new Image(), new Image()];
+        // Mock generator.
+        $mockGenerator = $this->createMock(MultiLanguageFallbackGenerator::class);
+        $mockGenerator->expects(static::once())->method('create')->with(
+            static::isInstanceOf(\Closure::class),
+            static::equalTo(BasicEpisode::class),
+            static::equalTo($accepted)
+        )->willReturn($result);
+        $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
+        $this->parent->expects(static::once())->method('getGenerator')->willReturn($mockGenerator);
+        $instance = new SeriesRouteLanguageFallback($this->parent);
+        $return   = $instance->getImagesWithQuery(1337, ['foo' => 'bar']);
+        static::assertInstanceOf(PaginatedResults::class, $return);
+        $return = $return->getData();
+        static::assertTrue(is_array($return));
+        static::assertCount(2, $return);
+        static::assertContainsOnly(Image::class, $return);
     }
 }
