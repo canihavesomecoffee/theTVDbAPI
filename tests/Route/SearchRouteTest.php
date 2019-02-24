@@ -37,6 +37,14 @@ class SearchRouteTest extends BaseRouteTest
         $instance->search('invalid', 'foo');
     }
 
+    /**
+     * Sets mock data defaults for tests.
+     *
+     * @param $return
+     * @param $options
+     *
+     * @return void
+     */
     private function setMockData($return, $options)
     {
         $this->parent->method('performAPICallWithJsonResponse')->willReturn($return);

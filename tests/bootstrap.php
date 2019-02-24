@@ -30,6 +30,5 @@ if (file_exists(__DIR__.'/../vendor/autoload.php')) {
     throw new Exception('Could not find Composer\'s autoload.php file.');
 }
 
-require_once __DIR__.'/BaseUnitTest.php';
 require_once __DIR__.'/Route/BaseRouteTest.php';
 require_once __DIR__.'/MultiLanguageWrapper/Route/BaseRouteLanguageFallback.php';

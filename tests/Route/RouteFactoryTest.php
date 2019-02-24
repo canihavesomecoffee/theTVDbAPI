@@ -18,8 +18,8 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\AuthenticationRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\RouteFactory;
-use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class RouteFactoryTest
@@ -30,16 +30,16 @@ use PHPUnit_Framework_MockObject_MockObject;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class RouteFactoryTest extends BaseUnitTest
+class RouteFactoryTest extends TestCase
 {
     /**
      * Mock for the parent of the route
      *
-     * @var PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     protected $parent;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->parent = static::getMockBuilder('CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPIInterface')->getMock();
     }

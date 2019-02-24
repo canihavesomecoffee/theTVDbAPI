@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\UpdateInfo;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\UpdatesRoute;
 use DateTime;

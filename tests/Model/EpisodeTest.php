@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Model;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode;
-use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class EpisodeTest
@@ -28,23 +28,23 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class EpisodeTest extends BaseUnitTest
+class EpisodeTest extends TestCase
 {
     public function testDirectorCreation()
     {
         $director = 'Foo Bar Baz';
         $episode = new Episode();
-        static::assertAttributeCount(0, 'directors', $episode);
+        static::assertEquals(0, sizeof($episode->directors));
         $episode->setDirector($director);
-        static::assertAttributeCount(1, 'directors', $episode);
-        static::assertAttributeContains($director, 'directors', $episode);
+        static::assertEquals(1, sizeof($episode->directors));
+        static::assertContains($director, $episode->directors);
     }
 
     public function testDirectorRetrieval()
     {
         $director = 'Foo Bar Baz';
         $episode = new Episode();
-        static::assertAttributeCount(0, 'directors', $episode);
+        static::assertEquals(0, sizeof($episode->directors));
         static::assertEquals('', $episode->getDirector());
         $episode->directors[] = $director;
         static::assertEquals($director, $episode->getDirector());

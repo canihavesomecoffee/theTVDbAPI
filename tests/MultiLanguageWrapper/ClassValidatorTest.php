@@ -21,12 +21,13 @@
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
+declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\ClassValidator;
-use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ClassValidatorTest
@@ -37,7 +38,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class ClassValidatorTest extends BaseUnitTest
+class ClassValidatorTest extends TestCase
 {
     /**
      * @var ClassValidator
@@ -47,7 +48,7 @@ class ClassValidatorTest extends BaseUnitTest
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->validator = new ClassValidator();
     }

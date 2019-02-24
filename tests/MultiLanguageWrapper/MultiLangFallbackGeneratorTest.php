@@ -28,7 +28,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\ClassValidator;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
-use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class to test the MultiLanguageFallbackGenerator
@@ -39,15 +39,8 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class MultiLangFallbackGeneratorTest extends BaseUnitTest
+class MultiLangFallbackGeneratorTest extends TestCase
 {
-    public function testConstructor() {
-        $validator = new ClassValidator();
-        $instance = new MultiLanguageFallbackGenerator($validator);
-        static::assertObjectHasAttribute('validator', $instance);
-        static::assertAttributeEquals($validator, 'validator', $instance);
-    }
-
     public function testCreateWithNoMerge() {
         $languages = ['en'];
         $class = BasicEpisode::class;

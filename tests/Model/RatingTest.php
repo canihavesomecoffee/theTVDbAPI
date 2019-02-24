@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Model;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Rating;
-use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class RatingTest extends BaseUnitTest
+class RatingTest extends TestCase
 {
     public function testIsValidRatingType()
     {

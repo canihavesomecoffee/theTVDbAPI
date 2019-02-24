@@ -25,7 +25,6 @@ declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\ClassValidator;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route\EpisodesRouteLanguageFallback;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route\SearchRouteLanguageFallback;
@@ -38,8 +37,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SeriesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\UpdatesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\UsersRoute;
-use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
-use GuzzleHttp\Client;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the LanguageFallBack class.
@@ -50,21 +48,8 @@ use GuzzleHttp\Client;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class TheTVDbAPILanguageFallbackTest extends BaseUnitTest
+class TheTVDbAPILanguageFallbackTest extends TestCase
 {
-    public function testConstructor() {
-        $validator_mock = $this->createMock(ClassValidator::class);
-        $client_mock = $this->createMock(Client::class);
-        $instance = new TheTVDbAPILanguageFallback($validator_mock, $client_mock);
-        static::assertAttributeEquals($client_mock, 'httpClient', $instance);
-        static::assertAttributeInstanceOf(MultiLanguageFallbackGenerator::class, 'generator', $instance);
-        static::assertAttributeHasEqualAttribute($validator_mock, 'validator', 'generator', $instance);
-        $instance = new TheTVDbAPILanguageFallback(null, $client_mock);
-        static::assertAttributeEquals($client_mock, 'httpClient', $instance);
-        static::assertAttributeInstanceOf(MultiLanguageFallbackGenerator::class, 'generator', $instance);
-        static::assertAttributeHasAttributeType(ClassValidator::class, 'validator', 'generator', $instance);
-    }
-
     public function testGetGenerator() {
         $instance = new TheTVDbAPILanguageFallback();
         static::assertInstanceOf(MultiLanguageFallbackGenerator::class, $instance->getGenerator());

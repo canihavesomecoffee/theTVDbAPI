@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPI;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class TheTVDbAPIDataTest tests with real data from the live API.
@@ -27,7 +28,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPI;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class TheTVDbAPIDataTest extends BaseUnitTest
+class TheTVDbAPIDataTest extends TestCase
 {
     /** @type TheTVDbAPI */
     protected $theTVDbAPI;
@@ -35,7 +36,7 @@ class TheTVDbAPIDataTest extends BaseUnitTest
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         // Set up an authenticated client
         $this->theTVDbAPI = new TheTVDbAPI();

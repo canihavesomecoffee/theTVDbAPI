@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Model;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\JSONError;
-use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class JSONErrorTest
@@ -28,7 +28,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class JSONErrorTest extends BaseUnitTest
+class JSONErrorTest extends TestCase
 {
     public function testDataRetrieval()
     {

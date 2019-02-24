@@ -18,7 +18,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
 use CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route\BaseRouteTest;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class BaseRouteLanguageFallback
@@ -34,11 +34,11 @@ class BaseRouteLanguageFallback extends BaseRouteTest
     /**
      * Mock for the parent of the route
      *
-     * @var PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     protected $parent;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->parent = static::getMockBuilder(TheTVDbAPILanguageFallback::class)->getMock();
     }

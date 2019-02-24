@@ -20,7 +20,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ConflictException;
-use function GuzzleHttp\Psr7\parse_query;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ExceptionTest
@@ -31,7 +31,7 @@ use function GuzzleHttp\Psr7\parse_query;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class ExceptionTest extends BaseUnitTest
+class ExceptionTest extends TestCase
 {
 
 

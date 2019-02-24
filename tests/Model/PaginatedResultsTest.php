@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Model;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
-use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class PaginatedResultsTest
@@ -28,17 +28,8 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Tests\BaseUnitTest;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class PaginatedResultsTest extends BaseUnitTest
+class PaginatedResultsTest extends TestCase
 {
-    public function testCreation()
-    {
-        $data  = ['foo' => 'bar', 'baz' => 'foo'];
-        $links = ['previous' => 0, 'next' => 2, 'first' => 0, 'last' => 1337];
-        $instance = new PaginatedResults($data, $links);
-        static::assertAttributeSame($data, 'data', $instance);
-        static::assertAttributeSame($links, 'links', $instance);
-    }
-
     public function testRetrieveData()
     {
         $data  = ['foo' => 'bar', 'baz' => 'foo'];

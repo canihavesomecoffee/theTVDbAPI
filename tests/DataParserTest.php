@@ -19,9 +19,9 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests;
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\RatingsInfo;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class DataParserTest
@@ -32,7 +32,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Model\RatingsInfo;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class DataParserTest extends BaseUnitTest
+class DataParserTest extends TestCase
 {
     public function testParseBasicEpisodeData()
     {

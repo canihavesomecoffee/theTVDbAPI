@@ -35,6 +35,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Route\SeriesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\UpdatesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\UsersRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPI;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class TheTVDbAPITest tests with mock objects, which do not require a live API key.
@@ -45,9 +46,11 @@ use CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPI;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class TheTVDbAPITest extends BaseUnitTest
+class TheTVDbAPITest extends TestCase
 {
     /**
+     * @param array $queue
+     *
      * @return Client
      */
     private function createClientWithMockHandler(array $queue)
@@ -91,35 +94,6 @@ class TheTVDbAPITest extends BaseUnitTest
         static::assertInstanceOf(SeriesRoute::class, $instance->series());
     }
 
-    public function testInstanceInitialization()
-    {
-        $client = new Client(
-            [
-                'base_uri' => TheTVDbAPI::API_BASE_URI,
-                'verify' => false,
-                'headers' => ['Content-Type' => 'application/json']
-            ]
-        );
-        $test_instance = new TheTVDbAPI($client);
-        static::assertAttributeSame($client, 'httpClient', $test_instance);
-    }
-
-    public function testSetToken()
-    {
-        $token = "ABC";
-        $test_instance = new TheTVDbAPI();
-        $test_instance->setToken($token);
-        static::assertAttributeSame($token, 'token', $test_instance);
-    }
-
-    public function setSetAcceptedLanguages()
-    {
-        $languages = ["nl", "en"];
-        $test_instance = new TheTVDbAPI();
-        $test_instance->setAcceptedLanguages($languages);
-        static::assertAttributeSame($languages, 'languages', $test_instance);
-    }
-
     public function testRetrieveAcceptedLanguages()
     {
         $languages = ["nl", "en"];
@@ -133,7 +107,6 @@ class TheTVDbAPITest extends BaseUnitTest
         $version = "1.33.7";
         $test_instance = new TheTVDbAPI();
         $test_instance->setVersion($version);
-        static::assertAttributeSame($version, 'version', $test_instance);
         // Set wrong version
         static::expectException(InvalidArgumentException::class);
         static::expectExceptionMessage('Version does not match pattern x.y.z (where x, y, z are numbers)');
