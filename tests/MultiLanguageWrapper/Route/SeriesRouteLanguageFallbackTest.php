@@ -227,7 +227,7 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         $mockGenerator = $this->createMock(MultiLanguageFallbackGenerator::class);
         $mockGenerator->expects(static::once())->method('create')->with(
             static::isInstanceOf(\Closure::class),
-            static::equalTo(BasicEpisode::class),
+            static::equalTo(Image::class),
             static::equalTo($accepted)
         )->willReturn($result);
         $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
