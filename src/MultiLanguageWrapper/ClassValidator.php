@@ -85,7 +85,8 @@ class ClassValidator implements ClassValidatorInterface
         if (array_key_exists($returnTypeClass, $this->getRequiredFields()) && $newInstance !== null) {
             foreach ($this->getRequiredFields()[$returnTypeClass] as $property) {
                 if (is_array($existingInstance)) {
-                    for ($index = 0; $index < sizeof($existingInstance); $index++) {
+                    $existingInstanceSize = sizeof($existingInstance);
+                    for ($index = 0; $index < $existingInstanceSize; $index++) {
                         if ($existingInstance[$index]->{$property} === null) {
                             $existingInstance[$index]->{$property} = $newInstance[$index]->{$property};
                         }
