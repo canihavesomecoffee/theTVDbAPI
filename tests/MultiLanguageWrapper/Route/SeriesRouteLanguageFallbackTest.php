@@ -234,8 +234,6 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         $this->parent->expects(static::once())->method('getGenerator')->willReturn($mockGenerator);
         $instance = new SeriesRouteLanguageFallback($this->parent);
         $return   = $instance->getImagesWithQuery(1337, ['foo' => 'bar']);
-        static::assertInstanceOf(PaginatedResults::class, $return);
-        $return = $return->getData();
         static::assertTrue(is_array($return));
         static::assertCount(2, $return);
         static::assertContainsOnly(Image::class, $return);
