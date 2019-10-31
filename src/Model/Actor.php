@@ -57,7 +57,7 @@ class Actor
     /**
      * The id of the author that added the image.
      *
-     * @var integer
+     * @var integer|null
      */
     public $imageAuthor;
     /**
