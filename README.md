@@ -40,9 +40,9 @@ For usage examples of the API, please refer to the examples folder.
 
 ````
 $theTVDbAPI = new \CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPI();
-$theTVDbAPI->setLanguage(['nl']);
+$theTVDbAPI->setAcceptedLanguages(['nl']);
 // or set Dutch with English as fallback language
-$theTVDbAPI->setLanguage['nl', 'en']);
+$theTVDbAPI->setAcceptedLanguages(['nl', 'en']);
 
 // Obtain a token. There are two options:
 // 1. Series data only
