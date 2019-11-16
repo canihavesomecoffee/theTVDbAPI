@@ -81,7 +81,7 @@ class Series extends BasicSeries
     /**
      * The rating of this series (ages, ...).
      *
-     * @var string
+     * @var string|null
      */
     public $rating;
     /**
