@@ -59,6 +59,19 @@ class SearchRoute extends AbstractRoute
 
 
     /**
+     * Checks if the given identifier can be used to search using the API.
+     *
+     * @param string $identifier The identifier to validate.
+     *
+     * @return bool True if the identifier can be used to search, false if not.
+     */
+    public static function isValidSearchIdentifier(string $identifier) : bool
+    {
+        $allowedSearchNames = [static::SEARCH_NAME, static::SEARCH_IMDB, static::SEARCH_ZAP2IT, static::SEARCH_SLUG];
+        return in_array($identifier, $allowedSearchNames);
+    }
+
+    /**
      * Searches on theTVDb with a given query for an given identifier.
      *
      * @param string $identifier  The identifier to search on.
@@ -68,8 +81,7 @@ class SearchRoute extends AbstractRoute
      */
     public function search(string $identifier, string $searchQuery): array
     {
-        $allowedSearchNames = [static::SEARCH_NAME, static::SEARCH_IMDB, static::SEARCH_ZAP2IT, static::SEARCH_SLUG];
-        if (in_array($identifier, $allowedSearchNames) === false) {
+        if (static::isValidSearchIdentifier($identifier) === false) {
             throw new InvalidArgumentException('Given search identifier is invalid!');
         }
         $options = ['query' => [$identifier => $searchQuery]];
