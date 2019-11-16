@@ -5,26 +5,22 @@
 [![Build status](https://api.travis-ci.org/canihavesomecoffee/theTVDbAPI.svg?branch=master)](https://travis-ci.org/canihavesomecoffee/theTVDbAPI)
 [![codecov](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI)
 
-This is an API client for the thetvdb.com website. It's using the 2nd, improved API version (RESTful). In order to be
+This is an API client for the thetvdb.com website. It's using the 3rd, improved API version (RESTful). In order to be
  able to access this API you'll have to register on theTVDb first.
 
 This API implementation can be considered a mix between adrenth/thetvdb2 and Moinax/TvDb.
 
 ## API Key Registration
 
-To use this PHP package, you need to request an API Key from the thetvdb.com website: [http://thetvdb.com/?tab=apiregister](http://thetvdb.com/?tab=apiregister).
+To use this PHP package, you need to request an API Key from the thetvdb.com website: [https://thetvdb.com/dashboard/account/apikeys](https://thetvdb.com/dashboard/account/apikeys).
 
-These guidelines have been taken from the [registration page](http://thetvdb.com/?tab=apiregister) :
+To use the API, there are a few guidelines (taken from [API information page](https://thetvdb.com/api-information)):
 
-> * If you will be using the API information in a commercial product or website, you must email [scott@thetvdb.com](mailto:scott@thetvdb.com) and wait for authorization before using the API. However, you MAY use the API for development and testing before a public release.
-> * If you have a publicly available program, you MUST inform your users of this website and request that they help contribute information and artwork if possible.
-> * You MUST familiarize yourself with our data structure, which is detailed in the wiki documentation.
-> * You MUST NOT perform more requests than are necessary for each user. This means no downloading all of our content (we'll provide the database if you need it). Play nice with our server.
-> * You MUST NOT directly access our data without using the documented API methods.
-> * You MUST keep the email address in your account information current and accurate in case we need to contact you regarding your key (we hate spam as much as anyone, so we'll never release your email address to anyone else).
-> * Please feel free to contact us and request changes to our site and/or API. We'll happily consider all reasonable suggestions.
+> Free, open source projects are welcome to use our API, images, and data as long as they provide attribution including a link to our site. If you sell your app, provide subscription based services, or sell advertising on your app or website, we consider you a commercial project. Commercial projects, both publicly and privately available to at least 10 users, are required to arrange a commercial license. Commercial projects are able to use our API without restriction during development. We often exclude projects from licensing fees until they are financially successful, but this is solely our decision.
+>
+> We reserve the right to change our interfaces, fees, or licensing terms at any point without notice.
 
-Please keep these guidelines in mind when making use of this API client.
+Please keep these guidelines in mind when making use of this API client. For information on how to comply with attribution, please refer to the page linked above.
 
 ## Installation
 
@@ -95,6 +91,7 @@ $theTVDbAPI->series()->getLastModified($seriesId);
 $theTVDbAPI->search()->seriesByName('lost');
 $theTVDbAPI->search()->seriesByImdbId('tt2243973');
 $theTVDbAPI->search()->seriesByZap2itId('EP015679352');
+$theTVDbAPI->search()->seriesBySlug('lost');
 ````
 
 #### Updates
