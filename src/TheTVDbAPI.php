@@ -88,7 +88,7 @@ class TheTVDbAPI implements TheTVDbAPIInterface
      *
      * @var string
      */
-    private $version = '2.1.2';
+    private $version = '3.0.0';
     /**
      * Array containing the JSON errors from the last request.
      *
