@@ -51,7 +51,7 @@ class BasicSeries
     /**
      * The Y-M-D representation of the first time the show aired.
      *
-     * @var string
+     * @var string|null
      */
     public $firstAired;
     /**
@@ -63,7 +63,7 @@ class BasicSeries
     /**
      * The network the serie airs on.
      *
-     * @var string
+     * @var string|null
      */
     public $network;
     /**
