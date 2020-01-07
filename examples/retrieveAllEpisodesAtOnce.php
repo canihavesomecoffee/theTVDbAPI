@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,7 +11,7 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Example to show retrieving a Dutch show (which misses most English titles) using Dutch as the fallback.
+ * Example to retrieve all episodes from a single show which has more than 100 episodes
  *
  * PHP version 7.1
  *
@@ -20,7 +20,6 @@
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-
 declare(strict_types=1);
 
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
@@ -30,25 +29,21 @@ require_once __DIR__.'/../vendor/autoload.php';
 $accessKey = 'YOURKEYHERE';
 
 $theTVDbAPI = new TheTVDbAPILanguageFallback();
-$theTVDbAPI->setAcceptedLanguages(['nl', 'en']);
 
 // Login and set the token.
 $token = $theTVDbAPI->authentication()->login($accessKey);
 $theTVDbAPI->setToken($token);
 
-// Retrieve an episode from a Dutch show.
-$episode = $theTVDbAPI->episodes()->byId(6347388);
-var_dump($episode);
+// Retrieve all episodes from The Big Bang Theory (> 100 episodes).
+$episodes = $theTVDbAPI->series()->getAllEpisodes(80379);
+var_dump($episodes);
 
 /*
-    This will yield something like:
-    class CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode#41 (30) {
-      ... snipped for brevity ...
-      public $episodeName =>
-      string(13) "Imke Courtois"
-      public $overview =>
-      NULL
-      ... snipped for brevity ...
-    }
-    English only would yield twice NULL.
+    This will yield something similar to this:
+    array(285) {
+    [0] =>
+    class CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode#42 (10) {
+    public $id =>
+    int(332484)
+    ... Snipped rest for brevity ...
 */
