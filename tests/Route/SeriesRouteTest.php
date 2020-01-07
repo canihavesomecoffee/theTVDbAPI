@@ -149,7 +149,7 @@ class SeriesRouteTest extends BaseRouteTest
                 [new BasicEpisode(), new BasicEpisode()], ['previous' => 2, 'next' => 4, 'first' => 0, 'last' => 5]),
             new PaginatedResults(
                 [new BasicEpisode(), new BasicEpisode()], ['previous' => 3, 'next' => 5, 'first' => 0, 'last' => 5]),
-            new PaginatedResults([new BasicEpisode()], ['previous' => 4, 'next' => 0, 'first' => 0, 'last' => 5]),
+            new PaginatedResults([new BasicEpisode()], ['previous' => 4, 'next' => 0, 'first' => 0, 'last' => 5])
         );
 
         $episodes = $mock->getAllEpisodes($series_id);
