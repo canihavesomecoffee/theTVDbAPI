@@ -94,7 +94,7 @@ class Episode extends BasicEpisode
     /**
      * The user that last updated this episode.
      *
-     * @var string
+     * @var integer|null
      */
     public $lastUpdatedBy;
     /**
@@ -118,7 +118,7 @@ class Episode extends BasicEpisode
     /**
      * User id of the author of the thumbnail.
      *
-     * @var integer
+     * @var integer|null
      */
     public $thumbAuthor;
     /**
