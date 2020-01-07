@@ -109,7 +109,7 @@ class SeriesRoute extends AbstractRoute
     }
 
     /**
-     * All episodes for a given series. Paginated with 100 results per page.
+     * Returns paginated episodes of the series with 100 results per page.
      *
      * @param int $id   The id of the series to retrieve.
      * @param int $page The page to start with (defaults to 1).
@@ -126,6 +126,26 @@ class SeriesRoute extends AbstractRoute
             DataParser::parseDataArray($json, BasicEpisode::class),
             $this->parent->getLastLinks()
         );
+    }
+
+    /**
+     * Consecutively calls getEpisodes to run through all the paginated results
+     * and groups them together in a single array.
+     *
+     * @param int $id The id of the series to retrieve.
+     *
+     * @return array An array of BasicEpisode instances.
+     */
+    public function getAllEpisodes(int $id): array
+    {
+        $currentPage = 1;
+        $allEpisodes = [];
+        do {
+            $results     = $this->getEpisodes($id, $currentPage);
+            $allEpisodes = array_merge($allEpisodes, $results->getData());
+            $currentPage = $results->getNextPage();
+        } while ($currentPage > 0);
+        return $allEpisodes;
     }
 
     /**

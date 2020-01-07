@@ -126,6 +126,37 @@ class SeriesRouteTest extends BaseRouteTest
         static::assertContainsOnlyInstancesOf(BasicEpisode::class, $episodes->getData());
     }
 
+    public function testGetAllEpisodes()
+    {
+        $series_id = 1337;
+        $mocked_method = 'getEpisodes';
+        $mock = $this->getMockBuilder(SeriesRoute::class)
+            ->setConstructorArgs([$this->parent])
+            ->onlyMethods([$mocked_method])
+            ->getMock();
+        $mock->expects(static::exactly(5))->method($mocked_method)->withConsecutive(
+            [$series_id, 1],
+            [$series_id, 2],
+            [$series_id, 3],
+            [$series_id, 4],
+            [$series_id, 5]
+        )->willReturnOnConsecutiveCalls(
+            new PaginatedResults(
+                [new BasicEpisode(), new BasicEpisode()], ['previous' => 0, 'next' => 2, 'first' => 0, 'last' => 5]),
+            new PaginatedResults(
+                [new BasicEpisode(), new BasicEpisode()], ['previous' => 1, 'next' => 3, 'first' => 0, 'last' => 5]),
+            new PaginatedResults(
+                [new BasicEpisode(), new BasicEpisode()], ['previous' => 2, 'next' => 4, 'first' => 0, 'last' => 5]),
+            new PaginatedResults(
+                [new BasicEpisode(), new BasicEpisode()], ['previous' => 3, 'next' => 5, 'first' => 0, 'last' => 5]),
+            new PaginatedResults([new BasicEpisode()], ['previous' => 4, 'next' => 0, 'first' => 0, 'last' => 5]),
+        );
+
+        $episodes = $mock->getAllEpisodes($series_id);
+        static::assertCount(9, $episodes);
+        static::assertContainsOnlyInstancesOf(BasicEpisode::class, $episodes);
+    }
+
     public function testGetEpisodeQueryParams()
     {
         $series_id = 1337;
