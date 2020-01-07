@@ -1,6 +1,6 @@
 {
   "name": "canihavesomecoffee/thetvdbapi",
-  "description": "PHP implementation for the 2nd version of the TheTVDb API.",
+  "description": "PHP implementation for the 2nd (or newer) version of the TheTVDb API.",
   "type": "library",
   "minimum-stability": "stable",
   "license": "ISC",
