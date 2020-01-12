@@ -2,6 +2,12 @@
 
 ## 1.x
 
+### 1.2.4 (12 January 2020)
+
+- Fix: Ignore ResourceNotFoundException's while retrieving data using the language wrapper.
+- Fix: Added `getImages` method to the multi-language fallback to correct wrong return values.
+- New: Added an example to retrieve banners. 
+
 ### 1.2.3 (7 January 2020)
 
 - Fix: Make documentation on `getEpisodes` a bit clearer
