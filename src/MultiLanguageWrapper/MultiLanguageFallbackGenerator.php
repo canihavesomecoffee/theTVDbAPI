@@ -25,6 +25,7 @@ declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper;
 
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use Closure;
 
 /**
@@ -77,7 +78,11 @@ class MultiLanguageFallbackGenerator
         $returnValue = null;
         $langLength  = sizeof($languages);
         do {
-            $result = $performRequest($languages[$languageIdx]);
+            try {
+                $result = $performRequest($languages[$languageIdx]);
+            } catch (ResourceNotFoundException $unused) {
+                $result = null;
+            }
             $languageIdx++;
             if ($languageIdx > 0 && $merge) {
                 $returnValue = $this->validator->merge($returnTypeClass, $returnValue, $result);

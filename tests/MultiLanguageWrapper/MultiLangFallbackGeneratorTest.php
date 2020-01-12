@@ -25,6 +25,7 @@ declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper;
 
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\ClassValidator;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
@@ -48,7 +49,7 @@ class MultiLangFallbackGeneratorTest extends TestCase
         $validator = $this->createMock(ClassValidator::class);
         $validator->expects(static::never())->method('merge');
         $validator->expects(static::once())->method('isValid')->with($class, $instance)->willReturn(true);
-        $closure = $this->getMockBuilder(\stdClass::class)->setMethods(['__invoke'])->getMock();
+        $closure = $this->getMockBuilder(\stdClass::class)->addMethods(['__invoke'])->getMock();
         $closure->expects(static::once())->method('__invoke')->with($languages[0])->willReturn($instance);
         /** @var ClassValidator $validator */
         $generator = new MultiLanguageFallbackGenerator($validator);
@@ -72,11 +73,44 @@ class MultiLangFallbackGeneratorTest extends TestCase
             [$class, $null_instance],
             [$class, $instance]
         )->willReturn(false, true);
-        $closure = $this->getMockBuilder(\stdClass::class)->setMethods(['__invoke'])->getMock();
+        $closure = $this->getMockBuilder(\stdClass::class)->addMethods(['__invoke'])->getMock();
         $closure->expects(static::exactly(2))->method('__invoke')->withConsecutive(
             [$languages[0]],
             [$languages[1]]
         )->willReturn($null_instance, $instance);
+        /** @var ClassValidator $validator */
+        $generator = new MultiLanguageFallbackGenerator($validator);
+        /** @var \Closure $closure */
+        $result = $generator->create(\Closure::fromCallable($closure), $class, $languages, true);
+        static::assertInstanceOf($class, $result);
+        static::assertEquals($instance, $result);
+    }
+
+    public function testCreateCatchesResourceNotFound() {
+        $languages = ['en', 'nl'];
+        $class = BasicEpisode::class;
+        $instance = new BasicEpisode();
+        $null_instance = new BasicEpisode();
+        $callback = function($lang) {
+            if($lang == "en") {
+                throw new ResourceNotFoundException();
+            }
+            return new BasicEpisode();
+        };
+        $validator = $this->createMock(ClassValidator::class);
+        $validator->expects(static::exactly(2))->method('merge')->withConsecutive(
+            [$class, null, null],
+            [$class, $null_instance, $instance]
+        )->willReturn($null_instance, $instance);
+        $validator->expects(static::exactly(2))->method('isValid')->withConsecutive(
+            [$class, null],
+            [$class, $instance]
+        )->willReturn(false, true);
+        $closure = $this->getMockBuilder(\stdClass::class)->addMethods(['__invoke'])->getMock();
+        $closure->expects(static::exactly(2))->method('__invoke')->withConsecutive(
+            [$languages[0]],
+            [$languages[1]]
+        )->will(static::returnCallback($callback));
         /** @var ClassValidator $validator */
         $generator = new MultiLanguageFallbackGenerator($validator);
         /** @var \Closure $closure */
