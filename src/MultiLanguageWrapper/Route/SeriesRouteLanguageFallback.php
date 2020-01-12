@@ -29,6 +29,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route;
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\ImageStatistics;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
@@ -167,6 +168,49 @@ class SeriesRouteLanguageFallback extends SeriesRoute
             );
 
             return DataParser::parseDataArray($json, BasicEpisode::class);
+        };
+    }
+
+    /**
+     * Fetches statistics on the submitted images.
+     *
+     * @param int $id The id of the series.
+     *
+     * @return ImageStatistics An instance with series statistics.
+     */
+    public function getImages(int $id): ImageStatistics
+    {
+        /* @var TheTVDbAPILanguageFallback $parent */
+        $parent  = $this->parent;
+        $closure = $this->getClosureForImages($id);
+
+        return $parent->getGenerator()->create(
+            $closure,
+            ImageStatistics::class,
+            $this->parent->getAcceptedLanguages(),
+            true
+        );
+    }
+
+    /**
+     * Returns the closure used to retrieve image statistics for a series with a certain query for a single language.
+     *
+     * @param int $seriesId The series id
+     *
+     * @return Closure
+     */
+    public function getClosureForImages(int $seriesId): Closure
+    {
+        return function ($language) use ($seriesId) {
+            $json = $this->parent->performAPICallWithJsonResponse(
+                'get',
+                '/series/'.$seriesId.'/images',
+                [
+                    'headers' => ['Accept-Language' => $language]
+                ]
+            );
+
+            return DataParser::parseData($json, ImageStatistics::class);
         };
     }
 

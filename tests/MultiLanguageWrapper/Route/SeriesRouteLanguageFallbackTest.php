@@ -27,6 +27,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\ImageStatistics;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
@@ -189,6 +190,49 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         static::assertTrue(is_array($return));
         static::assertCount(2, $return);
         static::assertContainsOnly(BasicEpisode::class, $return);
+    }
+
+    /**
+     * Test to check if the closure to retrieve images statistics for a series functions correctly.
+     *
+     * @return void
+     */
+    public function testClosureForImages()
+    {
+        $seriesId = 1337;
+        $language = 'en';
+        $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
+            static::equalTo('get'),
+            static::equalTo('/series/'.$seriesId.'/images'),
+            static::equalTo(['headers' => ['Accept-Language' => $language]])
+        )->willReturn(['fanart' => 1, 'poster' => 3]);
+        $route    = new SeriesRouteLanguageFallback($this->parent);
+        $instance = $route->getClosureForImages($seriesId);
+        static::assertInstanceOf(\Closure::class, $instance);
+        $return = $instance($language);
+        static::assertInstanceOf(ImageStatistics::class, $return);
+    }
+
+    /**
+     * Test to check if retrieving image statistics for a series functions correctly.
+     *
+     * @return void
+     */
+    public function testRetrieveImages()
+    {
+        $accepted = ['nl', 'en'];
+        // Mock generator.
+        $mockGenerator = $this->createMock(MultiLanguageFallbackGenerator::class);
+        $mockGenerator->expects(static::once())->method('create')->with(
+            static::isInstanceOf(\Closure::class),
+            static::equalTo(ImageStatistics::class),
+            static::equalTo($accepted)
+        )->willReturn(new ImageStatistics());
+        $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
+        $this->parent->expects(static::once())->method('getGenerator')->willReturn($mockGenerator);
+        $instance = new SeriesRouteLanguageFallback($this->parent);
+        $return   = $instance->getImages(1337);
+        static::assertInstanceOf(ImageStatistics::class, $return);
     }
 
     /**
