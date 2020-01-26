@@ -45,7 +45,7 @@ class BasicSeries
     /**
      * The URL to the banner of the serie.
      *
-     * @var string
+     * @var string|null
      */
     public $banner;
     /**
@@ -81,13 +81,13 @@ class BasicSeries
     /**
      * The slug of the serie.
      *
-     * @var string
+     * @var string|null
      */
     public $slug;
     /**
      * The status of the serie.
      *
-     * @var string
+     * @var string|null
      */
     public $status;
 }
