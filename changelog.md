@@ -2,6 +2,11 @@
 
 ## 1.x
 
+
+### 1.2.5 (27 January 2020)
+
+- Fix: Allow null for Banner, Slug and Status fields of BasicSeries (PR #8, #9)
+
 ### 1.2.4 (12 January 2020)
 
 - Fix: Ignore ResourceNotFoundException's while retrieving data using the language wrapper.
