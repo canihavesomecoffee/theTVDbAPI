@@ -3,6 +3,10 @@
 ## 1.x
 
 
+### 1.2.6 (8 March 2020)
+
+- New: Broadened allowed version dependencies for the 3 Symfony packages (Dependabot).
+
 ### 1.2.5 (27 January 2020)
 
 - Fix: Allow null for Banner, Slug and Status fields of BasicSeries (PR #8, #9)
