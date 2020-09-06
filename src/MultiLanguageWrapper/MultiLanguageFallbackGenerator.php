@@ -65,6 +65,7 @@ class MultiLanguageFallbackGenerator
      * @param string  $returnTypeClass The type of class instance that should be returned.
      * @param array   $languages       The languages that should be tried.
      * @param bool    $merge           Merge the results in different languages together?
+     * @param null    $defaultReturn   The default return value.
      *
      * @return mixed
      */
@@ -72,10 +73,11 @@ class MultiLanguageFallbackGenerator
         Closure $performRequest,
         string $returnTypeClass,
         array $languages,
-        bool $merge = false
+        bool $merge = false,
+        $defaultReturn = null
     ) {
         $languageIdx = 0;
-        $returnValue = null;
+        $returnValue = $defaultReturn;
         $langLength  = sizeof($languages);
         do {
             try {

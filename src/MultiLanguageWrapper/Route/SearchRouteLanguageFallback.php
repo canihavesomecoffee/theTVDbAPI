@@ -67,7 +67,8 @@ class SearchRouteLanguageFallback extends SearchRoute
             $closure,
             BasicSeries::class,
             $this->parent->getAcceptedLanguages(),
-            true
+            true,
+            []
         );
     }
 

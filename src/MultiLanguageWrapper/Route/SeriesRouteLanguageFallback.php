@@ -234,7 +234,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
         $parent  = $this->parent;
         $closure = $this->getClosureForImagesWithQuery($id, ['query' => $query]);
 
-        return $parent->getGenerator()->create($closure, Image::class, $this->parent->getAcceptedLanguages(), true);
+        return $parent->getGenerator()->create($closure, Image::class, $this->parent->getAcceptedLanguages(), true, []);
     }
 
     /**
