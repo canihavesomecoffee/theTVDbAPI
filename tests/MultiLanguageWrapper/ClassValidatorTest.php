@@ -26,6 +26,7 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\ClassValidator;
 use PHPUnit\Framework\TestCase;
 
@@ -134,5 +135,14 @@ class ClassValidatorTest extends TestCase
         static::assertEquals($valid_instance, $results[1]);
         static::assertEquals($invalid_instance, $results[2]);
         static::assertEquals($valid_instance, $results[3]);
+    }
+
+    public function testMergeWithRegularArrays() {
+        $valid_instance = new Image();
+        $another_valid_instance = new Image();
+        $results = $this->validator->merge(Image::class, [$valid_instance], [$another_valid_instance]);
+        static::assertCount(2, $results);
+        static::assertEquals($valid_instance, $results[0]);
+        static::assertEquals($another_valid_instance, $results[1]);
     }
 }

@@ -95,6 +95,8 @@ class ClassValidator implements ClassValidatorInterface
                     $existingInstance->{$property} = $newInstance->{$property};
                 }
             }
+        } else if(is_array($existingInstance) && is_array($newInstance)) {
+            $existingInstance = array_merge($existingInstance, $newInstance);
         }
         return $existingInstance;
     }

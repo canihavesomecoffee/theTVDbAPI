@@ -2,6 +2,10 @@
 
 ## 1.x
 
+### 1.2.8 (6 September 2020)
+
+- Fix: Make sure the data elements are merged correctly when merging arrays of regular objects.
+
 ### 1.2.7 (6 September 2020)
 
 - Fix: Make sure an array is returned when using the multi language wrapper when an array is required.
