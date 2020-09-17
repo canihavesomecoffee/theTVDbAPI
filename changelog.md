@@ -2,6 +2,12 @@
 
 ## 1.x
 
+### 1.3.0 (17 September 2020)
+
+- New: Allow Guzzle 7.x clients
+- Changed: Bump PHPUnit to version 9
+- Changed: Update Travis configuration for PHP 7.4
+
 ### 1.2.8 (6 September 2020)
 
 - Fix: Make sure the data elements are merged correctly when merging arrays of regular objects.
