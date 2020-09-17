@@ -5,7 +5,7 @@
 ### 1.3.0 (17 September 2020)
 
 - New: Allow Guzzle 7.x clients
-- Changed: Bump PHPUnit to version 9
+- Changed: Allow PHPUnit version 9 next to version 8 to prepare for future PHP version bumps
 - Changed: Update Travis configuration for PHP 7.4
 
 ### 1.2.8 (6 September 2020)
