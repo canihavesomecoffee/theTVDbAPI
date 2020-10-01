@@ -5,8 +5,10 @@
 [![Build status](https://api.travis-ci.org/canihavesomecoffee/theTVDbAPI.svg?branch=master)](https://travis-ci.org/canihavesomecoffee/theTVDbAPI)
 [![codecov](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI)
 
-This is an API client for the thetvdb.com website. It's using the 3rd, improved API version (RESTful). In order to be
+This is an API client for the thetvdb.com website. It's using the **3rd**, improved API version (RESTful). In order to be
  able to access this API you'll have to register on theTVDb first.
+ 
+ **Important notice: This API version (3) of theTVDb will be superseded by a new version early 2021 (unknown release date). No details are available on the new version as of yet, but we will look into making a new API wrapper available when these details become available.**
 
 This API implementation can be considered a mix between adrenth/thetvdb2 and Moinax/TvDb.
 
