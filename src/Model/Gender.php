@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,9 +11,9 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Represents image statistics on TVDb.
+ * Class to represent a gender on theTVDb.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -21,49 +21,28 @@
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class ImageStatistics
+ * Class Gender
  *
- * @category TheTVDbAPI
- * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
- * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
- * @license  See start of document
- * @link     https://canihavesome.coffee/projects/theTVDbAPI
+ * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
  */
-class ImageStatistics
+class Gender
 {
     /**
-     * Amount of images for fan art.
+     * ID of the gender.
      *
      * @var integer
      */
-    public $fanart;
+    public int $id;
     /**
-     * Amount of posters.
+     * Name of the gender.
      *
-     * @var integer
+     * @var string
      */
-    public $poster;
-    /**
-     * Amount of images for a season.
-     *
-     * @var integer
-     */
-    public $season;
-    /**
-     * Amount of images for all seasons.
-     *
-     * @var integer
-     */
-    public $seasonwide;
-    /**
-     * Amount of images for the series.
-     *
-     * @var integer
-     */
-    public $series;
+    public string $name;
 }

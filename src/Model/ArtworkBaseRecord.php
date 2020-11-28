@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,9 +11,9 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Represents image query parameters on TVDb.
+ * Provides a class with the data a base record of artwork contains.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -26,7 +26,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class ImageQueryParams
+ * Class ArtworkBaseRecord
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -34,30 +34,42 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class ImageQueryParams
+class ArtworkBaseRecord
 {
     /**
-     * The type of image (e.g fan-art, poster, ...)
+     * The id of this artwork.
+     *
+     * @var integer
+     */
+    public int $id;
+    /**
+     * URL for the artwork.
      *
      * @var string
      */
-    public $keyType;
+    public string $image;
     /**
-     * The language of the art-work.
+     * Shortened language in which the artwork was made.
      *
      * @var string
      */
-    public $languageId;
+    public string $language;
     /**
-     * An array with the allowed resolutions.
+     * Score of the artwork.
      *
-     * @var array
+     * @var float|integer|null
      */
-    public $resolution;
+    public $score;
     /**
-     * The sub keys for this image type (e.g graphical, text)
+     * URL for the thumbnail of this artwork.
      *
-     * @var array
+     * @var string
      */
-    public $subKey;
+    public string $thumbnail;
+    /**
+     * Type of the artwork.
+     *
+     * @var integer
+     */
+    public int $type;
 }

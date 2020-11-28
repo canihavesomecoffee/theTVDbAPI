@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,46 +11,53 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Exception for when there's a conflict during updating a record.
+ * Provides a class with the data an entity update contains.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
- * @package  CanIHaveSomeCoffee\TheTVDbAPI\Exception
+ * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
  * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
 declare(strict_types = 1);
 
-namespace CanIHaveSomeCoffee\TheTVDbAPI\Exception;
-
-use Exception;
+namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class ConflictException
+ * Class EntityUpdate
  *
  * @category TheTVDbAPI
- * @package  CanIHaveSomeCoffee\TheTVDbAPI\Exception
+ * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
  * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class ConflictException extends Exception
+class EntityUpdate
 {
     /**
-     * The error message for when there was a conflict updating
-     */
-    const CONFLICT_MESSAGE = 'There was a conflict while updating!';
-
-
-    /**
-     * Returns a new conflict exception.
+     * The action of the entity update.
      *
-     * @return ConflictException
+     * @var string
      */
-    public static function conflict(): ConflictException
-    {
-        return new static(static::CONFLICT_MESSAGE);
-    }
+    public string $action;
+    /**
+     * The entity type of the update.
+     *
+     * @var string
+     */
+    public string $entityType;
+    /**
+     * The id of the entity update.
+     *
+     * @var integer
+     */
+    public int $id;
+    /**
+     * The unix timestamp of the entity update.
+     *
+     * @var integer
+     */
+    public int $timestamp;
 }

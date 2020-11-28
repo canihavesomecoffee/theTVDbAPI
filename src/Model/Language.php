@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -13,7 +13,7 @@
  *
  * Represents a language on TVDb.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -41,23 +41,23 @@ class Language
      *
      * @var integer
      */
-    public $id;
-    /**
-     * The abbreviation of the language.
-     *
-     * @var string
-     */
-    public $abbreviation;
-    /**
-     * The local spelling of the language.
-     *
-     * @var string
-     */
-    public $name;
+    public int $id;
     /**
      * The English name of the language.
      *
      * @var string
      */
-    public $englishName;
+    public string $name;
+    /**
+     * The local spelling of the language.
+     *
+     * @var string
+     */
+    public string $nativeName;
+    /**
+     * The abbreviation of the language.
+     *
+     * @var string
+     */
+    public string $shortCode;
 }

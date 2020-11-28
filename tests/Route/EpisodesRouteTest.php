@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeExtendedRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
 
 /**
@@ -40,8 +40,8 @@ class EpisodesRouteTest extends BaseRouteTest
             static::equalTo('/episodes/'.$episode_id)
         );
         $instance = new EpisodesRoute($this->parent);
-        $episode = $instance->byId($episode_id);
-        static::assertInstanceOf(Episode::class, $episode);
+        $episode = $instance->simple($episode_id);
+        static::assertInstanceOf(EpisodeExtendedRecord::class, $episode);
         static::assertEquals($episode_id, $episode->id);
         static::assertEquals($overview, $episode->overview);
     }

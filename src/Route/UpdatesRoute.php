@@ -13,7 +13,7 @@
  *
  * Route that exposes the update methods of TheTVDb API.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Route
@@ -26,8 +26,13 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\UpdateInfo;
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EntityUpdate;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\Update;
 use DateTime;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
  * Class UpdatesRoute
@@ -46,19 +51,21 @@ class UpdatesRoute extends AbstractRoute
      * Fetches the series that were updated between the given timestamps. If the toTime variable is left null, the API
      * will take the current timestamp for this.
      *
-     * @param DateTime      $fromTime Fetch series that were updated after this timestamp.
-     * @param DateTime|null $toTime   Fetch series that were updated before this timestamp.
+     * @param DateTime $since Fetch series that were updated after this timestamp.
      *
-     * @return array An array with UpdateInfo instances.
+     * @return array An array with Update instances.
+     * @throws ParseException
+     * @throws ResourceNotFoundException
+     * @throws UnauthorizedException
+     * @throws ExceptionInterface
      */
-    public function query(DateTime $fromTime, DateTime $toTime = null): array
+    public function query(DateTime $since): array
     {
-        $options = ['query' => ['fromTime' => $fromTime->getTimestamp()]];
-        if ($toTime !== null) {
-            $options['query']['toTime'] = $toTime->getTimestamp();
-        }
+        $options = ['query' => ['since' => $since->getTimestamp()]];
 
-        $json = $this->parent->performAPICallWithJsonResponse('get', '/updated/query', $options);
-        return DataParser::parseDataArray($json, UpdateInfo::class);
+        $json = $this->parent->performAPICallWithJsonResponse('get', 'updates', $options);
+        return DataParser::parseDataArray($json, EntityUpdate::class);
     }
+
+
 }

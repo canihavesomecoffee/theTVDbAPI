@@ -1,5 +1,15 @@
 # Changelog of theTVDbAPI
 
+## 2.x
+
+### 2.0.0b (15 November 2020)
+
+Major release for the new API of theTVDb.
+
+* New: Beta support for API v4.0.0 of theTVDb.
+* Changed: Minimal PHP version is now 7.4
+* Changed: Dependencies got bumped
+
 ## 1.x
 
 ### 1.3.0 (17 September 2020)

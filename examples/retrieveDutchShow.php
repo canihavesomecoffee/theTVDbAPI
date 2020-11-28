@@ -13,7 +13,7 @@
  *
  * Example to show retrieving a Dutch show (which misses most English titles) using Dutch as the fallback.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category Examples
  * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
@@ -23,32 +23,112 @@
 
 declare(strict_types=1);
 
-use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
+use CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPI;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$accessKey = 'YOURKEYHERE';
+$accessKey = getenv('PROJECT_KEY');
 
-$theTVDbAPI = new TheTVDbAPILanguageFallback();
-$theTVDbAPI->setAcceptedLanguages(['nl', 'en']);
+$theTVDbAPI = new TheTVDbAPI();
 
 // Login and set the token.
 $token = $theTVDbAPI->authentication()->login($accessKey);
 $theTVDbAPI->setToken($token);
 
 // Retrieve an episode from a Dutch show.
-$episode = $theTVDbAPI->episodes()->byId(6347388);
+$episode = $theTVDbAPI->episodes()->simple(6347388);
 var_dump($episode);
 
 /*
     This will yield something like:
-    class CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode#41 (30) {
-      ... snipped for brevity ...
-      public $episodeName =>
-      string(13) "Imke Courtois"
-      public $overview =>
+    object(CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeExtendedRecord)#46 (14) {
+      ["airsAfterSeason"]=>
       NULL
-      ... snipped for brevity ...
+      ["airsBeforeSeason"]=>
+      NULL
+      ["airsBeforeEpisode"]=>
+      NULL
+      ["awards"]=>
+      uninitialized(array)
+      ["characters"]=>
+      uninitialized(array)
+      ["contentRatings"]=>
+      uninitialized(array)
+      ["network"]=>
+      uninitialized(CanIHaveSomeCoffee\TheTVDbAPI\Model\NetworkBaseRecord)
+      ["productionCode"]=>
+      uninitialized(string)
+      ["tagOptions"]=>
+      uninitialized(array)
+      ["trailers"]=>
+      uninitialized(array)
+      ["aired"]=>
+      string(10) "2017-10-05"
+      ["id"]=>
+      int(6347388)
+      ["image"]=>
+      NULL
+      ["imageType"]=>
+      NULL
+      ["isMovie"]=>
+      int(0)
+      ["name"]=>
+      string(13) "Imke Courtois"
+      ["nameTranslations"]=>
+      array(1) {
+        [0]=>
+        string(3) "nld"
+      }
+      ["overviewTranslations"]=>
+      array(0) {
+      }
+      ["runtime"]=>
+      int(45)
+      ["seasons"]=>
+      array(1) {
+        [0]=>
+        array(10) {
+          ["id"]=>
+          int(728669)
+          ["seriesId"]=>
+          int(280258)
+          ["type"]=>
+          array(3) {
+            ["id"]=>
+            int(1)
+            ["name"]=>
+            string(11) "Aired Order"
+            ["type"]=>
+            string(8) "official"
+          }
+          ["name"]=>
+          NULL
+          ["number"]=>
+          int(9)
+          ["nameTranslations"]=>
+          NULL
+          ["overviewTranslations"]=>
+          NULL
+          ["image"]=>
+          NULL
+          ["imageType"]=>
+          NULL
+          ["network"]=>
+          array(5) {
+            ["id"]=>
+            int(51)
+            ["name"]=>
+            string(6) "Canvas"
+            ["slug"]=>
+            string(12) "canvasketnet"
+            ["abbreviation"]=>
+            string(6) "Canvas"
+            ["country"]=>
+            string(3) "bel"
+          }
+        }
+      }
+      ["seriesId"]=>
+      int(280258)
     }
-    English only would yield twice NULL.
 */

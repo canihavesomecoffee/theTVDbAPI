@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,9 +11,9 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Provides a class with the data a series contains.
+ * Provides a class with the data an extended record of artwork contains.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -26,7 +26,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class Series
+ * Class ArtworkExtendedRecord
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -34,84 +34,78 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class Series extends BasicSeries
+class ArtworkExtendedRecord extends ArtworkBaseRecord
 {
     /**
-     * Y-m-d of when the show was added to theTVDb.
+     * The ID of the episode which this artwork belongs to.
      *
-     * @var string
+     * @var float|integer|null
      */
-    public $added;
+    public $episodeId;
     /**
-     * The day of the week when the serie airs.
-     *
-     * @var string
-     */
-    public $airsDayOfWeek;
-    /**
-     * Time when the series airs.
-     *
-     * @var string
-     */
-    public $airsTime;
-    /**
-     * An array containing the genre(s) of the series.
-     *
-     * @var array
-     */
-    public $genre;
-    /**
-     * The IMDb id of this series.
-     *
-     * @var string
-     */
-    public $imdbId;
-    /**
-     * The unix timestamp when the series was last updated.
+     * The height of this artwork.
      *
      * @var integer
      */
-    public $lastUpdated;
+    public int $height;
     /**
-     * The network id.
+     * The ID of the movie which this artwork belongs to.
      *
-     * @var string
+     * @var float|integer|null
+     */
+    public $movieId;
+    /**
+     * The ID of the network which this artwork belongs to.
+     *
+     * @var float|integer|null
      */
     public $networkId;
     /**
-     * The rating of this series (ages, ...).
+     * The ID of the person which this artwork belongs to.
      *
-     * @var string|null
+     * @var float|integer|null
      */
-    public $rating;
+    public $peopleId;
     /**
-     * The runtime of a single episode in minutes.
+     * The ID of the season which this artwork belongs to.
      *
-     * @var string
+     * @var float|integer|null
      */
-    public $runtime;
+    public $seasonId;
     /**
-     * The series id. Seems to be a string version of the id.
+     * The ID of the series which this artwork belongs to.
      *
-     * @var int|string
+     * @var float|integer|null
      */
     public $seriesId;
     /**
-     * The rating given by the TVDb users.
+     * The ID of the persons in the series which this artwork belongs to.
      *
-     * @var float|integer
+     * @var float|integer|null
      */
-    public $siteRating;
+    public $seriesPeopleId;
     /**
-     * The number of people that voted for the rating.
+     * The height of the thumbnail for this artwork.
      *
      * @var integer
      */
-    public $siteRatingCount;
+    public int $thumbnailHeight;
     /**
-     * The zap2it id of the series.
+     * The width of the thumbnail for this artwork.
      *
-     * @var string
+     * @var integer
      */
-    public $zap2itId;
+    public int $thumbnailWidth;
+    /**
+     * Unix timestamp of last update to the artwork.
+     *
+     * @var integer
+     */
+    public int $updatedAt;
+    /**
+     * The width of this artwork.
+     *
+     * @var integer
+     */
+    public int $width;
 }

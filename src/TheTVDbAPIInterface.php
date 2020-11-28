@@ -13,7 +13,7 @@
  *
  * Interface for the theTVDbAPI client.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI
@@ -25,19 +25,17 @@ declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI;
 
+use CanIHaveSomeCoffee\TheTVDbAPI\Route\AuthenticationRoute;
 use Exception;
 use GuzzleHttp\Psr7\Response;
-use InvalidArgumentException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
-use CanIHaveSomeCoffee\TheTVDbAPI\Route\AuthenticationRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\LanguagesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SeriesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\UpdatesRoute;
-use CanIHaveSomeCoffee\TheTVDbAPI\Route\UsersRoute;
 
 /**
  * Interface TheTVDbAPIInterface
@@ -55,40 +53,14 @@ interface TheTVDbAPIInterface
     /**
      * Sets the authentication token.
      *
-     * @param string $token A valid authentication token
+     * @param string|null $token A valid token.
      *
      * @return void
      */
     public function setToken(string $token = null);
 
     /**
-     * Sets the language(s) that will be sent to the API for localized series information.
-     *
-     * @param array $languages An array with language abbreviation. E.g. en, nl or de.
-     *
-     * @return void
-     */
-    public function setAcceptedLanguages(array $languages);
-
-    /**
-     * Retrieves the language(s) that will be sent to the API for localized series information.
-     *
-     * @return array An array with language abbreviation. E.g. en, nl or de.
-     */
-    public function getAcceptedLanguages(): array;
-
-    /**
-     * Sets the version of the theTVDb API to call (e.g. 2.1.1).
-     *
-     * @param string $version Version in format x.y.z
-     *
-     * @return void
-     * @throws InvalidArgumentException If the string doesn't match the format
-     */
-    public function setVersion(string $version);
-
-    /**
-     * Returns the authentication route object.
+     * Get authentication extension
      *
      * @return AuthenticationRoute
      */
@@ -130,13 +102,6 @@ interface TheTVDbAPIInterface
     public function updates(): UpdatesRoute;
 
     /**
-     * Get users extension
-     *
-     * @return UsersRoute
-     */
-    public function users(): UsersRoute;
-
-    /**
      * Makes a call to the API and return headers only.
      *
      * @param string $method  HTTP Method (post, getUserData, put, etc.)
@@ -147,7 +112,7 @@ interface TheTVDbAPIInterface
      * @throws UnauthorizedException
      * @throws ResourceNotFoundException
      */
-    public function requestHeaders($method, $path, array $options = []): array;
+    public function requestHeaders(string $method, string $path, array $options = []): array;
 
     /**
      * Perform an API call to theTVDb.
@@ -160,7 +125,7 @@ interface TheTVDbAPIInterface
      * @throws UnauthorizedException
      * @throws ResourceNotFoundException
      */
-    public function performAPICall($method, $path, array $options = []): Response;
+    public function performAPICall(string $method, string $path, array $options = []): Response;
 
     /**
      * Perform an API call to theTVDb and return a JSON response
@@ -175,19 +140,7 @@ interface TheTVDbAPIInterface
      * @throws ResourceNotFoundException
      * @throws Exception
      */
-    public function performAPICallWithJsonResponse($method, $path, array $options = []);
+    public function performAPICallWithJsonResponse(string $method, string $path, array $options = []);
 
-    /**
-     * Returns the JSON errors for the latest request.
-     *
-     * @return array An array of JSONError instances.
-     */
-    public function getLastJSONErrors(): array;
 
-    /**
-     * Returns the links from the latest request.
-     *
-     * @return array An array of link pages.
-     */
-    public function getLastLinks(): array;
 }

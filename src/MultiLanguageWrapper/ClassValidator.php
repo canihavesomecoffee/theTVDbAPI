@@ -11,7 +11,7 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper
@@ -23,10 +23,10 @@ declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeExtendedRecord;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesExtendedRecord;
 
 /**
  * Class ClassValidator
@@ -109,10 +109,10 @@ class ClassValidator implements ClassValidatorInterface
     public function getRequiredFields(): array
     {
         return [
-            BasicEpisode::class => ['episodeName', 'overview'],
-            Episode::class => ['episodeName', 'overview'],
-            BasicSeries::class => ['seriesName', 'overview'],
-            Series::class => ['seriesName', 'overview']
+            EpisodeBaseRecord::class => ['episodeName', 'overview'],
+            EpisodeExtendedRecord::class => ['episodeName', 'overview'],
+            SeriesBaseRecord::class => ['seriesName', 'overview'],
+            SeriesExtendedRecord::class => ['seriesName', 'overview']
         ];
     }
 }

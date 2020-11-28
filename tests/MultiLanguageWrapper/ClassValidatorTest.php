@@ -13,7 +13,7 @@
  *
  * Class to test the ClassValidator code.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category Tests
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper
@@ -25,7 +25,7 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\ClassValidator;
 use PHPUnit\Framework\TestCase;
@@ -63,38 +63,38 @@ class ClassValidatorTest extends TestCase
     }
 
     public function testIsValidWithSingleItem() {
-        $valid_instance = new BasicEpisode();
+        $valid_instance = new EpisodeBaseRecord();
         $valid_instance->episodeName = "Foo";
         $valid_instance->overview = "Bar";
-        $invalid_instance = new BasicEpisode();
+        $invalid_instance = new EpisodeBaseRecord();
 
-        static::assertTrue($this->validator->isValid(BasicEpisode::class, $valid_instance));
-        static::assertFalse($this->validator->isValid(BasicEpisode::class, $invalid_instance));
+        static::assertTrue($this->validator->isValid(EpisodeBaseRecord::class, $valid_instance));
+        static::assertFalse($this->validator->isValid(EpisodeBaseRecord::class, $invalid_instance));
     }
 
     public function testIsValidWithMultipleItems() {
-        $valid_instance = new BasicEpisode();
+        $valid_instance = new EpisodeBaseRecord();
         $valid_instance->episodeName = "Foo";
         $valid_instance->overview = "Bar";
-        $invalid_instance = new BasicEpisode();
+        $invalid_instance = new EpisodeBaseRecord();
         $valid_instances = [$valid_instance, $valid_instance, $valid_instance];
         $invalid_instances = [$valid_instance, $invalid_instance, $valid_instance];
 
-        static::assertTrue($this->validator->isValid(BasicEpisode::class, $valid_instances));
-        static::assertFalse($this->validator->isValid(BasicEpisode::class, $invalid_instances));
+        static::assertTrue($this->validator->isValid(EpisodeBaseRecord::class, $valid_instances));
+        static::assertFalse($this->validator->isValid(EpisodeBaseRecord::class, $invalid_instances));
     }
 
     public function testMergeWithNonExistingObject() {
-        $valid_instance = new BasicEpisode();
+        $valid_instance = new EpisodeBaseRecord();
         $valid_instance->episodeName = "Foo";
         $valid_instance->overview = "Bar";
         static::assertEquals(
             $valid_instance,
-            $this->validator->merge(BasicEpisode::class, null, $valid_instance)
+            $this->validator->merge(EpisodeBaseRecord::class, null, $valid_instance)
         );
         static::assertEquals(
             $valid_instance,
-            $this->validator->merge(BasicEpisode::class, $valid_instance, null)
+            $this->validator->merge(EpisodeBaseRecord::class, $valid_instance, null)
         );
     }
 
@@ -106,30 +106,30 @@ class ClassValidatorTest extends TestCase
     }
 
     public function testMergeWithTwoObjects() {
-        $valid_instance = new BasicEpisode();
+        $valid_instance = new EpisodeBaseRecord();
         $valid_instance->episodeName = "Foo";
         $valid_instance->overview = "Bar";
-        $invalid_instance = new BasicEpisode();
+        $invalid_instance = new EpisodeBaseRecord();
         static::assertEquals(
             $valid_instance,
-            $this->validator->merge(BasicEpisode::class, $invalid_instance, $valid_instance)
+            $this->validator->merge(EpisodeBaseRecord::class, $invalid_instance, $valid_instance)
         );
         $invalid_instance->firstAired = "Baz";
-        /** @var BasicEpisode $merged_instance */
-        $merged_instance = $this->validator->merge(BasicEpisode::class, $invalid_instance, $valid_instance);
+        /** @var EpisodeBaseRecord $merged_instance */
+        $merged_instance = $this->validator->merge(EpisodeBaseRecord::class, $invalid_instance, $valid_instance);
         static::assertEquals($merged_instance->episodeName, $valid_instance->episodeName);
         static::assertEquals($merged_instance->overview, $valid_instance->overview);
         static::assertEquals($merged_instance->firstAired, $invalid_instance->firstAired);
     }
 
     public function testMergeWithTwoArrays() {
-        $valid_instance = new BasicEpisode();
+        $valid_instance = new EpisodeBaseRecord();
         $valid_instance->episodeName = "Foo";
         $valid_instance->overview = "Bar";
-        $invalid_instance = new BasicEpisode();
+        $invalid_instance = new EpisodeBaseRecord();
         $first_array = [$valid_instance, $invalid_instance, $invalid_instance, $valid_instance];
         $second_array = [$valid_instance, $valid_instance, $invalid_instance, $invalid_instance];
-        $results = $this->validator->merge(BasicEpisode::class, $first_array, $second_array);
+        $results = $this->validator->merge(EpisodeBaseRecord::class, $first_array, $second_array);
         static::assertCount(4, $results);
         static::assertEquals($valid_instance, $results[0]);
         static::assertEquals($valid_instance, $results[1]);

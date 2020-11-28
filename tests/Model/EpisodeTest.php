@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Model;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeExtendedRecord;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,7 +33,7 @@ class EpisodeTest extends TestCase
     public function testDirectorCreation()
     {
         $director = 'Foo Bar Baz';
-        $episode = new Episode();
+        $episode = new EpisodeExtendedRecord();
         static::assertEquals(0, sizeof($episode->directors));
         $episode->setDirector($director);
         static::assertEquals(1, sizeof($episode->directors));
@@ -43,7 +43,7 @@ class EpisodeTest extends TestCase
     public function testDirectorRetrieval()
     {
         $director = 'Foo Bar Baz';
-        $episode = new Episode();
+        $episode = new EpisodeExtendedRecord();
         static::assertEquals(0, sizeof($episode->directors));
         static::assertEquals('', $episode->getDirector());
         $episode->directors[] = $director;

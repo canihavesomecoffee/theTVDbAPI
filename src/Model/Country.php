@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,9 +11,9 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Provides a class with the minimal data an episode contains.
+ * Provides a class with the data a country contains.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -26,7 +26,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class BasicEpisode
+ * Class Country
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -34,66 +34,24 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class BasicEpisode
+class Country
 {
     /**
-     * TVDb episode id.
+     * The id of this country.
      *
      * @var integer
      */
-    public $id;
+    public int $id;
     /**
-     * Absolute episode number for series.
+     * Name of the country.
      *
-     * @var integer|null
+     * @var string
      */
-    public $absoluteNumber;
+    public string $name;
     /**
-     * Aired season relative episode number.
+     * The short code of the country.
      *
-     * @var integer|null
+     * @var string
      */
-    public $airedEpisodeNumber;
-    /**
-     * Aired season number.
-     *
-     * @var integer|null
-     */
-    public $airedSeason;
-    /**
-     * DVD season relative episode number.
-     *
-     * @var float|integer|null
-     */
-    public $dvdEpisodeNumber;
-    /**
-     * DVD season number.
-     *
-     * @var integer|null
-     */
-    public $dvdSeason;
-    /**
-     * Episode name.
-     *
-     * @var string|null
-     */
-    public $episodeName;
-    /**
-     * Episode short description.
-     *
-     * @var string|null
-     */
-    public $overview;
-    /**
-     * Y-m-d string value of first time the episode aired.
-     *
-     * @var string|null
-     */
-    public $firstAired;
-    /**
-     * Unix timestamp of last update.
-     *
-     * @var integer
-     */
-    public $lastUpdated;
+    public string $shortCode;
 }

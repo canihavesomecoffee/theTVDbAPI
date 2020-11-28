@@ -12,13 +12,15 @@
         <exclude name="PEAR.Commenting.FileComment.MissingPackageTag" />
         <exclude name="PEAR.Commenting.FileComment.MissingLinkTag" />
         <exclude name="PEAR.Commenting.FileComment.MissingVersion" />
-        <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
-        <exclude name="PEAR.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
-        <exclude name="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+        <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore" />
+        <exclude name="PEAR.NamingConventions.ValidFunctionName.PrivateNoUnderscore" />
+        <exclude name="PEAR.WhiteSpace.ScopeIndent.IncorrectExact" />
     </rule>
 
     <rule ref="PSR1" />
-    <rule ref="PSR2" />
+    <rule ref="PSR2">
+        <exclude name="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody" /><!-- Collides with Squiz.WhiteSpace.FunctionSpacing.AfterLast -->
+    </rule>
 
     <!-- Private methods MUST not be prefixed with an underscore -->
     <rule ref="PSR2.Methods.MethodDeclaration.Underscore">

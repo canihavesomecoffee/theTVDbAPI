@@ -13,7 +13,7 @@
  *
  * Tests the LanguageFallBack class.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category Tests
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper

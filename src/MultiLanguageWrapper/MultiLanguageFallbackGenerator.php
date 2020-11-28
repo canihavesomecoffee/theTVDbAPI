@@ -13,7 +13,7 @@
  *
  * Class that generates multiple requests for language fallback purposes.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper

@@ -13,7 +13,7 @@
  *
  * Tests the SeriesRouteLanguageFallback class.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category Tests
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route
@@ -25,11 +25,11 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\ImageStatistics;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesExtendedRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route\SeriesRouteLanguageFallback;
 
@@ -64,7 +64,7 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         $instance = $route->getClosureById($seriesId);
         static::assertInstanceOf(\Closure::class, $instance);
         $return = $instance($language);
-        static::assertInstanceOf(Series::class, $return);
+        static::assertInstanceOf(SeriesExtendedRecord::class, $return);
     }
 
     /**
@@ -75,19 +75,19 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
     public function testRetrieveSeriesById()
     {
         $accepted = ['nl', 'en'];
-        $result   = new Series();
+        $result   = new SeriesExtendedRecord();
         // Mock generator.
         $mockGenerator = $this->createMock(MultiLanguageFallbackGenerator::class);
         $mockGenerator->expects(static::once())->method('create')->with(
             static::isInstanceOf(\Closure::class),
-            static::equalTo(Series::class),
+            static::equalTo(SeriesExtendedRecord::class),
             static::equalTo($accepted)
         )->willReturn($result);
         $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
         $this->parent->expects(static::once())->method('getGenerator')->willReturn($mockGenerator);
         $instance = new SeriesRouteLanguageFallback($this->parent);
         $return   = $instance->getById(1337);
-        static::assertInstanceOf(Series::class, $return);
+        static::assertInstanceOf(SeriesExtendedRecord::class, $return);
     }
 
     /**
@@ -111,7 +111,7 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         $return = $instance($language);
         static::assertTrue(is_array($return));
         static::assertCount(1, $return);
-        static::assertContainsOnly(BasicEpisode::class, $return);
+        static::assertContainsOnly(EpisodeBaseRecord::class, $return);
     }
 
     /**
@@ -122,12 +122,12 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
     public function testRetrieveEpisodesForSeries()
     {
         $accepted = ['nl', 'en'];
-        $result   = [new BasicEpisode(), new BasicEpisode()];
+        $result   = [new EpisodeBaseRecord(), new EpisodeBaseRecord()];
         // Mock generator.
         $mockGenerator = $this->createMock(MultiLanguageFallbackGenerator::class);
         $mockGenerator->expects(static::once())->method('create')->with(
             static::isInstanceOf(\Closure::class),
-            static::equalTo(BasicEpisode::class),
+            static::equalTo(EpisodeBaseRecord::class),
             static::equalTo($accepted)
         )->willReturn($result);
         $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
@@ -138,7 +138,7 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         $return = $return->getData();
         static::assertTrue(is_array($return));
         static::assertCount(2, $return);
-        static::assertContainsOnly(BasicEpisode::class, $return);
+        static::assertContainsOnly(EpisodeBaseRecord::class, $return);
     }
 
     /**
@@ -162,7 +162,7 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         $return = $instance($language);
         static::assertTrue(is_array($return));
         static::assertCount(1, $return);
-        static::assertContainsOnly(BasicEpisode::class, $return);
+        static::assertContainsOnly(EpisodeBaseRecord::class, $return);
     }
 
     /**
@@ -173,12 +173,12 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
     public function testRetrieveEpisodesWithQuery()
     {
         $accepted = ['nl', 'en'];
-        $result   = [new BasicEpisode(), new BasicEpisode()];
+        $result   = [new EpisodeBaseRecord(), new EpisodeBaseRecord()];
         // Mock generator.
         $mockGenerator = $this->createMock(MultiLanguageFallbackGenerator::class);
         $mockGenerator->expects(static::once())->method('create')->with(
             static::isInstanceOf(\Closure::class),
-            static::equalTo(BasicEpisode::class),
+            static::equalTo(EpisodeBaseRecord::class),
             static::equalTo($accepted)
         )->willReturn($result);
         $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
@@ -189,7 +189,7 @@ class SeriesRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         $return = $return->getData();
         static::assertTrue(is_array($return));
         static::assertCount(2, $return);
-        static::assertContainsOnly(BasicEpisode::class, $return);
+        static::assertContainsOnly(EpisodeBaseRecord::class, $return);
     }
 
     /**

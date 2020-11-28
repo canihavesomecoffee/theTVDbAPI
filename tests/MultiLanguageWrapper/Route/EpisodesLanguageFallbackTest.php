@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeExtendedRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route\EpisodesRouteLanguageFallback;
 
@@ -54,11 +54,11 @@ class EpisodesLanguageFallbackTest extends BaseRouteLanguageFallback
         $instance = $route->getClosureById($episode_id);
         static::assertInstanceOf(\Closure::class, $instance);
         $first = $instance($accepted[0]);
-        static::assertInstanceOf(Episode::class, $first);
+        static::assertInstanceOf(EpisodeExtendedRecord::class, $first);
         static::assertEquals($episode_id, $first->id);
         static::assertEquals(null, $first->overview);
         $second = $instance($accepted[1]);
-        static::assertInstanceOf(Episode::class, $second);
+        static::assertInstanceOf(EpisodeExtendedRecord::class, $second);
         static::assertEquals($episode_id, $second->id);
         static::assertEquals($overview, $second->overview);
 
@@ -69,18 +69,18 @@ class EpisodesLanguageFallbackTest extends BaseRouteLanguageFallback
         $accepted = ['nl', 'en'];
         $episode_id = 1337;
         $overview = 'foo bar baz';
-        $result = new Episode();
+        $result = new EpisodeExtendedRecord();
         $result->id = $episode_id;
         $result->overview = $overview;
         $mock_generator = $this->createMock(MultiLanguageFallbackGenerator::class);
         $mock_generator->expects(static::once())->method('create')->with(
-            static::isInstanceOf(\Closure::class), static::equalTo(Episode::class), static::equalTo($accepted)
+            static::isInstanceOf(\Closure::class), static::equalTo(EpisodeExtendedRecord::class), static::equalTo($accepted)
         )->willReturn($result);
         $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
         $this->parent->expects(static::once())->method('getGenerator')->willReturn($mock_generator);
         $instance = new EpisodesRouteLanguageFallback($this->parent);
-        $episode = $instance->byId($episode_id);
-        static::assertInstanceOf(Episode::class, $episode);
+        $episode = $instance->simple($episode_id);
+        static::assertInstanceOf(EpisodeExtendedRecord::class, $episode);
         static::assertEquals($episode_id, $episode->id);
         static::assertEquals($overview, $episode->overview);
     }

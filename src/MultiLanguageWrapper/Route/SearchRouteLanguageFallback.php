@@ -14,7 +14,7 @@
  * Route that exposes the search methods of TheTVDb API. It extends the original route in order to perform look-ups
  * with fallback languages if the primary language does not fill in all fields.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route
@@ -27,7 +27,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
 use Closure;
@@ -52,7 +52,7 @@ class SearchRouteLanguageFallback extends SearchRoute
      * @param string $identifier  The identifier to search on.
      * @param string $searchQuery The query to search for.
      *
-     * @return array A list of matching Series.
+     * @return array A list of matching SeriesExtendedRecord.
      */
     public function search(string $identifier, string $searchQuery): array
     {
@@ -65,7 +65,7 @@ class SearchRouteLanguageFallback extends SearchRoute
         $closure = $this->getClosureForSearch($options);
         return $parent->getGenerator()->create(
             $closure,
-            BasicSeries::class,
+            SeriesBaseRecord::class,
             $this->parent->getAcceptedLanguages(),
             true,
             []
@@ -87,7 +87,7 @@ class SearchRouteLanguageFallback extends SearchRoute
                 '/search/series',
                 array_merge($options, ['headers' => ['Accept-Language' => $language]])
             );
-            return DataParser::parseDataArray($json, BasicSeries::class);
+            return DataParser::parseDataArray($json, SeriesBaseRecord::class);
         };
     }
 }

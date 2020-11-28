@@ -13,7 +13,7 @@
  *
  * Example to retrieve all episodes from a single show which has more than 100 episodes
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category Examples
  * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
@@ -31,8 +31,7 @@ $accessKey = 'YOURKEYHERE';
 $theTVDbAPI = new TheTVDbAPILanguageFallback();
 
 // Login and set the token.
-$token = $theTVDbAPI->authentication()->login($accessKey);
-$theTVDbAPI->setToken($token);
+$theTVDbAPI->setApiKey($accessKey);
 
 // Retrieve all episodes from The Big Bang Theory (> 100 episodes).
 $episodes = $theTVDbAPI->series()->getAllEpisodes(80379);
@@ -42,7 +41,7 @@ var_dump($episodes);
     This will yield something similar to this:
     array(285) {
     [0] =>
-    class CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode#42 (10) {
+    class CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord#42 (10) {
     public $id =>
     int(332484)
     ... Snipped rest for brevity ...

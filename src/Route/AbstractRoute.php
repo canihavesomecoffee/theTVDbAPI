@@ -13,7 +13,7 @@
  *
  * Base route class
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Route
@@ -55,4 +55,6 @@ abstract class AbstractRoute implements RouteInterface
     {
         $this->parent = $parent;
     }
+
+
 }

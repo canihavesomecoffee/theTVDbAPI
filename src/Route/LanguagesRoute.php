@@ -13,7 +13,7 @@
  *
  * Route that exposes the language methods of TheTVDb API.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Route
@@ -31,6 +31,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Language;
 use Exception;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
  * Class LanguageRoute
@@ -52,28 +53,13 @@ class LanguagesRoute extends AbstractRoute
      * @throws ParseException
      * @throws UnauthorizedException
      * @throws ResourceNotFoundException
-     * @throws Exception
+     * @throws Exception|ExceptionInterface
      */
-    public function getAvailable(): array
+    public function all(): array
     {
         $json = $this->parent->performAPICallWithJsonResponse('get', '/languages');
         return DataParser::parseDataArray($json, Language::class);
     }
 
-    /**
-     * Get information about a particular language, given the language ID.
-     *
-     * @param int $identifier The language ID
-     *
-     * @return Language
-     * @throws ParseException
-     * @throws UnauthorizedException
-     * @throws ResourceNotFoundException
-     * @throws Exception
-     */
-    public function getLanguage(int $identifier): Language
-    {
-        $json = $this->parent->performAPICallWithJsonResponse('get', sprintf('/languages/%d', $identifier));
-        return DataParser::parseData($json, Language::class);
-    }
+
 }

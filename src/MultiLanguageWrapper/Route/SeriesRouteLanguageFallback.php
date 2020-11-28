@@ -14,7 +14,7 @@
  * Route that exposes the series methods of TheTVDb API. It extends the original route in order to perform look-ups
  * with fallback languages if the primary language does not fill in all fields.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route
@@ -27,11 +27,11 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\ImageStatistics;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesExtendedRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SeriesRoute;
 use Closure;
@@ -54,15 +54,15 @@ class SeriesRouteLanguageFallback extends SeriesRoute
      *
      * @param int $id The id of the series.
      *
-     * @return Series
+     * @return SeriesExtendedRecord
      */
-    public function getById(int $id): Series
+    public function getById(int $id): SeriesExtendedRecord
     {
         /* @var TheTVDbAPILanguageFallback $parent */
         $parent  = $this->parent;
         $closure = $this->getClosureById($id);
 
-        return $parent->getGenerator()->create($closure, Series::class, $this->parent->getAcceptedLanguages(), true);
+        return $parent->getGenerator()->create($closure, SeriesExtendedRecord::class, $this->parent->getAcceptedLanguages(), true);
     }
 
     /**
@@ -83,7 +83,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
                 ]
             );
 
-            return DataParser::parseData($json, Series::class);
+            return DataParser::parseData($json, SeriesExtendedRecord::class);
         };
     }
 
@@ -102,7 +102,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
         $closure = $this->getClosureForEpisodes($id, ['query' => ['page' => $page]]);
 
         return new PaginatedResults(
-            $parent->getGenerator()->create($closure, BasicEpisode::class, $this->parent->getAcceptedLanguages(), true),
+            $parent->getGenerator()->create($closure, EpisodeBaseRecord::class, $this->parent->getAcceptedLanguages(), true),
             $this->parent->getLastLinks()
         );
     }
@@ -125,7 +125,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
                 $options
             );
 
-            return DataParser::parseDataArray($json, BasicEpisode::class);
+            return DataParser::parseDataArray($json, EpisodeBaseRecord::class);
         };
     }
 
@@ -144,7 +144,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
         $closure = $this->getClosureForEpisodesWithQuery($id, ['query' => $query]);
 
         return new PaginatedResults(
-            $parent->getGenerator()->create($closure, BasicEpisode::class, $this->parent->getAcceptedLanguages(), true),
+            $parent->getGenerator()->create($closure, EpisodeBaseRecord::class, $this->parent->getAcceptedLanguages(), true),
             $this->parent->getLastLinks()
         );
     }
@@ -167,7 +167,7 @@ class SeriesRouteLanguageFallback extends SeriesRoute
                 $options
             );
 
-            return DataParser::parseDataArray($json, BasicEpisode::class);
+            return DataParser::parseDataArray($json, EpisodeBaseRecord::class);
         };
     }
 

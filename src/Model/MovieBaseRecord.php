@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,9 +11,9 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Provides a class with the minimal data a serie contains.
+ * Class to represent a list on theTVDb.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -21,73 +21,70 @@
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class BasicSeries
+ * Class MovieBaseRecord
  *
- * @category TheTVDbAPI
- * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
- * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
- * @license  See start of document
- * @link     https://canihavesome.coffee/projects/theTVDbAPI
+ * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
  */
-class BasicSeries
+class MovieBaseRecord
 {
     /**
-     * The known aliases for this serie.
+     * A list of aliases for this movie.
      *
      * @var array
      */
-    public $aliases;
+    public array $aliases;
     /**
-     * The URL to the banner of the serie.
-     *
-     * @var string|null
-     */
-    public $banner;
-    /**
-     * The Y-M-D representation of the first time the show aired.
-     *
-     * @var string|null
-     */
-    public $firstAired;
-    /**
-     * The id of the serie.
+     * The id of this movie.
      *
      * @var integer
      */
-    public $id;
+    public int $id;
     /**
-     * The network the serie airs on.
+     * URL to an image of the character.
      *
-     * @var string|null
+     * @var string
      */
-    public $network;
+    public string $image;
     /**
-     * A summary of the serie.
+     * MovieBaseRecord name.
      *
-     * @var string|null
+     * @var string
      */
-    public $overview;
+    public string $name;
     /**
-     * The name of the serie.
+     * List of languages for which translated movie names are available.
      *
-     * @var string|null
+     * @var array
      */
-    public $seriesName;
+    public array $nameTranslations;
     /**
-     * The slug of the serie.
+     * List of languages for which translated movie overviews are available.
      *
-     * @var string|null
+     * @var array
      */
-    public $slug;
+    public array $overviewTranslations;
     /**
-     * The status of the serie.
+     * Assigned score.
      *
-     * @var string|null
+     * @var integer
      */
-    public $status;
+    public int $score;
+    /**
+     * The slug for this movie.
+     *
+     * @var string
+     */
+    public string $slug;
+    /**
+     * The status of this movie.
+     *
+     * @var Status
+     */
+    public Status $status;
 }

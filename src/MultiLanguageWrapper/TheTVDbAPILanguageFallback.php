@@ -16,7 +16,7 @@
  * library solves that by checking on a number of important fields and making a second request if one of those fields
  * is empty, using the fallback language(s).
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI

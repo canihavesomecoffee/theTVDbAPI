@@ -18,12 +18,12 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Actor;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\ImageQueryParams;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\ImageStatistics;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Series;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesExtendedRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesStatistics;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SeriesRoute;
 use DateTime;
@@ -50,7 +50,7 @@ class SeriesRouteTest extends BaseRouteTest
         )->willReturn(['id' => $series_id, 'overview' => $overview]);
         $instance = new SeriesRoute($this->parent);
         $series = $instance->getById($series_id);
-        static::assertInstanceOf(Series::class, $series);
+        static::assertInstanceOf(SeriesExtendedRecord::class, $series);
         static::assertEquals($series_id, $series->id);
         static::assertEquals($overview, $series->overview);
     }
@@ -123,7 +123,7 @@ class SeriesRouteTest extends BaseRouteTest
         $instance = new SeriesRoute($this->parent);
         $episodes = $instance->getEpisodes($series_id, $page);
         static::assertInstanceOf(PaginatedResults::class, $episodes);
-        static::assertContainsOnlyInstancesOf(BasicEpisode::class, $episodes->getData());
+        static::assertContainsOnlyInstancesOf(EpisodeBaseRecord::class, $episodes->getData());
     }
 
     public function testGetAllEpisodes()
@@ -142,19 +142,19 @@ class SeriesRouteTest extends BaseRouteTest
             [$series_id, 5]
         )->willReturnOnConsecutiveCalls(
             new PaginatedResults(
-                [new BasicEpisode(), new BasicEpisode()], ['previous' => 0, 'next' => 2, 'first' => 0, 'last' => 5]),
+                [new EpisodeBaseRecord(), new EpisodeBaseRecord()], ['previous' => 0, 'next' => 2, 'first' => 0, 'last' => 5]),
             new PaginatedResults(
-                [new BasicEpisode(), new BasicEpisode()], ['previous' => 1, 'next' => 3, 'first' => 0, 'last' => 5]),
+                [new EpisodeBaseRecord(), new EpisodeBaseRecord()], ['previous' => 1, 'next' => 3, 'first' => 0, 'last' => 5]),
             new PaginatedResults(
-                [new BasicEpisode(), new BasicEpisode()], ['previous' => 2, 'next' => 4, 'first' => 0, 'last' => 5]),
+                [new EpisodeBaseRecord(), new EpisodeBaseRecord()], ['previous' => 2, 'next' => 4, 'first' => 0, 'last' => 5]),
             new PaginatedResults(
-                [new BasicEpisode(), new BasicEpisode()], ['previous' => 3, 'next' => 5, 'first' => 0, 'last' => 5]),
-            new PaginatedResults([new BasicEpisode()], ['previous' => 4, 'next' => 0, 'first' => 0, 'last' => 5])
+                [new EpisodeBaseRecord(), new EpisodeBaseRecord()], ['previous' => 3, 'next' => 5, 'first' => 0, 'last' => 5]),
+            new PaginatedResults([new EpisodeBaseRecord()], ['previous' => 4, 'next' => 0, 'first' => 0, 'last' => 5])
         );
 
         $episodes = $mock->getAllEpisodes($series_id);
         static::assertCount(9, $episodes);
-        static::assertContainsOnlyInstancesOf(BasicEpisode::class, $episodes);
+        static::assertContainsOnlyInstancesOf(EpisodeBaseRecord::class, $episodes);
     }
 
     public function testGetEpisodeQueryParams()
@@ -188,7 +188,7 @@ class SeriesRouteTest extends BaseRouteTest
         $instance = new SeriesRoute($this->parent);
         $episodes = $instance->getEpisodesWithQuery($series_id, $parameters);
         static::assertInstanceOf(PaginatedResults::class, $episodes);
-        static::assertContainsOnlyInstancesOf(BasicEpisode::class, $episodes->getData());
+        static::assertContainsOnlyInstancesOf(EpisodeBaseRecord::class, $episodes->getData());
     }
 
     public function testGetEpisodeSummary()

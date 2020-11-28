@@ -14,7 +14,7 @@
  * Route that exposes the episodes methods of TheTVDb API. It extends the original route in order to perform look-ups
  * with fallback languages if the primary language does not fill in all fields.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Route
@@ -30,7 +30,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeExtendedRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\TheTVDbAPILanguageFallback;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
 use Closure;
@@ -54,18 +54,18 @@ class EpisodesRouteLanguageFallback extends EpisodesRoute
      *
      * @param int $episodeId The episode ID.
      *
-     * @return Episode The full episode, if found.
+     * @return EpisodeExtendedRecord The full episode, if found.
      * @throws ParseException
      * @throws UnauthorizedException
      * @throws ResourceNotFoundException
      * @throws Exception
      */
-    public function byId(int $episodeId): Episode
+    public function simple(int $episodeId): EpisodeExtendedRecord
     {
         /* @var TheTVDbAPILanguageFallback $parent */
         $parent  = $this->parent;
         $closure = $this->getClosureById($episodeId);
-        return $parent->getGenerator()->create($closure, Episode::class, $this->parent->getAcceptedLanguages(), true);
+        return $parent->getGenerator()->create($closure, EpisodeExtendedRecord::class, $this->parent->getAcceptedLanguages(), true);
     }
 
     /**
@@ -86,7 +86,7 @@ class EpisodesRouteLanguageFallback extends EpisodesRoute
                     'headers' => ['Accept-Language' => $language]
                 ]
             );
-            return DataParser::parseData($json, Episode::class);
+            return DataParser::parseData($json, EpisodeExtendedRecord::class);
         };
     }
 }

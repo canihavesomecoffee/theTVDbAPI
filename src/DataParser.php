@@ -13,7 +13,7 @@
  *
  * Class that processes json and converts it into class representations.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI
@@ -29,6 +29,7 @@ use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -46,9 +47,9 @@ class DataParser
     /**
      * The Serializer instance.
      *
-     * @var Serializer
+     * @var Serializer|null
      */
-    private static $serializer;
+    private static ?Serializer $serializer = null;
 
 
     /**
@@ -58,6 +59,7 @@ class DataParser
      * @param string $returnClass The expected return class
      *
      * @return mixed
+     * @throws ExceptionInterface
      */
     public static function parseData(array $json, string $returnClass)
     {
@@ -71,6 +73,7 @@ class DataParser
      * @param string $returnClass The expected return class
      *
      * @return array
+     * @throws ExceptionInterface
      */
     public static function parseDataArray($json, string $returnClass): array
     {
@@ -99,4 +102,6 @@ class DataParser
         }
         return static::$serializer;
     }
+
+
 }

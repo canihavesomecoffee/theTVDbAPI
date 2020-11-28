@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,9 +11,9 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Provides a class with the data an actor contains.
+ * Provides a class with the base record for awards.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -26,7 +26,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class Actor
+ * Class AwardBaseRecord
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -34,60 +34,18 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class Actor
+class AwardBaseRecord
 {
     /**
-     * The id of the actor.
+     * The ID of the award.
      *
      * @var integer
      */
-    public $id;
+    public int $id;
     /**
-     * The URL to the image of the actor.
+     * The name of the award.
      *
      * @var string
      */
-    public $image;
-    /**
-     * The timestamp when the image was added.
-     *
-     * @var string
-     */
-    public $imageAdded;
-    /**
-     * The id of the author that added the image.
-     *
-     * @var integer|null
-     */
-    public $imageAuthor;
-    /**
-     * The time this entry was last updated
-     *
-     * @var string
-     */
-    public $lastUpdated;
-    /**
-     * The name of the actor.
-     *
-     * @var string
-     */
-    public $name;
-    /**
-     * The role the actor is playing.
-     *
-     * @var string
-     */
-    public $role;
-    /**
-     * The id of the series.
-     *
-     * @var integer
-     */
-    public $seriesId;
-    /**
-     * The sort order of the actors?
-     *
-     * @var integer
-     */
-    public $sortOrder;
+    public string $name;
 }

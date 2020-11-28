@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
 
 /**
@@ -86,7 +86,7 @@ class SearchRouteTest extends BaseRouteTest
         $this->setMockData($return, $options);
         $instance = new SearchRoute($this->parent);
         $results = $instance->searchByName($name);
-        static::assertContainsOnlyInstancesOf(BasicSeries::class, $results);
+        static::assertContainsOnlyInstancesOf(SeriesBaseRecord::class, $results);
     }
 
     public function testSearchByIMDb()
@@ -100,7 +100,7 @@ class SearchRouteTest extends BaseRouteTest
         $this->setMockData($return, $options);
         $instance = new SearchRoute($this->parent);
         $results = $instance->searchByIMDbId($name);
-        static::assertContainsOnlyInstancesOf(BasicSeries::class, $results);
+        static::assertContainsOnlyInstancesOf(SeriesBaseRecord::class, $results);
     }
 
     public function testSearchByZap2It()
@@ -114,7 +114,7 @@ class SearchRouteTest extends BaseRouteTest
         $this->setMockData($return, $options);
         $instance = new SearchRoute($this->parent);
         $results = $instance->searchByZap2ItId($name);
-        static::assertContainsOnlyInstancesOf(BasicSeries::class, $results);
+        static::assertContainsOnlyInstancesOf(SeriesBaseRecord::class, $results);
     }
 
     public function testSearchBySlug()
@@ -128,6 +128,6 @@ class SearchRouteTest extends BaseRouteTest
         $this->setMockData($return, $options);
         $instance = new SearchRoute($this->parent);
         $results = $instance->searchBySlug($name);
-        static::assertContainsOnlyInstancesOf(BasicSeries::class, $results);
+        static::assertContainsOnlyInstancesOf(SeriesBaseRecord::class, $results);
     }
 }

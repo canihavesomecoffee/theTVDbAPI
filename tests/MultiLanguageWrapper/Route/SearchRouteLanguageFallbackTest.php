@@ -13,7 +13,7 @@
  *
  * Tests the SearchRouteLanguageFallback class.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category Tests
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route
@@ -25,7 +25,7 @@ declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper\Route;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\Route\SearchRouteLanguageFallback;
 
@@ -57,16 +57,16 @@ class SearchRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         $return = $instance($language);
         static::assertTrue(is_array($return));
         static::assertCount(2, $return);
-        static::assertContainsOnly(BasicSeries::class, $return);
+        static::assertContainsOnly(SeriesBaseRecord::class, $return);
     }
 
     public function testSearch()
     {
         $accepted = ['nl', 'en'];
-        $result = [new BasicSeries()];
+        $result = [new SeriesBaseRecord()];
         $mock_generator = $this->createMock(MultiLanguageFallbackGenerator::class);
         $mock_generator->expects(static::once())->method('create')->with(
-            static::isInstanceOf(\Closure::class), static::equalTo(BasicSeries::class), static::equalTo($accepted)
+            static::isInstanceOf(\Closure::class), static::equalTo(SeriesBaseRecord::class), static::equalTo($accepted)
         )->willReturn($result);
         $this->parent->expects(static::once())->method('getAcceptedLanguages')->willReturn($accepted);
         $this->parent->expects(static::once())->method('getGenerator')->willReturn($mock_generator);
@@ -74,7 +74,7 @@ class SearchRouteLanguageFallbackTest extends BaseRouteLanguageFallback
         $return = $instance->search('name', 'foo');
         static::assertTrue(is_array($return));
         static::assertCount(1, $return);
-        static::assertContainsOnly(BasicSeries::class, $return);
+        static::assertContainsOnly(SeriesBaseRecord::class, $return);
     }
 
     public function testInvalidSearch() {

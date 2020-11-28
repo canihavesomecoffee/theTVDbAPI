@@ -13,7 +13,7 @@
  *
  * Class to test the MultiLanguageFallbackGenerator
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category Tests
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper
@@ -26,7 +26,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\MultiLanguageWrapper;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\ClassValidator;
 use CanIHaveSomeCoffee\TheTVDbAPI\MultiLanguageWrapper\MultiLanguageFallbackGenerator;
 use PHPUnit\Framework\TestCase;
@@ -44,8 +44,8 @@ class MultiLangFallbackGeneratorTest extends TestCase
 {
     public function testCreateWithNoMerge() {
         $languages = ['en'];
-        $class = BasicEpisode::class;
-        $instance = new BasicEpisode();
+        $class = EpisodeBaseRecord::class;
+        $instance = new EpisodeBaseRecord();
         $validator = $this->createMock(ClassValidator::class);
         $validator->expects(static::never())->method('merge');
         $validator->expects(static::once())->method('isValid')->with($class, $instance)->willReturn(true);
@@ -61,9 +61,9 @@ class MultiLangFallbackGeneratorTest extends TestCase
 
     public function testCreateWithMerge() {
         $languages = ['en', 'nl'];
-        $class = BasicEpisode::class;
-        $instance = new BasicEpisode();
-        $null_instance = new BasicEpisode();
+        $class = EpisodeBaseRecord::class;
+        $instance = new EpisodeBaseRecord();
+        $null_instance = new EpisodeBaseRecord();
         $validator = $this->createMock(ClassValidator::class);
         $validator->expects(static::exactly(2))->method('merge')->withConsecutive(
             [$class, null, $null_instance],
@@ -88,14 +88,14 @@ class MultiLangFallbackGeneratorTest extends TestCase
 
     public function testCreateCatchesResourceNotFound() {
         $languages = ['en', 'nl'];
-        $class = BasicEpisode::class;
-        $instance = new BasicEpisode();
-        $null_instance = new BasicEpisode();
+        $class = EpisodeBaseRecord::class;
+        $instance = new EpisodeBaseRecord();
+        $null_instance = new EpisodeBaseRecord();
         $callback = function($lang) {
             if($lang == "en") {
                 throw new ResourceNotFoundException();
             }
-            return new BasicEpisode();
+            return new EpisodeBaseRecord();
         };
         $validator = $this->createMock(ClassValidator::class);
         $validator->expects(static::exactly(2))->method('merge')->withConsecutive(

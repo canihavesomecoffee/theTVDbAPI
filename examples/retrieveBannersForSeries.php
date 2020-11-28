@@ -13,7 +13,7 @@
  *
  * Example to show retrieving a Dutch show (which misses most English titles) using Dutch as the fallback.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category Examples
  * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
@@ -33,8 +33,7 @@ $theTVDbAPI = new TheTVDbAPILanguageFallback();
 $theTVDbAPI->setAcceptedLanguages(['nl', 'en']);
 
 // Login and set the token.
-$token = $theTVDbAPI->authentication()->login($accessKey);
-$theTVDbAPI->setToken($token);
+$theTVDbAPI->setApiKey($accessKey);
 
 // Retrieve artwork statistics from a Dutch show.
 $artworkStatistics = $theTVDbAPI->series()->getImages(280258);

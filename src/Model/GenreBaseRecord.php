@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,9 +11,9 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Represents an image on TVDb.
+ * Class to represent a genre on theTVDb.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -21,67 +21,34 @@
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class Image
+ * Class GenreBaseRecord
  *
- * @category TheTVDbAPI
- * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
- * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
- * @license  See start of document
- * @link     https://canihavesome.coffee/projects/theTVDbAPI
+ * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
  */
-class Image
+class GenreBaseRecord
 {
     /**
-     * The name of the file
-     *
-     * @var string
-     */
-    public $fileName;
-    /**
-     * The id of the image
+     * The id of the genre.
      *
      * @var integer
      */
-    public $id;
+    public int $id;
     /**
-     * The key type
+     * The name of the genre.
      *
      * @var string
      */
-    public $keyType;
+    public string $name;
     /**
-     * The language id.
-     *
-     * @var integer
-     */
-    public $languageId;
-    /**
-     * Rating info on this image.
-     *
-     * @var RatingsInfo
-     */
-    public $ratingsInfo;
-    /**
-     * The resolution of this image.
+     * The slug for this genre.
      *
      * @var string
      */
-    public $resolution;
-    /**
-     * The subkey.
-     *
-     * @var string
-     */
-    public $subKey;
-    /**
-     * Thumbnail URL
-     *
-     * @var string
-     */
-    public $thumbnail;
+    public string $slug;
 }

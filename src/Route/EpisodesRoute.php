@@ -13,7 +13,7 @@
  *
  * Route that exposes the episodes methods of TheTVDb API.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Route
@@ -29,8 +29,11 @@ use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Episode;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeExtendedRecord;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\Translation;
 use Exception;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
  * Class EpisodesRoute
@@ -46,19 +49,56 @@ class EpisodesRoute extends AbstractRoute
 
 
     /**
-     * Returns the full information for a given episode ID.
+     * Returns the simple information for a given episode ID.
      *
      * @param int $episodeId The episode ID.
      *
-     * @return Episode The full episode, if found.
+     * @return EpisodeBaseRecord The simple episode, if found.
      * @throws ParseException
      * @throws UnauthorizedException
      * @throws ResourceNotFoundException
-     * @throws Exception
+     * @throws Exception|ExceptionInterface
      */
-    public function byId(int $episodeId): Episode
+    public function simple(int $episodeId): EpisodeBaseRecord
     {
-        $json = $this->parent->performAPICallWithJsonResponse('get', '/episodes/'.$episodeId);
-        return DataParser::parseData($json, Episode::class);
+        $json = $this->parent->performAPICallWithJsonResponse('get', 'episodes/'.$episodeId);
+        return DataParser::parseData($json, EpisodeBaseRecord::class);
     }
+
+    /**
+     * Returns the extended information for a given episode ID.
+     *
+     * @param int $episodeId The episode ID.
+     *
+     * @return EpisodeExtendedRecord The extended episode, if found.
+     * @throws ParseException
+     * @throws UnauthorizedException
+     * @throws ResourceNotFoundException
+     * @throws Exception|ExceptionInterface
+     */
+    public function extended(int $episodeId): EpisodeExtendedRecord
+    {
+        $json = $this->parent->performAPICallWithJsonResponse('get', 'episodes/'.$episodeId.'/extended');
+        return DataParser::parseData($json, EpisodeExtendedRecord::class);
+    }
+
+    /**
+     * Returns the simple information for a given episode ID.
+     *
+     * @param int    $episodeId The episode ID.
+     * @param string $lng       The language name.
+     *
+     * @return Translation The translation for the episode, if found.
+     * @throws ParseException
+     * @throws UnauthorizedException
+     * @throws ResourceNotFoundException
+     * @throws Exception|ExceptionInterface
+     */
+    public function translations(int $episodeId, string $lng): Translation
+    {
+        $json = $this->parent->performAPICallWithJsonResponse('get', 'episodes/'.$episodeId.'/translations/'.$lng);
+        return DataParser::parseData($json, Translation::class);
+    }
+
+
 }

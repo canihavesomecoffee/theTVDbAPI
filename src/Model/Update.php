@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,9 +11,9 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Represents a JSON error returned by the API.
+ * Represents update info on TVDb.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -26,7 +26,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class JSONError
+ * Class Update
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -34,65 +34,24 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class JSONError
+class Update
 {
     /**
-     * Invalid filters passed to route.
-     */
-    const INVALID_FILTER = 1;
-    /**
-     * Invalid language or translation missing.
-     */
-    const INVALID_LANGUAGE = 2;
-    /**
-     * Invalid query params passed to route.
-     */
-    const INVALID_QUERYPARAMS = 3;
-
-    /**
-     * The error type.
+     * The type of change.
      *
-     * @var integer
+     * @var string The type of change.
      */
-    private $type;
-
+    public string $method;
     /**
-     * Contains the message or the returned data.
+     * The record id.
      *
-     * @var mixed
+     * @var integer The record id.
      */
-    private $data;
-
-
+    public int $recordId;
     /**
-     * JSONError constructor.
+     * The EPOCH timestamp of the change.
      *
-     * @param int   $type The type of this error.
-     * @param mixed $data The optional data of this error.
+     * @var integer The EPOCH timestamp of the change.
      */
-    public function __construct($type = JSONError::INVALID_LANGUAGE, $data = null)
-    {
-        $this->type = $type;
-        $this->data = $data;
-    }
-
-    /**
-     * Gets the Type
-     *
-     * @return int
-     */
-    public function getType(): int
-    {
-        return $this->type;
-    }
-
-    /**
-     * Gets the Data
-     *
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
+    public int $timeStamp;
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,9 +11,9 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Represents user info on TVDb.
  *
- * PHP version 7.1
+ *
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -21,37 +21,28 @@
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class UserData
+ * Class Race
  *
- * @category TheTVDbAPI
- * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
- * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
- * @license  See start of document
- * @link     https://canihavesome.coffee/projects/theTVDbAPI
+ * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
  */
-class UserData
+class Race
 {
     /**
-     * The display mode of the favourites.
+     * The biography? of this race.
      *
      * @var string
      */
-    public $favoritesDisplaymode;
+    public string $biography;
     /**
-     * The language.
+     * The language of this race.
      *
      * @var string
      */
-    public $language;
-    /**
-     * The username.
-     *
-     * @var string
-     */
-    public $userName;
+    public string $language;
 }

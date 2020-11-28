@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2017, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,9 +11,9 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Represents update info on TVDb.
+ * Provides a class with the data an entity contains.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -26,7 +26,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class UpdateInfo
+ * Class Entity
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -34,18 +34,24 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class UpdateInfo
+class Entity
 {
     /**
-     * The id of the series that was updated.
+     * The ID of the movie which this entity belongs to.
      *
-     * @var integer
+     * @var float|integer|null
      */
-    public $id;
+    public $movieId;
     /**
-     * The epoch timestamp of the last update.
+     * The order?
      *
      * @var integer
      */
-    public $lastUpdated;
+    public int $order;
+    /**
+     * The ID of the series which this entity belongs to.
+     *
+     * @var float|integer|null
+     */
+    public $seriesId;
 }

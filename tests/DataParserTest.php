@@ -17,8 +17,8 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\RatingsInfo;
 use PHPUnit\Framework\TestCase;
@@ -39,8 +39,8 @@ class DataParserTest extends TestCase
         $json = [
             json_decode('{"absoluteNumber": null, "airedEpisodeNumber": 0, "airedSeason": 0, "airedSeasonID": 0, "dvdEpisodeNumber": null, "dvdSeason": null, "episodeName": "string",  "firstAired": "2018-04-10", "id": 0, "language": { "episodeName": "en", "overview": "en" }, "lastUpdated": 1523605586, "overview": "string"}', true)
         ];
-        $return = DataParser::parseDataArray($json, BasicEpisode::class);
-        static::assertContainsOnlyInstancesOf(BasicEpisode::class, $return);
+        $return = DataParser::parseDataArray($json, EpisodeBaseRecord::class);
+        static::assertContainsOnlyInstancesOf(EpisodeBaseRecord::class, $return);
     }
 
     public function testParseBasicSeriesData()
@@ -50,8 +50,8 @@ class DataParserTest extends TestCase
             json_decode('{"added": "string", "airsDayOfWeek": "string", "airsTime": "string", "aliases": [ "string" ], "banner": "string", "firstAired": "string", "genre": [ "string" ], "id": 0, "imdbId": "string", "lastUpdated": 0, "network": "string", "networkId": "string", "overview": "string", "rating": "string", "runtime": "string", "seriesId": 0, "seriesName": "string", "siteRating": 0, "siteRatingCount": 0, "status": "string", "zap2itId": "string"}', true),
             json_decode('{"added": "string", "airsDayOfWeek": "string", "airsTime": "string", "aliases": [ "string" ], "banner": "string", "firstAired": "string", "genre": [], "id": 0, "imdbId": "string", "lastUpdated": 0, "network": "string", "networkId": "string", "overview": null, "rating": "string", "runtime": "string", "seriesId": 0, "seriesName": null, "siteRating": 0, "siteRatingCount": 0, "status": "string", "zap2itId": "string"}', true)
         ];
-        $return = DataParser::parseDataArray($json, BasicSeries::class);
-        static::assertContainsOnlyInstancesOf(BasicSeries::class, $return);
+        $return = DataParser::parseDataArray($json, SeriesBaseRecord::class);
+        static::assertContainsOnlyInstancesOf(SeriesBaseRecord::class, $return);
     }
 
     public function testParseImage()

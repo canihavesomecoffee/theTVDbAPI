@@ -13,7 +13,7 @@
  *
  * Exception for when a request cannot be fulfilled (not found).
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Exception
@@ -26,6 +26,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Exception;
 
 use Exception;
+use function GuzzleHttp\Psr7\build_query;
 
 /**
  * Class ResourceNotFoundException
@@ -55,9 +56,9 @@ class ResourceNotFoundException extends Exception
     /**
      * Creates an error message for a not found exception.
      *
-     * @param string $baseMessage The base error message
-     * @param string $path        The requested path
-     * @param array  $parameters  The query parameters (if defined)
+     * @param string      $baseMessage The base error message
+     * @param string|null $path        The requested path
+     * @param array       $parameters  The query parameters (if defined)
      *
      * @return string
      */
@@ -68,7 +69,7 @@ class ResourceNotFoundException extends Exception
             $errorMessage .= sprintf(
                 static::PATH_MESSAGE,
                 $path,
-                \GuzzleHttp\Psr7\build_query($parameters)
+                build_query($parameters)
             );
         }
         return $errorMessage;
@@ -77,8 +78,8 @@ class ResourceNotFoundException extends Exception
     /**
      * Returns a new instance for the resource not found exception.
      *
-     * @param string $path    The requested path
-     * @param array  $options The options passed to the request
+     * @param string|null $path    The requested path
+     * @param array       $options The options passed to the request
      *
      * @return ResourceNotFoundException
      */
@@ -94,8 +95,8 @@ class ResourceNotFoundException extends Exception
     /**
      * Returns a new instance for the resource not found exception for missing translations
      *
-     * @param string $path    The requested path
-     * @param array  $options The options passed to the request
+     * @param string|null $path    The requested path
+     * @param array       $options The options passed to the request
      *
      * @return ResourceNotFoundException
      */
@@ -107,4 +108,6 @@ class ResourceNotFoundException extends Exception
         }
         return new static(static::createErrorMessage(static::NO_TRANSLATION_MESSAGE, $path, $query));
     }
+
+
 }

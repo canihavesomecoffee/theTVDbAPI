@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\UpdateInfo;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\Update;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\UpdatesRoute;
 use DateTime;
 
@@ -46,8 +46,8 @@ class UpdatesRouteTest extends BaseRouteTest
         )->willReturn([['id' => 123, 'lastUpdated' => 1495295674], ['id' => 124, 'lastUpdated' => 1495295874]]);
         $instance = new UpdatesRoute($this->parent);
         $results = $instance->query(DateTime::createFromFormat('U', $from_time.''));
-        static::assertContainsOnlyInstancesOf(UpdateInfo::class, $results);
+        static::assertContainsOnlyInstancesOf(Update::class, $results);
         $both_results = $instance->query(DateTime::createFromFormat('U', $from_time.''), DateTime::createFromFormat('U', $to_time.''));
-        static::assertContainsOnlyInstancesOf(UpdateInfo::class, $both_results);
+        static::assertContainsOnlyInstancesOf(Update::class, $both_results);
     }
 }
