@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeExtendedRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
 
@@ -37,12 +38,11 @@ class EpisodesRouteTest extends BaseRouteTest
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['id' => $episode_id, 'overview' => $overview]);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('get'),
-            static::equalTo('/episodes/'.$episode_id)
+            static::equalTo('episodes/'.$episode_id)
         );
         $instance = new EpisodesRoute($this->parent);
         $episode = $instance->simple($episode_id);
-        static::assertInstanceOf(EpisodeExtendedRecord::class, $episode);
+        static::assertInstanceOf(EpisodeBaseRecord::class, $episode);
         static::assertEquals($episode_id, $episode->id);
-        static::assertEquals($overview, $episode->overview);
     }
 }

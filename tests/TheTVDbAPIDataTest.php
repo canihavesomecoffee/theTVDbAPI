@@ -40,8 +40,6 @@ class TheTVDbAPIDataTest extends TestCase
     {
         // Set up an authenticated client
         $this->theTVDbAPI = new TheTVDbAPI();
-        $this->theTVDbAPI->setVersion('1.2.0');
-        $this->theTVDbAPI->setAcceptedLanguages(['en']);
 
         /*$token = $this->theTVDbAPI->authentication()->login(
             getenv("API_KEY"), getenv("API_USER"), getenv("API_USER_KEY")

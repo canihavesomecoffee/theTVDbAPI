@@ -19,8 +19,6 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests;
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\RatingsInfo;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -52,17 +50,5 @@ class DataParserTest extends TestCase
         ];
         $return = DataParser::parseDataArray($json, SeriesBaseRecord::class);
         static::assertContainsOnlyInstancesOf(SeriesBaseRecord::class, $return);
-    }
-
-    public function testParseImage()
-    {
-        $json   = [
-            json_decode('{ "id": 845571, "keyType": "series", "subKey": "graphical", "fileName": "graphical/236061-g.jpg", "resolution": "", "ratingsInfo": { "average": 8, "count": 5 }, "thumbnail": "_cache/graphical/236061-g.jpg"}', true),
-            json_decode('{ "id": 845571, "keyType": "series", "subKey": "graphical", "fileName": "graphical/236061-g.jpg", "resolution": "", "ratingsInfo": { "average": 8.5, "count": 5 }, "thumbnail": "_cache/graphical/236061-g.jpg"}', true)
-        ];
-        /** @var Image $return */
-        $return = DataParser::parseDataArray($json, Image::class);
-        static::assertContainsOnlyInstancesOf(Image::class, $return);
-        static::assertInstanceOf(RatingsInfo::class, $return[0]->ratingsInfo);
     }
 }

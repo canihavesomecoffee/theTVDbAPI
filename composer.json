@@ -25,5 +25,8 @@
     "psr-4": {
       "CanIHaveSomeCoffee\\TheTVDbAPI\\": "src/"
     }
+  },
+  "scripts": {
+    "tests": "phpunit --bootstrap tests/bootstrap.php"
   }
 }

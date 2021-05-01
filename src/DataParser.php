@@ -69,8 +69,8 @@ class DataParser
     /**
      * Parses the given JSON data into an array of return_class instances.
      *
-     * @param object $json        The JSON data. Must be valid
-     * @param string $returnClass The expected return class
+     * @param object|array $json        The JSON data. Must be valid
+     * @param string       $returnClass The expected return class
      *
      * @return array
      * @throws ExceptionInterface

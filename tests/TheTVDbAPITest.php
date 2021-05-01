@@ -90,27 +90,7 @@ class TheTVDbAPITest extends TestCase
         static::assertInstanceOf(LanguagesRoute::class, $instance->languages());
         static::assertInstanceOf(SearchRoute::class, $instance->search());
         static::assertInstanceOf(UpdatesRoute::class, $instance->updates());
-        static::assertInstanceOf(UsersRoute::class, $instance->users());
         static::assertInstanceOf(SeriesRoute::class, $instance->series());
-    }
-
-    public function testRetrieveAcceptedLanguages()
-    {
-        $languages = ["nl", "en"];
-        $test_instance = new TheTVDbAPI();
-        $test_instance->setAcceptedLanguages($languages);
-        static::assertEquals($languages, $test_instance->getAcceptedLanguages());
-    }
-
-    public function testSetVersion()
-    {
-        $version = "1.33.7";
-        $test_instance = new TheTVDbAPI();
-        $test_instance->setVersion($version);
-        // Set wrong version
-        static::expectException(InvalidArgumentException::class);
-        static::expectExceptionMessage('Version does not match pattern x.y.z (where x, y, z are numbers)');
-        $test_instance->setVersion('this.is.wrong');
     }
 
     public function testIfHeadersAreReturned()
@@ -124,7 +104,7 @@ class TheTVDbAPITest extends TestCase
         $handler = HandlerStack::create($mock);
         $client = new Client(['handler' => $handler]);
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         $headers = $test_instance->requestHeaders('GET', '/');
         static::assertEquals($headers_expected, $headers);
@@ -134,7 +114,7 @@ class TheTVDbAPITest extends TestCase
     {
         $client = $this->createTokenErrorClient();
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         static::expectException(UnauthorizedException::class);
         $test_instance->requestHeaders('GET', 'fail');
@@ -144,7 +124,7 @@ class TheTVDbAPITest extends TestCase
     {
         $client = $this->createPathErrorClient();
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         // Not found
         static::expectException(ResourceNotFoundException::class);
@@ -159,7 +139,7 @@ class TheTVDbAPITest extends TestCase
             new RequestException("Error Communicating with Server", new Request('GET', 'test'))
         ]);
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         $response = $test_instance->performAPICall("GET", "/");
         static::assertEquals($input, $response->getBody()->getContents());
@@ -169,7 +149,7 @@ class TheTVDbAPITest extends TestCase
     {
         $client = $this->createTokenErrorClient();
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         static::expectException(UnauthorizedException::class);
         $test_instance->performAPICall('GET', 'fail');
@@ -179,7 +159,7 @@ class TheTVDbAPITest extends TestCase
     {
         $client = $this->createPathErrorClient();
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         // Not found
         static::expectException(ResourceNotFoundException::class);
@@ -193,7 +173,7 @@ class TheTVDbAPITest extends TestCase
             new RequestException("Error Communicating with Server", new Request('GET', 'test'))
         ]);
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         static::expectException(Exception::class);
         $test_instance->performAPICallWithJsonResponse('GET', 'fail');
@@ -207,7 +187,7 @@ class TheTVDbAPITest extends TestCase
             new RequestException("Error Communicating with Server", new Request('GET', 'test'))
         ]);
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         static::expectException(ParseException::class);
         $test_instance->performAPICallWithJsonResponse("GET", "/");
@@ -221,7 +201,7 @@ class TheTVDbAPITest extends TestCase
             new RequestException("Error Communicating with Server", new Request('GET', 'test'))
         ]);
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         static::expectException(ParseException::class);
         $test_instance->performAPICallWithJsonResponse("GET", "/");
@@ -242,30 +222,9 @@ class TheTVDbAPITest extends TestCase
             new RequestException("Error Communicating with Server", new Request('GET', 'test'))
         ]);
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         $result = $test_instance->performAPICallWithJsonResponse("GET", "/");
-        $errors = $test_instance->getLastJSONErrors();
-        static::assertCount(3, $errors);
-        static::assertEquals($expected, $result);
-    }
-
-    public function testAPICallWithLinkData()
-    {
-        $expected = [
-            'foo' => 'bar',
-            'links' => ['previous' => 0, 'next' => 2, 'first' => 0, 'last' => 1337]
-        ];
-        $client = $this->createClientWithMockHandler([
-            new Response(200, [], json_encode($expected)),
-            new RequestException("Error Communicating with Server", new Request('GET', 'test'))
-        ]);
-        $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
-
-        $result = $test_instance->performAPICallWithJsonResponse("GET", "/");
-        $links = $test_instance->getLastLinks();
-        static::assertCount(4, $links);
         static::assertEquals($expected, $result);
     }
 
@@ -278,7 +237,7 @@ class TheTVDbAPITest extends TestCase
             new RequestException("Error Communicating with Server", new Request('GET', 'test'))
         ]);
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         $result = $test_instance->performAPICallWithJsonResponse("GET", "/");
         static::assertEquals($expected, $result);
@@ -292,7 +251,7 @@ class TheTVDbAPITest extends TestCase
             new RequestException("Error Communicating with Server", new Request('GET', 'test'))
         ]);
         $test_instance = new TheTVDbAPI($client);
-        $test_instance->setApiKey('ABC');
+        $test_instance->setToken('ABC');
 
         $result = $test_instance->performAPICallWithJsonResponse("GET", "/");
         static::assertEquals($expected['data'], $result);

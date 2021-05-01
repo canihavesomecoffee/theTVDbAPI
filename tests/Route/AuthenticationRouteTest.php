@@ -37,7 +37,7 @@ class AuthenticationRouteTest extends BaseRouteTest
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['token' => $expected_token]);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('post'),
-            static::equalTo('/login'),
+            static::equalTo('login'),
             static::equalTo(['body' => json_encode(['apikey' => $api_key]), 'http_errors' => true])
         );
         $instance = new AuthenticationRoute($this->parent);
@@ -53,7 +53,7 @@ class AuthenticationRouteTest extends BaseRouteTest
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['token' => $expected_token]);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('post'),
-            static::equalTo('/login'),
+            static::equalTo('login'),
             static::equalTo([
                 'body' => json_encode(['apikey' => $api_key, 'pin' => $userPIN]),
                 'http_errors' => true
@@ -64,20 +64,13 @@ class AuthenticationRouteTest extends BaseRouteTest
         static::assertEquals($expected_token, $token);
     }
 
-    public function testAPIAndUserMissingUserKey()
-    {
-        $instance = new AuthenticationRoute($this->parent);
-        static::expectException(\InvalidArgumentException::class);
-        $instance->login('FOO');
-    }
-
     public function testAPIKeyWrongToken()
     {
         $api_key = "FOO";
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['error' => 'Invalid token']);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('post'),
-            static::equalTo('/login'),
+            static::equalTo('login'),
             static::equalTo(['body' => json_encode(['apikey' => $api_key]), 'http_errors' => true])
         );
         $instance = new AuthenticationRoute($this->parent);

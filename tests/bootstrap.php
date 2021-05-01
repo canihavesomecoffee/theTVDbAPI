@@ -31,4 +31,3 @@ if (file_exists(__DIR__.'/../vendor/autoload.php')) {
 }
 
 require_once __DIR__.'/Route/BaseRouteTest.php';
-require_once __DIR__.'/MultiLanguageWrapper/Route/BaseRouteLanguageFallback.php';
