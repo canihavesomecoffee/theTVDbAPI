@@ -2,7 +2,7 @@
 
 ## 2.x
 
-### 2.0.0b (15 November 2020)
+### 2.0.0b (02 May 2021)
 
 Major release for the new API of theTVDb.
 
