@@ -27,6 +27,6 @@
     }
   },
   "scripts": {
-    "tests": "phpunit --bootstrap tests/bootstrap.php"
+    "test": "phpunit --bootstrap tests/bootstrap.php"
   }
 }
