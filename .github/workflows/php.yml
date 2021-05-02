@@ -11,9 +11,13 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        operating-system: [ubuntu-latest, windows-latest, macOS-latest]
-        php-versions: ['7.4', '8.0', '8.1']
-        experimental: [false, false, true]
+        operating-system: [ubuntu-latest]
+        php-versions: ['7.4', '8.0']
+        experimental: [false]
+        include:
+          - php-versions: '8.1'
+            operating-system: ubuntu-latest
+            experimental: true
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
       - uses: actions/checkout@v2
