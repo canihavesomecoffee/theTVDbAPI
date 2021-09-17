@@ -19,6 +19,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
+use GuzzleHttp\Psr7\Query;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -51,7 +52,7 @@ class ExceptionTest extends TestCase
         $expectedError = $base.sprintf(
             ResourceNotFoundException::PATH_MESSAGE,
             $path,
-            \GuzzleHttp\Psr7\build_query($parameters)
+            Query::build($parameters)
         );
         static::assertEquals($expectedError, ResourceNotFoundException::createErrorMessage($base, $path, $parameters));
     }

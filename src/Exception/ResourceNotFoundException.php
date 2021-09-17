@@ -26,7 +26,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Exception;
 
 use Exception;
-use function GuzzleHttp\Psr7\build_query;
+use GuzzleHttp\Psr7\Query;
 
 /**
  * Class ResourceNotFoundException
@@ -69,7 +69,7 @@ class ResourceNotFoundException extends Exception
             $errorMessage .= sprintf(
                 static::PATH_MESSAGE,
                 $path,
-                build_query($parameters)
+                Query::build($parameters)
             );
         }
         return $errorMessage;
