@@ -122,4 +122,10 @@ class EpisodeBaseRecord
      * @var DateTime|null
      */
     public ?DateTime $lastUpdated;
+    /**
+     * The overview if provided.
+     *
+     * @var string|null
+     */
+    public ?string $overview;
 }

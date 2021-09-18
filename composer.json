@@ -13,9 +13,9 @@
   "require": {
     "php": ">=7.4",
     "guzzlehttp/guzzle": "^7.0",
-    "symfony/serializer": "^4.0",
+    "symfony/serializer": "^5.3",
     "symfony/property-access": "^5.3",
-    "symfony/property-info": "^5.2",
+    "symfony/property-info": "^5.3",
     "ext-json": "*"
   },
   "require-dev": {

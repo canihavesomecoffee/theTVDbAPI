@@ -2,6 +2,20 @@
 
 ## 2.x
 
+### 2.0.0 (19 September 2021)
+
+First stable release for support of v4 of the TVDb API.
+
+This version currently supports Authentication, Episodes, Series, Search, Update and Language API calls.
+Support for other endpoints will be added in future releases.
+
+* New: Minimal support for API v4.0.0 of theTVDb.
+* Changed: Minimal PHP version is now 7.4
+* Changed: Dependencies got bumped
+  * Guzzle version 7 or newer
+  * Symfony's components 5.3 or newer
+  * PHPUnit 9 or newer (developers)
+
 ### 2.0.0b3 (19 September 2021)
 
 Forth beta
