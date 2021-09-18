@@ -25,6 +25,8 @@ declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
+use DateTime;
+
 /**
  * Class EpisodeBaseRecord
  *
@@ -49,6 +51,8 @@ class EpisodeBaseRecord
      */
     public int $id;
     /**
+     * Link to image.
+     *
      * @var string|null URL to the image related to this base record of an episode.
      */
     public ?string $image;
@@ -100,4 +104,22 @@ class EpisodeBaseRecord
      * @var integer
      */
     public int $seriesId;
+    /**
+     * Season number.
+     *
+     * @var integer
+     */
+    public int $seasonNumber;
+    /**
+     * Season episode nr.
+     *
+     * @var integer
+     */
+    public int $number;
+    /**
+     * The last time this episode got an update.
+     *
+     * @var DateTime|null
+     */
+    public ?DateTime $lastUpdated;
 }

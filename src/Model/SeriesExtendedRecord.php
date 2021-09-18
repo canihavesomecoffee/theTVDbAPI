@@ -96,4 +96,22 @@ class SeriesExtendedRecord extends SeriesBaseRecord
      * @var array
      */
     public array $trailers;
+
+
+    /**
+     * Filters the remote id's for the IMDB id (if available).
+     *
+     * @return string|null
+     */
+    public function getIMDBId()
+    {
+        foreach ($this->remoteIds as $remoteId) {
+            if ($remoteId->type === 2) {
+                return $remoteId->id;
+            }
+        }
+        return null;
+    }
+
+
 }

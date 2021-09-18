@@ -2,6 +2,14 @@
 
 ## 2.x
 
+### 2.0.0b3 (19 September 2021)
+
+Forth beta
+
+* New
+  * Series base and extended records have new fields and methods for average runtime & retrieving the imdb id.
+  * Episode base has new fields to match API.
+
 ### 2.0.0b2 (18 September 2021)
 
 Third beta

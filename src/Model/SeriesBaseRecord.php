@@ -25,6 +25,8 @@ declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
+use DateTime;
+
 /**
  * Class SeriesBaseRecord
  *
@@ -138,4 +140,16 @@ class SeriesBaseRecord
      * @var Status
      */
     public Status $status;
+    /**
+     * The average runtime.
+     *
+     * @var integer|null
+     */
+    public ?int $averageRuntime;
+    /**
+     * The last updated timestamp.
+     *
+     * @var DateTime|null
+     */
+    public ?DateTime $lastUpdated;
 }
