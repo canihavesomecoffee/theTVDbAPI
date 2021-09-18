@@ -59,7 +59,8 @@ class SeriesRouteTest extends BaseRouteTest
     {
         $series_id = 1337;
         $page = 1;
-        $options = ['query' => ['page' => $page]];
+        $season = 0;
+        $options = ['query' => ['page' => $page, 'season' => $season]];
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('get'),
             static::equalTo('series/'.$series_id.'/episodes/default'),
@@ -68,7 +69,7 @@ class SeriesRouteTest extends BaseRouteTest
             ["episodes" => [['id' => 123, 'name' => 'foo bar'], ['id' => 124, 'name' => 'bar baz']]]
         );
         $instance = new SeriesRoute($this->parent);
-        $episodes = $instance->episodes($series_id, $page);
+        $episodes = $instance->episodes($series_id, $season, $page);
         static::assertContainsOnlyInstancesOf(EpisodeBaseRecord::class, $episodes);
     }
 
@@ -81,7 +82,7 @@ class SeriesRouteTest extends BaseRouteTest
             ->onlyMethods([$mocked_method])
             ->getMock();
         $mock->expects(static::exactly(1))->method($mocked_method)->withConsecutive(
-            [$series_id, 1]
+            [$series_id, 0, 1]
         )->willReturnOnConsecutiveCalls(
             [new EpisodeBaseRecord(), new EpisodeBaseRecord()]
         );
