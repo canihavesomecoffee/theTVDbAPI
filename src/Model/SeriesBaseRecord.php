@@ -63,9 +63,9 @@ class SeriesBaseRecord
     /**
      * The Y-M-D representation of the first time the show aired.
      *
-     * @var string
+     * @var string|null
      */
-    public $firstAired;
+    public ?string $firstAired;
     /**
      * The id of the serie.
      *
@@ -75,9 +75,9 @@ class SeriesBaseRecord
     /**
      * The image related to this series.
      *
-     * @var string
+     * @var string|null
      */
-    public string $image;
+    public ?string $image;
     /**
      * Is the order for this series randomized?
      *
@@ -87,9 +87,9 @@ class SeriesBaseRecord
     /**
      * The last date the series was aired on.
      *
-     * @var string
+     * @var string|null
      */
-    public string $lastAired;
+    public ?string $lastAired;
     /**
      * The name of the serie.
      *
@@ -111,9 +111,9 @@ class SeriesBaseRecord
     /**
      * Original country this series was shown in.
      *
-     * @var string
+     * @var string|null
      */
-    public string $originalCountry;
+    public ?string $originalCountry;
     /**
      * Original language of the series.
      *
@@ -123,7 +123,7 @@ class SeriesBaseRecord
     /**
      * The score of this series.
      *
-     * @var float
+     * @var float|integer
      */
     public float $score;
     /**

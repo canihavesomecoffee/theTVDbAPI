@@ -11,7 +11,7 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Provides a class with the data an entity update contains.
+ * Provides a class with the data an entity contains.
  *
  * PHP version 7.4
  *
@@ -26,7 +26,7 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class EntityUpdate
+ * Class Links
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
@@ -34,30 +34,24 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class EntityUpdate
+class Links
 {
     /**
-     * The entity type of the update.
+     * Previous url.
      *
-     * @var string
+     * @var string|null
      */
-    public string $entityType;
+    public ?string $prev;
     /**
-     * The action of the entity update.
+     * Current url.
      *
-     * @var string
+     * @var string|null
      */
-    public string $method;
+    public ?string $self;
     /**
-     * The id of the entity update.
+     * Next url.
      *
-     * @var integer
+     * @var string|null
      */
-    public int $recordId;
-    /**
-     * The unix timestamp of the entity update.
-     *
-     * @var integer
-     */
-    public int $timeStamp;
+    public ?string $next;
 }

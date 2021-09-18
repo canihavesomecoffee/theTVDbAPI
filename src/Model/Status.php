@@ -36,9 +36,9 @@ class Status
     /**
      * The id for this Status.
      *
-     * @var integer
+     * @var integer|null
      */
-    public int $id;
+    public ?int $id;
     /**
      * Keep this record type updated?
      *
@@ -48,9 +48,9 @@ class Status
     /**
      * The name for this Status.
      *
-     * @var string
+     * @var string|null
      */
-    public string $name;
+    public ?string $name;
     /**
      * The record type to keep a status about.
      *

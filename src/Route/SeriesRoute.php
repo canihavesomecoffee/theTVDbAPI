@@ -101,7 +101,23 @@ class SeriesRoute extends AbstractRoute
     }
 
 
-
+    /**
+     * Get a list of episodes.
+     *
+     * @param int $page The page number (optional).
+     *
+     * @return array
+     * @throws ExceptionInterface
+     * @throws ParseException
+     * @throws ResourceNotFoundException
+     * @throws UnauthorizedException
+     */
+    public function list(int $page = 0): array
+    {
+        $options = ['query' => ['page' => $page]];
+        $json    = $this->parent->performAPICallWithJsonResponse('get', 'series', $options);
+        return DataParser::parseDataArray($json, SeriesBaseRecord::class);
+    }
 
     /**
      * Returns a series record that contains all information known about a particular series ID.
@@ -141,8 +157,10 @@ class SeriesRoute extends AbstractRoute
      * Returns paginated episodes of the series with 100 results per page.
      *
      * @param int    $id         The id of the series to retrieve.
+     * @param int    $season     The season to retrieve.
      * @param int    $page       The page to start with (defaults to 1).
      * @param string $seasonType The season type. Defaults to default.
+     * @param string $lang       The language for translated episodes.
      *
      * @return array An array of base episode records. Empty if not enough episodes available.
      * @throws ParseException
@@ -150,14 +168,18 @@ class SeriesRoute extends AbstractRoute
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function episodes(int $id, int $page = 0, string $seasonType = self::SEASON_TYPE_DEFAULT): array
+    public function episodes(int $id, int $season = 0, int $page = 0, string $seasonType = self::SEASON_TYPE_DEFAULT, string $lang = ""): array
     {
         if (static::isValidSeasonType($seasonType) === false) {
             throw new \InvalidArgumentException("Given season type is not valid");
         }
-        $options = ['query' => ['page' => $page]];
+        $options = ['query' => ['page' => $page, 'season' => $season]];
 
-        $json = $this->parent->performAPICallWithJsonResponse('get', 'series/'.$id.'/episodes/'.$seasonType, $options);
+        $path = 'series/'.$id.'/episodes/'.$seasonType;
+        if ($lang !== "") {
+            $path .= "/".$lang;
+        }
+        $json = $this->parent->performAPICallWithJsonResponse('get', $path, $options);
 
         return DataParser::parseDataArray($json['episodes'], EpisodeBaseRecord::class);
     }
@@ -167,7 +189,9 @@ class SeriesRoute extends AbstractRoute
      * and groups them together in a single array.
      *
      * @param int    $id         The id of the series to retrieve.
+     * @param int    $season     The season to retrieve.
      * @param string $seasonType The season type. Defaults to default.
+     * @param string $lang       The language for translated episodes.
      *
      * @return array An array of EpisodeBaseRecord instances.
      * @throws ParseException
@@ -175,12 +199,12 @@ class SeriesRoute extends AbstractRoute
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function allEpisodes(int $id, string $seasonType = self::SEASON_TYPE_DEFAULT): array
+    public function allEpisodes(int $id, int $season = 0, string $seasonType = self::SEASON_TYPE_DEFAULT, string $lang = ""): array
     {
         $currentPage = 1;
         $allEpisodes = [];
         do {
-            $results     = $this->episodes($id, $currentPage, $seasonType);
+            $results     = $this->episodes($id, $season, $currentPage, $seasonType, $lang);
             $allEpisodes = array_merge($allEpisodes, $results);
             $currentPage++;
             if (sizeof($results) < 100) {

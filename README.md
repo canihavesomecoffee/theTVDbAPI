@@ -1,7 +1,7 @@
 # CanIHaveSomeCoffee/TheTVDbAPI
 
 [![Packagist](https://img.shields.io/packagist/v/canihavesomecoffee/thetvdbapi.svg)](https://packagist.org/packages/canihavesomecoffee/thetvdbapi)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-green.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/packagist/php-v/canihavesomecoffee/theTVDbAPI)](https://php.net/)
 [![Build status](https://api.travis-ci.org/canihavesomecoffee/theTVDbAPI.svg?branch=master)](https://travis-ci.org/canihavesomecoffee/theTVDbAPI)
 [![codecov](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI)
 
@@ -26,9 +26,9 @@ $ composer require canihavesomecoffee/thetvdbapi
 
 ## Documentation
 
-The official API documentation can be found here: [https://api.thetvdb.com/swagger]().
+The official API documentation can be found here: [https://thetvdb.github.io/v4-api/]().
 
-For usage examples of the API, please refer to the examples folder.
+For usage examples of the API, please refer to the examples' folder.
 
 ### Authentication
 

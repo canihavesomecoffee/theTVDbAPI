@@ -28,6 +28,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\Links;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\AuthenticationRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\LanguagesRoute;
@@ -71,6 +72,13 @@ class TheTVDbAPI implements TheTVDbAPIInterface
      */
     private ?string $token;
 
+    /**
+     * Property used to control pagination (if any).
+     *
+     * @var Links|null
+     */
+    private ?Links $links = null;
+
 
     /**
      * TheTVDbAPI constructor.
@@ -103,6 +111,16 @@ class TheTVDbAPI implements TheTVDbAPIInterface
     public function setToken(string $token = null)
     {
         $this->token = $token;
+    }
+
+    /**
+     * Get the links currently set.
+     *
+     * @return Links|null
+     */
+    public function getLinks(): ?Links
+    {
+        return $this->links;
     }
 
     /**
@@ -263,6 +281,12 @@ class TheTVDbAPI implements TheTVDbAPIInterface
             $json     = json_decode($contents, true);
             if ($json === null) {
                 throw ParseException::decode();
+            }
+            // Parse links, if any.
+            if (array_key_exists('links', $json)) {
+                $this->links = DataParser::parseData($json['links'], Links::class);
+            } else {
+                $this->links = null;
             }
             if (array_key_exists('data', $json) === false) {
                 return $json;

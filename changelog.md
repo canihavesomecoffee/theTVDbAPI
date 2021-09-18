@@ -2,6 +2,22 @@
 
 ## 2.x
 
+### 2.0.0b2 (18 September 2021)
+
+Third beta
+
+* Changed:
+  * Updated updates controller to the latest revision of the API.
+  * Updated series controller to the latest revision of the API.
+* New:
+  * SeriesAirDays now has a method to indicate if it airs every day, or no days at all.
+
+### 2.0.0b1 (17 September 2021)
+
+Second beta
+
+* Changed: Bumped dependencies (Fixes #19)
+
 ### 2.0.0b (02 May 2021)
 
 Major release for the new API of theTVDb.

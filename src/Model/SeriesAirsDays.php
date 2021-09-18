@@ -75,4 +75,29 @@ class SeriesAirsDays
      * @var boolean
      */
     public bool $wednesday;
+
+
+    /**
+     * Checks if all fields of the week have been set.
+     *
+     * @return bool
+     */
+    public function airsAllDays()
+    {
+        return $this->monday && $this->tuesday && $this->wednesday && $this->thursday && $this->friday &&
+            $this->saturday && $this->sunday;
+    }
+
+    /**
+     * Checks if no days are enabled as air day.
+     *
+     * @return bool
+     */
+    public function airsNoDays()
+    {
+        return !$this->monday && ! $this->tuesday && !$this->wednesday && !$this->thursday && !$this->friday &&
+            !$this->saturday && !$this->sunday;
+    }
+
+
 }
