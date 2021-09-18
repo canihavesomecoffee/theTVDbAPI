@@ -30,6 +30,7 @@ use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -96,7 +97,7 @@ class DataParser
         if (static::$serializer === null) {
             $extractor          = new PropertyInfoExtractor([], [new PhpDocExtractor(), new ReflectionExtractor()]);
             static::$serializer = new Serializer(
-                [new ObjectNormalizer(null, null, null, $extractor)],
+                [new DateTimeNormalizer(), new ObjectNormalizer(null, null, null, $extractor)],
                 [new JsonEncoder()]
             );
         }
