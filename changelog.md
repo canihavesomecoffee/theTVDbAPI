@@ -2,7 +2,7 @@
 
 ## 2.x
 
-### 2.0.0 (19 September 2021)
+### 2.0.0 (2x September 2021)
 
 First stable release for support of v4 of the TVDb API.
 
@@ -15,6 +15,14 @@ Support for other endpoints will be added in future releases.
   * Guzzle version 7 or newer
   * Symfony's components 5.3 or newer
   * PHPUnit 9 or newer (developers)
+
+### 2.0.0b4 (22 September 2021)
+
+Fifth beta
+
+* Fix
+  * Fix array parsing of models
+  * Update models to add correct model arrays
 
 ### 2.0.0b3 (19 September 2021)
 
