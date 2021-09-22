@@ -36,19 +36,31 @@ class SeasonExtendedRecord extends SeasonBaseRecord
     /**
      * A list of artworks for this season.
      *
-     * @var array
+     * @var ArtworkBaseRecord[]
      */
     public array $artwork;
     /**
      * A list of episodes for this season.
      *
-     * @var array
+     * @var EpisodeBaseRecord[]
      */
     public array $episodes;
     /**
      * A list of trailers for this season.
      *
-     * @var array
+     * @var Trailer[]
      */
     public array $trailers;
+    /**
+     * List of companies.
+     *
+     * @var Companies
+     */
+    public Companies $companies;
+    /**
+     * Tags.
+     *
+     * @var TagOption[]
+     */
+    public array $tagOptions;
 }

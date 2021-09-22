@@ -72,7 +72,7 @@ class SeasonBaseRecord
     /**
      * List of languages for which translated season names are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $nameTranslations;
     /**
@@ -84,7 +84,7 @@ class SeasonBaseRecord
     /**
      * List of languages for which translated season overviews are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $overviewTranslations;
     /**
@@ -102,7 +102,7 @@ class SeasonBaseRecord
     /**
      * Type of the season.
      *
-     * @var integer
+     * @var SeasonType
      */
-    public int $type;
+    public SeasonType $type;
 }

@@ -45,7 +45,7 @@ class Company
     /**
      * Aliases for this company.
      *
-     * @var array
+     * @var Alias[]
      */
     public array $aliases;
     /**
@@ -75,13 +75,13 @@ class Company
     /**
      * List of languages for which translated company names are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $nameTranslations;
     /**
      * List of languages for which translated company overviews are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $overviewTranslations;
     /**

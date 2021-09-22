@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2021, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,7 +11,7 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- * Class that represents a base record for a franchise.
+ *
  *
  * PHP version 7.4
  *
@@ -27,40 +27,16 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class FranchiseBaseRecord
+ * Class TranslationSimple
  *
  * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
  */
-class FranchiseBaseRecord
+class TranslationSimple
 {
     /**
-     * A list of aliases for this franchise.
-     *
-     * @var array
-     */
-    public array $aliases;
-    /**
-     * The id of this franchise.
-     *
-     * @var integer
-     */
-    public int $id;
-    /**
-     * FranchiseBaseRecord name.
+     * Shortened language of this translation.
      *
      * @var string
      */
-    public string $name;
-    /**
-     * List of languages for which translated franchise names are available.
-     *
-     * @var array
-     */
-    public array $nameTranslations;
-    /**
-     * List of languages for which translated franchise overviews are available.
-     *
-     * @var array
-     */
-    public array $overviewTranslations;
+    public string $language;
 }

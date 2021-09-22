@@ -36,7 +36,7 @@ class PeopleBaseRecord
     /**
      * The aliases for this person.
      *
-     * @var array
+     * @var Alias[]
      */
     public array $aliases;
     /**

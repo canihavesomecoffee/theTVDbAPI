@@ -34,7 +34,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class Translation
+class Translation extends TranslationSimple
 {
     /**
      * List of alias strings.
@@ -54,12 +54,6 @@ class Translation
      * @var boolean
      */
     public bool $isPrimary;
-    /**
-     * Shortened language of this translation.
-     *
-     * @var string
-     */
-    public string $language;
     /**
      * Translated name.
      *

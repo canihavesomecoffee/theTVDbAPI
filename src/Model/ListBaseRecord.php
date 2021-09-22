@@ -36,7 +36,7 @@ class ListBaseRecord
     /**
      * A list of aliases for this list.
      *
-     * @var array
+     * @var Alias[]
      */
     public array $aliases;
     /**
@@ -60,7 +60,7 @@ class ListBaseRecord
     /**
      * List of languages for which translated list names are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $nameTranslations;
     /**
@@ -72,7 +72,7 @@ class ListBaseRecord
     /**
      * List of languages for which translated list overviews are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $overviewTranslations;
     /**

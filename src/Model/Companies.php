@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2021, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -27,22 +27,40 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class ListExtendedRecord
+ * Class Companies
  *
  * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
  */
-class ListExtendedRecord extends ListBaseRecord
+class Companies
 {
     /**
-     * List of related entities.
+     * Studio.
      *
-     * @var Entity[]
+     * @var Company
      */
-    public array $entities;
+    public Company $studio;
     /**
-     * Assigned score.
+     * Network.
      *
-     * @var integer
+     * @var Company
      */
-    public int $score;
+    public Company $network;
+    /**
+     * Production.
+     *
+     * @var Company
+     */
+    public Company $production;
+    /**
+     * Distributor.
+     *
+     * @var Company
+     */
+    public Company $distributor;
+    /**
+     * Special effects.
+     *
+     * @var Company
+     */
+    public Company $specialEffects;
 }

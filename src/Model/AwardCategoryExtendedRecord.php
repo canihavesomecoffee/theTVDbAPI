@@ -39,7 +39,7 @@ class AwardCategoryExtendedRecord extends AwardCategoryBaseRecord
     /**
      * An array of nominees.
      *
-     * @var array
+     * @var AwardNomineeBaseRecord[]
      */
     public array $nominees;
 }

@@ -39,13 +39,13 @@ class SearchResult
     /**
      * The known aliases for this serie.
      *
-     * @var array
+     * @var string[]
      */
     public array $aliases;
     /**
      * Company names.
      *
-     * @var array
+     * @var string[]
      */
     public array $companies;
     /**
@@ -75,7 +75,7 @@ class SearchResult
     /**
      * Genres.
      *
-     * @var array
+     * @var string[]
      */
     public array $genres;
     /**
@@ -103,11 +103,11 @@ class SearchResult
      */
     public string $nameTranslated;
     /**
-     * The network
+     * The Official list
      *
      * @var string
      */
-    public string $network;
+    public string $officialList;
     /**
      * Overview
      *
@@ -117,13 +117,13 @@ class SearchResult
     /**
      * Translated overviews
      *
-     * @var array
+     * @var string[]
      */
     public array $overview_translated;
     /**
      * Posters
      *
-     * @var array
+     * @var string[]
      */
     public array $posters;
     /**
@@ -147,7 +147,7 @@ class SearchResult
     /**
      * Translations
      *
-     * @var array
+     * @var string[]
      */
     public array $translationsWithLang;
     /**
@@ -168,5 +168,52 @@ class SearchResult
      * @var string
      */
     public string $year;
-
+    /**
+     * Thumbnail URL.
+     *
+     * @var string
+     */
+    public string $thumbnail;
+    /**
+     * Poster URL.
+     *
+     * @var string
+     */
+    public string $poster;
+    /**
+     * Translations.
+     *
+     * @var TranslationSimple[]
+     */
+    public array $translations;
+    /**
+     * Official entry?
+     *
+     * @var boolean
+     */
+    public bool $is_official;
+    /**
+     * Remote ID's.
+     *
+     * @var RemoteID[]
+     */
+    public array $remoteIds;
+    /**
+     * Network.
+     *
+     * @var string
+     */
+    public string $network;
+    /**
+     * Title.
+     *
+     * @var string
+     */
+    public string $title;
+    /**
+     * Translated overviews.
+     *
+     * @var TranslationSimple[]
+     */
+    public array $overviews;
 }

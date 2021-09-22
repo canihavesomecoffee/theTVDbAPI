@@ -60,7 +60,7 @@ class Tag
     /**
      * A series of TagOptions.
      *
-     * @var array
+     * @var TagOption[]
      */
     public array $options;
 }

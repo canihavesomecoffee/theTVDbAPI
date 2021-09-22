@@ -77,13 +77,13 @@ class EpisodeBaseRecord
     /**
      * List of languages for which translated episode names are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $nameTranslations;
     /**
      * List of languages for which translated episode overviews are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $overviewTranslations;
     /**
@@ -95,7 +95,7 @@ class EpisodeBaseRecord
     /**
      * A list of seasons this episode features in.
      *
-     * @var array|null Entries are of SeasonBaseRecord classes.
+     * @var SeasonBaseRecord[]|null Entries are of SeasonBaseRecord classes.
      */
     public ?array $seasons;
     /**

@@ -51,9 +51,9 @@ class ArtworkBaseRecord
     /**
      * Shortened language in which the artwork was made.
      *
-     * @var string
+     * @var string|null
      */
-    public string $language;
+    public ?string $language;
     /**
      * Score of the artwork.
      *

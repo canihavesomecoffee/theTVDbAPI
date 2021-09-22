@@ -47,7 +47,7 @@ class SeriesBaseRecord
     /**
      * The known aliases for this serie.
      *
-     * @var array
+     * @var Alias[]
      */
     public array $aliases;
     /**
@@ -101,7 +101,7 @@ class SeriesBaseRecord
     /**
      * List of languages for which translated series names are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $nameTranslations;
     /**

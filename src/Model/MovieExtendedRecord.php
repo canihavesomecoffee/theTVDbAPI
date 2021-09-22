@@ -36,19 +36,19 @@ class MovieExtendedRecord extends MovieBaseRecord
     /**
      * Artworks for this movie.
      *
-     * @var array
+     * @var ArtworkBaseRecord[]
      */
     public array $artworks;
     /**
      * Audio languages for this movie.
      *
-     * @var array
+     * @var string[]
      */
     public array $audioLanguages;
     /**
      * Awards for this movie.
      *
-     * @var array
+     * @var AwardBaseRecord[]
      */
     public array $awards;
     /**
@@ -66,19 +66,13 @@ class MovieExtendedRecord extends MovieBaseRecord
     /**
      * Characters for this movie.
      *
-     * @var array
+     * @var Character[]
      */
     public array $characters;
     /**
-     * Franchises for this movie.
-     *
-     * @var array
-     */
-    public array $franchises;
-    /**
      * Genres for this movie.
      *
-     * @var array
+     * @var GenreBaseRecord[]
      */
     public array $genres;
     /**
@@ -96,31 +90,31 @@ class MovieExtendedRecord extends MovieBaseRecord
     /**
      * Releases for this movie.
      *
-     * @var array
+     * @var Release[]
      */
     public array $releases;
     /**
      * External ID's for this movie.
      *
-     * @var array
+     * @var RemoteID[]
      */
     public array $remoteIds;
     /**
      * Studios for this movie.
      *
-     * @var array
+     * @var StudioBaseRecord[]
      */
     public array $studios;
     /**
      * Subtitle languages for this movie.
      *
-     * @var array
+     * @var string[]
      */
     public array $subtitleLanguages;
     /**
      * Trailers for this movie.
      *
-     * @var array
+     * @var Trailer[]
      */
     public array $trailers;
 }

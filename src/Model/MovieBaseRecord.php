@@ -36,7 +36,7 @@ class MovieBaseRecord
     /**
      * A list of aliases for this movie.
      *
-     * @var array
+     * @var Alias[]
      */
     public array $aliases;
     /**
@@ -60,13 +60,13 @@ class MovieBaseRecord
     /**
      * List of languages for which translated movie names are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $nameTranslations;
     /**
      * List of languages for which translated movie overviews are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $overviewTranslations;
     /**

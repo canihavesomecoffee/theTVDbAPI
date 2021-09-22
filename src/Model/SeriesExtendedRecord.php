@@ -51,7 +51,7 @@ class SeriesExtendedRecord extends SeriesBaseRecord
     /**
      * Artworks for this series.
      *
-     * @var array
+     * @var ArtworkBaseRecord[]
      */
     public array $artworks;
     /**

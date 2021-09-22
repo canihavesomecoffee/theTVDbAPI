@@ -58,19 +58,19 @@ class EpisodeExtendedRecord extends EpisodeBaseRecord
     /**
      * List of awards this episode got.
      *
-     * @var array Entries are of type AwardBaseRecord.
+     * @var AwardBaseRecord[] Entries are of type AwardBaseRecord.
      */
     public array $awards;
     /**
      * Characters in this episode.
      *
-     * @var array|null Entries are of type Character.
+     * @var Character[]|null Entries are of type Character.
      */
     public ?array $characters;
     /**
      * Content ratings this episode received.
      *
-     * @var array Entries are of type ContentRating.
+     * @var ContentRating[] Entries are of type ContentRating.
      */
     public array $contentRatings;
     /**
@@ -88,13 +88,13 @@ class EpisodeExtendedRecord extends EpisodeBaseRecord
     /**
      * Tag options for this episode.
      *
-     * @var array Entries are of type TagOption.
+     * @var TagOption[] Entries are of type TagOption.
      */
     public array $tagOptions;
     /**
      * Trailers that are available for this episode.
      *
-     * @var array Entries are of type Trailer.
+     * @var Trailer[] Entries are of type Trailer.
      */
     public array $trailers;
 }

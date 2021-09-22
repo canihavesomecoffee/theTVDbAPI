@@ -36,13 +36,13 @@ class PeopleExtendedRecord extends PeopleBaseRecord
     /**
      * The awards of this person.
      *
-     * @var array
+     * @var AwardBaseRecord[]
      */
     public array $awards;
     /**
      * The biographies of this person.
      *
-     * @var array
+     * @var Biography[]
      */
     public array $biographies;
     /**
@@ -60,7 +60,7 @@ class PeopleExtendedRecord extends PeopleBaseRecord
     /**
      * The awards of this person.
      *
-     * @var array
+     * @var Character[]
      */
     public array $characters;
     /**
@@ -78,19 +78,19 @@ class PeopleExtendedRecord extends PeopleBaseRecord
     /**
      * The races of this person.
      *
-     * @var array
+     * @var Race[]
      */
     public array $races;
     /**
      * The remote ID's of this person.
      *
-     * @var array
+     * @var RemoteID[]
      */
     public array $remoteIds;
     /**
      * The tag options of this person.
      *
-     * @var array
+     * @var TagOption[]
      */
     public array $tagOptions;
 }

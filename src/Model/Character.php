@@ -39,7 +39,7 @@ class Character
     /**
      * Aliases for this character.
      *
-     * @var array
+     * @var Alias[]
      */
     public array $aliases;
     /**
@@ -81,13 +81,13 @@ class Character
     /**
      * List of languages for which translated character names are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $nameTranslations;
     /**
      * List of languages for which translated character overviews are available.
      *
-     * @var array
+     * @var string[]
      */
     public array $overviewTranslations;
     /**
