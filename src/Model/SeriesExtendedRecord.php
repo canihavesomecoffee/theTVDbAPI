@@ -57,31 +57,31 @@ class SeriesExtendedRecord extends SeriesBaseRecord
     /**
      * Characters for this series.
      *
-     * @var array
+     * @var Character[]
      */
     public array $characters;
     /**
      * Genres for this series.
      *
-     * @var array
+     * @var GenreBaseRecord[]
      */
     public array $genres;
     /**
      * List of remote id's for this series.
      *
-     * @var array
+     * @var RemoteID[]
      */
     public array $remoteIds;
     /**
      * List of seasons for this series.
      *
-     * @var array
+     * @var SeasonBaseRecord[]
      */
     public array $seasons;
     /**
      * List of trailers for this series.
      *
-     * @var array
+     * @var Trailer[]
      */
     public array $trailers;
 

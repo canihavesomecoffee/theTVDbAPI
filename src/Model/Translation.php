@@ -39,7 +39,7 @@ class Translation extends TranslationSimple
     /**
      * List of alias strings.
      *
-     * @var array
+     * @var string[]
      */
     public array $aliases;
     /**
