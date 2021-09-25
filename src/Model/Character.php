@@ -81,15 +81,15 @@ class Character
     /**
      * List of languages for which translated character names are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $nameTranslations;
+    public ?array $nameTranslations;
     /**
      * List of languages for which translated character overviews are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $overviewTranslations;
+    public ?array $overviewTranslations;
     /**
      * Link to the portraying actor.
      *

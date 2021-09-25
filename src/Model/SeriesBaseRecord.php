@@ -101,9 +101,9 @@ class SeriesBaseRecord
     /**
      * List of languages for which translated series names are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $nameTranslations;
+    public ?array $nameTranslations;
     /**
      * The next air date.
      *

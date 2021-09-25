@@ -75,15 +75,15 @@ class Company
     /**
      * List of languages for which translated company names are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $nameTranslations;
+    public ?array $nameTranslations;
     /**
      * List of languages for which translated company overviews are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $overviewTranslations;
+    public ?array $overviewTranslations;
     /**
      * The primary type of this company.
      *

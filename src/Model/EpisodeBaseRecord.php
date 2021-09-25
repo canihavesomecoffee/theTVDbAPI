@@ -77,15 +77,15 @@ class EpisodeBaseRecord
     /**
      * List of languages for which translated episode names are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $nameTranslations;
+    public ?array $nameTranslations;
     /**
      * List of languages for which translated episode overviews are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $overviewTranslations;
+    public ?array $overviewTranslations;
     /**
      * Runtime of this episode in minutes
      *

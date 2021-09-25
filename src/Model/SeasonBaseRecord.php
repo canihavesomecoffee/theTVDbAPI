@@ -72,9 +72,9 @@ class SeasonBaseRecord
     /**
      * List of languages for which translated season names are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $nameTranslations;
+    public ?array $nameTranslations;
     /**
      * Number of the season.
      *
@@ -84,9 +84,9 @@ class SeasonBaseRecord
     /**
      * List of languages for which translated season overviews are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $overviewTranslations;
+    public ?array $overviewTranslations;
     /**
      * SeriesExtendedRecord id if this season is present in there.
      *

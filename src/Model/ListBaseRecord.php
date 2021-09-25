@@ -60,9 +60,9 @@ class ListBaseRecord
     /**
      * List of languages for which translated list names are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $nameTranslations;
+    public ?array $nameTranslations;
     /**
      * An overview of the list.
      *
@@ -72,9 +72,9 @@ class ListBaseRecord
     /**
      * List of languages for which translated list overviews are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $overviewTranslations;
+    public ?array $overviewTranslations;
     /**
      * The URL where this list can be found.
      *

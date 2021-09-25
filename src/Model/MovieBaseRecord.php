@@ -60,15 +60,15 @@ class MovieBaseRecord
     /**
      * List of languages for which translated movie names are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $nameTranslations;
+    public ?array $nameTranslations;
     /**
      * List of languages for which translated movie overviews are available.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $overviewTranslations;
+    public ?array $overviewTranslations;
     /**
      * Assigned score.
      *
