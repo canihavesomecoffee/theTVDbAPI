@@ -120,4 +120,12 @@ class Character
      * @var string
      */
     public string $url;
+    /**
+     * The name? of this character.
+     *
+     * @var string
+     */
+    public string $personName;
+
+
 }

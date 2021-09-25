@@ -61,23 +61,11 @@ class SeriesExtendedRecord extends SeriesBaseRecord
      */
     public array $characters;
     /**
-     * Franchises for this series.
-     *
-     * @var array
-     */
-    public array $franchises;
-    /**
      * Genres for this series.
      *
      * @var array
      */
     public array $genres;
-    /**
-     * List of networks this show has aired on.
-     *
-     * @var array
-     */
-    public array $networks;
     /**
      * List of remote id's for this series.
      *

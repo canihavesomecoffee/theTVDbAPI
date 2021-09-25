@@ -11,7 +11,7 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- *
+ * Provides a class with the data a trailer contains.
  *
  * PHP version 7.4
  *
@@ -21,46 +21,43 @@
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class SeasonExtendedRecord
+ * Class Inspiration
  *
- * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
+ * @category TheTVDbAPI
+ * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
+ * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * @license  See start of document
+ * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class SeasonExtendedRecord extends SeasonBaseRecord
+class Inspiration
 {
     /**
-     * A list of artworks for this season.
+     * The id.
      *
-     * @var ArtworkBaseRecord[]
+     * @var integer
      */
-    public array $artwork;
+    public int $id;
     /**
-     * A list of episodes for this season.
+     * Type of inspiration
      *
-     * @var EpisodeBaseRecord[]
+     * @var string
      */
-    public array $episodes;
+    public string $type;
     /**
-     * A list of trailers for this season.
+     * TypeName of inspiration.
      *
-     * @var InspirationType[]
+     * @var string
      */
-    public array $trailers;
+    public string $typeName;
     /**
-     * List of companies.
+     * URL of the inspiration.
      *
-     * @var Companies
+     * @var string
      */
-    public Companies $companies;
-    /**
-     * Tags.
-     *
-     * @var TagOption[]
-     */
-    public array $tagOptions;
+    public string $url;
 }

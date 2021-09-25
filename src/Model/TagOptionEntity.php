@@ -11,7 +11,7 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- *
+ * Provides a class for a company.
  *
  * PHP version 7.4
  *
@@ -21,28 +21,37 @@
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class Occupation
+ * Class TagOptionEntity
  *
- * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
+ * @category TheTVDbAPI
+ * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
+ * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * @license  See start of document
+ * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class Occupation
+class TagOptionEntity
 {
     /**
-     * Id of the occupation.
-     *
-     * @var integer
-     */
-    public int $id;
-    /**
-     * Name of the occupation.
+     * Name of the entity (original).
      *
      * @var string
      */
     public string $name;
+    /**
+     * TAg name of the entity (original).
+     *
+     * @var string
+     */
+    public string $tagName;
+    /**
+     * Series ID for this entity.
+     *
+     * @var integer
+     */
+    public int $tagId;
 }

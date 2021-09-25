@@ -84,4 +84,18 @@ class AwardNomineeBaseRecord
      * @var string
      */
     public string $year;
+    /**
+     * The category of the nomination.
+     *
+     * @var string
+     */
+    public string $category;
+    /**
+     * The name of the nomination.
+     *
+     * @var string
+     */
+    public string $name;
+
+
 }

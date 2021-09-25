@@ -45,4 +45,10 @@ class RemoteID
      * @var integer
      */
     public int $type;
+    /**
+     * The source name of this remote ID.
+     *
+     * @var string
+     */
+    public string $sourceName;
 }

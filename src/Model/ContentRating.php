@@ -48,4 +48,28 @@ class ContentRating
      * @var string
      */
     public string $name;
+    /**
+     * Country for the content rating.
+     *
+     * @var string
+     */
+    public string $country;
+    /**
+     * Content type of the content rating.
+     *
+     * @var string
+     */
+    public string $contentType;
+    /**
+     * The order of this content rating.
+     *
+     * @var integer
+     */
+    public int $order;
+    /**
+     * Full name for the content rating.
+     *
+     * @var string
+     */
+    public string $fullName;
 }

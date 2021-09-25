@@ -94,7 +94,7 @@ class EpisodeExtendedRecord extends EpisodeBaseRecord
     /**
      * Trailers that are available for this episode.
      *
-     * @var Trailer[] Entries are of type Trailer.
+     * @var InspirationType[] Entries are of type Trailer.
      */
     public array $trailers;
 }

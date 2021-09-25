@@ -27,40 +27,28 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class SeasonExtendedRecord
+ * Class ProductionCountry
  *
  * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
  */
-class SeasonExtendedRecord extends SeasonBaseRecord
+class ProductionCountry
 {
     /**
-     * A list of artworks for this season.
+     * The ID.
      *
-     * @var ArtworkBaseRecord[]
+     * @var integer
      */
-    public array $artwork;
+    public int $id;
     /**
-     * A list of episodes for this season.
+     * Country.
      *
-     * @var EpisodeBaseRecord[]
+     * @var string
      */
-    public array $episodes;
+    public string $country;
     /**
-     * A list of trailers for this season.
+     * Name of this production country.
      *
-     * @var InspirationType[]
+     * @var string
      */
-    public array $trailers;
-    /**
-     * List of companies.
-     *
-     * @var Companies
-     */
-    public Companies $companies;
-    /**
-     * Tags.
-     *
-     * @var TagOption[]
-     */
-    public array $tagOptions;
+    public string $name;
 }

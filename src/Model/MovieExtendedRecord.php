@@ -90,7 +90,7 @@ class MovieExtendedRecord extends MovieBaseRecord
     /**
      * Releases for this movie.
      *
-     * @var Release[]
+     * @var ProductionCountry[]
      */
     public array $releases;
     /**
@@ -114,7 +114,7 @@ class MovieExtendedRecord extends MovieBaseRecord
     /**
      * Trailers for this movie.
      *
-     * @var Trailer[]
+     * @var InspirationType[]
      */
     public array $trailers;
 }

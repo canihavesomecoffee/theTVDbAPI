@@ -16,6 +16,13 @@ Support for other endpoints will be added in future releases.
   * Symfony's components 5.3 or newer
   * PHPUnit 9 or newer (developers)
 
+### 2.0.0b6 (25 September 2021)
+
+Seventh beta (it doesn't stop...)
+
+* Fix
+  * Double checked all models (again)...
+
 ### 2.0.0b5 (25 September 2021)
 
 Sixth beta
