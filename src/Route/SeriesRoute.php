@@ -243,7 +243,7 @@ class SeriesRoute extends AbstractRoute
                 'get',
                 'series/'.$id.'/translations/'.$this->parent->getPrimaryLanguage()
             );
-        } catch (ResourceNotFoundException) {
+        } catch (ResourceNotFoundException $exc) {
             $json = $this->parent->performAPICallWithJsonResponse(
                 'get',
                 'series/'.$id.'/translations/'.$this->parent->getSecondaryLanguage()
