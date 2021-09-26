@@ -79,15 +79,32 @@ class TheTVDbAPI implements TheTVDbAPIInterface
      */
     private ?Links $links = null;
 
+    /**
+     * Primary language to use for retrieving series.
+     *
+     * @var string
+     */
+    private string $primaryLanguage;
+    /**
+     * Secondary language to use as fallback.
+     *
+     * @var string
+     */
+    private string $secondaryLanguage;
+
 
     /**
      * TheTVDbAPI constructor.
      *
-     * @param Client|null $client Optional parameter. If you pass one in you need to ensure that 'base_uri' and the
-     *                            content-type of the headers are set in the options.
+     * @param string      $primaryLanguage   The primary language to retrieve data in.
+     * @param string      $secondaryLanguage The fallback languages.
+     * @param Client|null $client            Optional parameter. If you pass one in you need to ensure that 'base_uri'
+     *                                       and the content-type of the headers are set in the options.
      */
-    public function __construct(Client $client = null)
+    public function __construct(string $primaryLanguage = "eng", string $secondaryLanguage = "", Client $client = null)
     {
+        $this->primaryLanguage   = $primaryLanguage;
+        $this->secondaryLanguage = $secondaryLanguage;
         if ($client === null) {
             $this->httpClient = new Client(
                 [
@@ -301,6 +318,26 @@ class TheTVDbAPI implements TheTVDbAPIInterface
                 $path
             )
         );
+    }
+
+    /**
+     * Return the primary language to get translations for.
+     *
+     * @return string
+     */
+    public function getPrimaryLanguage(): string
+    {
+        return $this->primaryLanguage;
+    }
+
+    /**
+     * Return the secondary fallback language.
+     *
+     * @return string
+     */
+    public function getSecondaryLanguage(): string
+    {
+        return $this->secondaryLanguage;
     }
 
 

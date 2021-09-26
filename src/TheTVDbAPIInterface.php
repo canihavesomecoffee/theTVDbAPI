@@ -142,5 +142,19 @@ interface TheTVDbAPIInterface
      */
     public function performAPICallWithJsonResponse(string $method, string $path, array $options = []);
 
+    /**
+     * Return the primary language to get translations for.
+     *
+     * @return string
+     */
+    public function getPrimaryLanguage(): string;
+
+    /**
+     * Return the secondary fallback language.
+     *
+     * @return string
+     */
+    public function getSecondaryLanguage(): string;
+
 
 }

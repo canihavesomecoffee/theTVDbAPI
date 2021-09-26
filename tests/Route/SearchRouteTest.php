@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SearchResult;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
 
 /**

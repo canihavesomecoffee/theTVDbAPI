@@ -16,6 +16,15 @@ Support for other endpoints will be added in future releases.
   * Symfony's components 5.3 or newer
   * PHPUnit 9 or newer (developers)
 
+### 2.0.0b8 (26 September 2021)
+
+Ninth beta
+
+* Fix
+  * Issue with argument for series episode
+* New
+  * Re-introduce multiple-language routes for Series
+
 ### 2.0.0b7 (25 September 2021)
 
 Eighth beta

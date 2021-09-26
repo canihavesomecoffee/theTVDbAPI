@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\EntityUpdate;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Update;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\UpdatesRoute;
 use DateTime;
 

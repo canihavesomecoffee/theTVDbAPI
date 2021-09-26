@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeExtendedRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
 
 /**

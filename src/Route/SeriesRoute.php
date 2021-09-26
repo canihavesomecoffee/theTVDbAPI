@@ -154,7 +154,8 @@ class SeriesRoute extends AbstractRoute
     }
 
     /**
-     * Returns paginated episodes of the series with 100 results per page.
+     * Returns paginated episodes of the series with 100 results per page. If you pass a language, it will fetch
+     * all episodes instead.
      *
      * @param int    $id         The id of the series to retrieve.
      * @param int    $season     The season to retrieve.
@@ -162,7 +163,7 @@ class SeriesRoute extends AbstractRoute
      * @param string $seasonType The season type. Defaults to default.
      * @param string $lang       The language for translated episodes.
      *
-     * @return array An array of base episode records. Empty if not enough episodes available.
+     * @return EpisodeBaseRecord[] An array of base episode records. Empty if not enough episodes available.
      * @throws ParseException
      * @throws ResourceNotFoundException
      * @throws UnauthorizedException
@@ -173,52 +174,61 @@ class SeriesRoute extends AbstractRoute
         if (static::isValidSeasonType($seasonType) === false) {
             throw new \InvalidArgumentException("Given season type is not valid");
         }
-        $options = ['query' => ['page' => $page, 'season' => $season]];
+        $arguments = ['page' => $page];
 
         $path = 'series/'.$id.'/episodes/'.$seasonType;
         if ($lang !== "") {
             $path .= "/".$lang;
+        } else {
+            $arguments['season'] = $season;
         }
-        $json = $this->parent->performAPICallWithJsonResponse('get', $path, $options);
+        $options = ['query' => $arguments];
+        $json    = $this->parent->performAPICallWithJsonResponse('get', $path, $options);
 
         return DataParser::parseDataArray($json['episodes'], EpisodeBaseRecord::class);
     }
 
     /**
-     * Consecutively calls getEpisodes to run through all the paginated results
-     * and groups them together in a single array.
+     * Fetch all available episode for this series and season type, localized to primary language. Will merge in
+     * episodes in the fallback language if this is specified.
      *
      * @param int    $id         The id of the series to retrieve.
-     * @param int    $season     The season to retrieve.
      * @param string $seasonType The season type. Defaults to default.
-     * @param string $lang       The language for translated episodes.
      *
-     * @return array An array of EpisodeBaseRecord instances.
+     * @return EpisodeBaseRecord[] An array of base episode records. Empty if not enough episodes available.
      * @throws ParseException
      * @throws ResourceNotFoundException
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function allEpisodes(int $id, int $season = 0, string $seasonType = self::SEASON_TYPE_DEFAULT, string $lang = ""): array
-    {
-        $currentPage = 1;
-        $allEpisodes = [];
-        do {
-            $results     = $this->episodes($id, $season, $currentPage, $seasonType, $lang);
-            $allEpisodes = array_merge($allEpisodes, $results);
-            $currentPage++;
-            if (sizeof($results) < 100) {
-                break;
+    public function allEpisodes(int $id, string $seasonType = self::SEASON_TYPE_DEFAULT) : array {
+        $result = [];
+
+        if ($this->parent->getSecondaryLanguage() !== "") {
+            // Pre-fill results with fallback language, assuming the fallback language always has more results than the
+            // translated, primary language.
+            $eps = $this->episodes($id, 0, 0, $seasonType, $this->parent->getSecondaryLanguage());
+            foreach ($eps as $episode) {
+                $result[$episode->id] = $episode;
             }
-        } while ($currentPage > 0);
-        return $allEpisodes;
+        }
+        $translatedEpisodes = $this->episodes($id, 0, 0, $seasonType, $this->parent->getPrimaryLanguage());
+        foreach ($translatedEpisodes as $episode) {
+            if (array_key_exists($episode->id, $result)) {
+                $result[$episode->id]->name     = $episode->name;
+                $result[$episode->id]->overview = $episode->overview;
+            } else {
+                $result[$episode->id] = $episode;
+            }
+        }
+
+        return array_values($result);
     }
 
     /**
      * Retrieves the possible parameters that can be used to search for episodes.
      *
-     * @param int    $id   The id of the series.
-     * @param string $lang The language string to retrieve
+     * @param int $id The id of the series.
      *
      * @return Translation The translated series info.
      * @throws ParseException
@@ -226,9 +236,19 @@ class SeriesRoute extends AbstractRoute
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function translate(int $id, string $lang): Translation
+    public function translate(int $id): Translation
     {
-        $json = $this->parent->performAPICallWithJsonResponse('get', 'series/'.$id.'/translations/'.$lang);
+        try {
+            $json = $this->parent->performAPICallWithJsonResponse(
+                'get',
+                'series/'.$id.'/translations/'.$this->parent->getPrimaryLanguage()
+            );
+        } catch (ResourceNotFoundException) {
+            $json = $this->parent->performAPICallWithJsonResponse(
+                'get',
+                'series/'.$id.'/translations/'.$this->parent->getSecondaryLanguage()
+            );
+        }
         return DataParser::parseData($json, Translation::class);
     }
 

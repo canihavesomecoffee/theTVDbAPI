@@ -16,19 +16,9 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Actor;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\ImageQueryParams;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\ImageStatistics;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\PaginatedResults;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesExtendedRecord;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesStatistics;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SeriesRoute;
-use DateTime;
-use DateTimeImmutable;
 
 /**
  * Class SearchRouteTest
@@ -70,25 +60,6 @@ class SeriesRouteTest extends BaseRouteTest
         );
         $instance = new SeriesRoute($this->parent);
         $episodes = $instance->episodes($series_id, $season, $page);
-        static::assertContainsOnlyInstancesOf(EpisodeBaseRecord::class, $episodes);
-    }
-
-    public function testGetAllEpisodes()
-    {
-        $series_id = 1337;
-        $mocked_method = 'episodes';
-        $mock = $this->getMockBuilder(SeriesRoute::class)
-            ->setConstructorArgs([$this->parent])
-            ->onlyMethods([$mocked_method])
-            ->getMock();
-        $mock->expects(static::exactly(1))->method($mocked_method)->withConsecutive(
-            [$series_id, 0, 1]
-        )->willReturnOnConsecutiveCalls(
-            [new EpisodeBaseRecord(), new EpisodeBaseRecord()]
-        );
-
-        $episodes = $mock->allEpisodes($series_id);
-        static::assertCount(2, $episodes);
         static::assertContainsOnlyInstancesOf(EpisodeBaseRecord::class, $episodes);
     }
 }
