@@ -91,7 +91,7 @@ class SeriesExtendedRecord extends SeriesBaseRecord
      *
      * @return string|null
      */
-    public function getIMDBId()
+    public function getIMDBId(): ?string
     {
         foreach ($this->remoteIds as $remoteId) {
             if ($remoteId->type === 2) {

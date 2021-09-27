@@ -18,6 +18,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SearchResult;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
+use InvalidArgumentException;
 
 /**
  * Class SearchRouteTest
@@ -33,7 +34,7 @@ class SearchRouteTest extends BaseRouteTest
     public function testSearchInvalidSpecifier()
     {
         $instance = new SearchRoute($this->parent);
-        static::expectException(\InvalidArgumentException::class);
+        static::expectException(InvalidArgumentException::class);
         $instance->search('invalid', ['foo' => 'bar']);
     }
 

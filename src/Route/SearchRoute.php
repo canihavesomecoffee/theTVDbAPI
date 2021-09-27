@@ -30,7 +30,6 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SearchResult;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
 use InvalidArgumentException;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
@@ -54,7 +53,7 @@ class SearchRoute extends AbstractRoute
      *
      * @return bool
      */
-    public static function isValidOptionalParameter(string $key)
+    public static function isValidOptionalParameter(string $key): bool
     {
         return in_array($key, ["type", "year", "offset"]);
     }

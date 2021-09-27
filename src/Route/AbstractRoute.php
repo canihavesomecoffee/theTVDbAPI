@@ -43,7 +43,7 @@ abstract class AbstractRoute implements RouteInterface
      *
      * @var TheTVDbAPIInterface
      */
-    protected $parent;
+    protected TheTVDbAPIInterface $parent;
 
 
     /**

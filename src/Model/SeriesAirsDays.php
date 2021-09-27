@@ -82,7 +82,7 @@ class SeriesAirsDays
      *
      * @return bool
      */
-    public function airsAllDays()
+    public function airsAllDays(): bool
     {
         return $this->monday && $this->tuesday && $this->wednesday && $this->thursday && $this->friday &&
             $this->saturday && $this->sunday;
@@ -93,7 +93,7 @@ class SeriesAirsDays
      *
      * @return bool
      */
-    public function airsNoDays()
+    public function airsNoDays(): bool
     {
         return !$this->monday && ! $this->tuesday && !$this->wednesday && !$this->thursday && !$this->friday &&
             !$this->saturday && !$this->sunday;

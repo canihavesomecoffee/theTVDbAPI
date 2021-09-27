@@ -2,7 +2,7 @@
 
 ## 2.x
 
-### 2.0.0 (2x September 2021)
+### 2.0.0 (27 September 2021)
 
 First stable release for support of v4 of the TVDb API.
 

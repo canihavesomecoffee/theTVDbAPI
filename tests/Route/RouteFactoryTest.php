@@ -18,6 +18,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\AuthenticationRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\RouteFactory;
+use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -46,7 +47,7 @@ class RouteFactoryTest extends TestCase
 
     public function testCreateWrongInheritance()
     {
-        static::expectException(\InvalidArgumentException::class);
+        static::expectException(InvalidArgumentException::class);
         RouteFactory::getRouteInstance($this->parent, static::class);
     }
 

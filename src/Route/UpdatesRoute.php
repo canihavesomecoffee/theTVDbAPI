@@ -30,8 +30,8 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\EntityUpdate;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Update;
 use DateTime;
+use InvalidArgumentException;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
@@ -45,12 +45,47 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface;
  */
 class UpdatesRoute extends AbstractRoute
 {
+    /**
+     * Contains possible types for updates.
+     *
+     * @var string[]
+     */
     public static array $types = [
-        "artwork", "award_nominees", "companies", "episodes", "lists", "people", "seasons", "series", "seriespeople",
-        "artworktypes", "award_categories", "awards", "company_types", "content_ratings", "countries", "entity_types",
-        "genres", "languages", "movies", "movie_genres", "movie_status", "peopletypes", "seasontypes", "sourcetypes",
-        "tag_options", "tags", "translatedcharacters", "translatedcompanies", "translatedepisodes", "translatedlists",
-        "translatedmovies", "translatedpeople", "translatedseasons", "translatedseries"];
+        "artwork",
+        "award_nominees",
+        "companies",
+        "episodes",
+        "lists",
+        "people",
+        "seasons",
+        "series",
+        "seriespeople",
+        "artworktypes",
+        "award_categories",
+        "awards",
+        "company_types",
+        "content_ratings",
+        "countries",
+        "entity_types",
+        "genres",
+        "languages",
+        "movies",
+        "movie_genres",
+        "movie_status",
+        "peopletypes",
+        "seasontypes",
+        "sourcetypes",
+        "tag_options",
+        "tags",
+        "translatedcharacters",
+        "translatedcompanies",
+        "translatedepisodes",
+        "translatedlists",
+        "translatedmovies",
+        "translatedpeople",
+        "translatedseasons",
+        "translatedseries",
+    ];
 
 
     /**
@@ -72,7 +107,7 @@ class UpdatesRoute extends AbstractRoute
         $query = ['since' => $since->getTimestamp()];
         if ($type !== "") {
             if (in_array($type, static::$types) === false) {
-                throw new \InvalidArgumentException("Type is not in the allowed list of types");
+                throw new InvalidArgumentException("Type is not in the allowed list of types");
             }
             $query['type'] = $type;
         }

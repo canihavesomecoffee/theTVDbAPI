@@ -133,7 +133,7 @@ class SeriesBaseRecord
      *
      * @var string|null
      */
-    public $slug;
+    public ?string $slug;
     /**
      * The status of the serie.
      *

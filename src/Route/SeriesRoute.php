@@ -33,7 +33,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesExtendedRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Translation;
-use DateTimeImmutable;
+use InvalidArgumentException;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
@@ -169,10 +169,15 @@ class SeriesRoute extends AbstractRoute
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function episodes(int $id, int $season = 0, int $page = 0, string $seasonType = self::SEASON_TYPE_DEFAULT, string $lang = ""): array
-    {
+    public function episodes(
+        int $id,
+        int $season = 0,
+        int $page = 0,
+        string $seasonType = self::SEASON_TYPE_DEFAULT,
+        string $lang = ""
+    ): array {
         if (static::isValidSeasonType($seasonType) === false) {
-            throw new \InvalidArgumentException("Given season type is not valid");
+            throw new InvalidArgumentException("Given season type is not valid");
         }
         $arguments = ['page' => $page];
 
@@ -201,7 +206,8 @@ class SeriesRoute extends AbstractRoute
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function allEpisodes(int $id, string $seasonType = self::SEASON_TYPE_DEFAULT) : array {
+    public function allEpisodes(int $id, string $seasonType = self::SEASON_TYPE_DEFAULT) : array
+    {
         $result = [];
 
         if ($this->parent->getSecondaryLanguage() !== "") {

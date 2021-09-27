@@ -39,6 +39,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Route\UpdatesRoute;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
  * Class TheTVDbAPI
@@ -285,9 +286,10 @@ class TheTVDbAPI implements TheTVDbAPIInterface
      * @param array  $options HTTP Client options
      *
      * @return mixed
+     * @throws ParseException
      * @throws ResourceNotFoundException
      * @throws UnauthorizedException
-     * @throws Exception
+     * @throws ExceptionInterface
      */
     public function performAPICallWithJsonResponse(string $method, string $path, array $options = [])
     {
