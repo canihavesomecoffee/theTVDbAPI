@@ -48,7 +48,7 @@ class SeasonType
     /**
      * The type of the season type.
      *
-     * @var integer
+     * @var string
      */
-    public int $type;
+    public string $type;
 }

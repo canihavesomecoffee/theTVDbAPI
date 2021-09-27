@@ -75,9 +75,9 @@ class Character
     /**
      * Name of the character (original).
      *
-     * @var string
+     * @var string|null
      */
-    public string $name;
+    public ?string $name;
     /**
      * List of languages for which translated character names are available.
      *
