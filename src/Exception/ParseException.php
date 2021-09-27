@@ -13,7 +13,7 @@
  *
  * Exception for when an error happens during parsing.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Exception
@@ -69,7 +69,7 @@ class ParseException extends Exception
      *
      * @return ParseException
      */
-    public static function missingHeader(string $headerName)
+    public static function missingHeader(string $headerName): ParseException
     {
         return new static(sprintf(static::HEADER_MESSAGE, $headerName));
     }
@@ -81,8 +81,10 @@ class ParseException extends Exception
      *
      * @return ParseException
      */
-    public static function lastModified(string $suppliedTimestamp)
+    public static function lastModified(string $suppliedTimestamp): ParseException
     {
         return new static(sprintf(static::MODIFIED_MESSAGE, $suppliedTimestamp));
     }
+
+
 }

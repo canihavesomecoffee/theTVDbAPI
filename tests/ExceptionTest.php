@@ -19,7 +19,7 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
-use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ConflictException;
+use GuzzleHttp\Psr7\Query;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -52,7 +52,7 @@ class ExceptionTest extends TestCase
         $expectedError = $base.sprintf(
             ResourceNotFoundException::PATH_MESSAGE,
             $path,
-            \GuzzleHttp\Psr7\build_query($parameters)
+            Query::build($parameters)
         );
         static::assertEquals($expectedError, ResourceNotFoundException::createErrorMessage($base, $path, $parameters));
     }
@@ -194,18 +194,5 @@ class ExceptionTest extends TestCase
         static::expectException(ParseException::class);
         static::expectExceptionMessage(sprintf(ParseException::MODIFIED_MESSAGE, $timestamp));
         throw ParseException::lastModified($timestamp);
-    }
-
-    /**
-     * Test that a conflict exception has the correct type and error message.
-     *
-     * @return void
-     * @throws UnauthorizedException
-     */
-    public function testConflictException(): void
-    {
-        static::expectException(ConflictException::class);
-        static::expectExceptionMessage(ConflictException::CONFLICT_MESSAGE);
-        throw ConflictException::conflict();
     }
 }

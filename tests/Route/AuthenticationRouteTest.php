@@ -37,7 +37,7 @@ class AuthenticationRouteTest extends BaseRouteTest
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['token' => $expected_token]);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('post'),
-            static::equalTo('/login'),
+            static::equalTo('login'),
             static::equalTo(['body' => json_encode(['apikey' => $api_key]), 'http_errors' => true])
         );
         $instance = new AuthenticationRoute($this->parent);
@@ -48,28 +48,20 @@ class AuthenticationRouteTest extends BaseRouteTest
     public function testAPIAndUserLogin()
     {
         $api_key = "FOO";
-        $user = "foo";
-        $user_key = "bar";
+        $userPIN = "bar";
         $expected_token = 'bar';
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['token' => $expected_token]);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('post'),
-            static::equalTo('/login'),
+            static::equalTo('login'),
             static::equalTo([
-                'body' => json_encode(['apikey' => $api_key, 'username' => $user, 'userkey' => $user_key]),
+                'body' => json_encode(['apikey' => $api_key, 'pin' => $userPIN]),
                 'http_errors' => true
             ])
         );
         $instance = new AuthenticationRoute($this->parent);
-        $token = $instance->login($api_key, $user, $user_key);
+        $token = $instance->login($api_key, $userPIN);
         static::assertEquals($expected_token, $token);
-    }
-
-    public function testAPIAndUserMissingUserKey()
-    {
-        $instance = new AuthenticationRoute($this->parent);
-        static::expectException(\InvalidArgumentException::class);
-        $instance->login('FOO', 'bar');
     }
 
     public function testAPIKeyWrongToken()
@@ -78,38 +70,12 @@ class AuthenticationRouteTest extends BaseRouteTest
         $this->parent->method('performAPICallWithJsonResponse')->willReturn(['error' => 'Invalid token']);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('post'),
-            static::equalTo('/login'),
+            static::equalTo('login'),
             static::equalTo(['body' => json_encode(['apikey' => $api_key]), 'http_errors' => true])
         );
         $instance = new AuthenticationRoute($this->parent);
         static::expectException(UnauthorizedException::class);
         static::expectExceptionMessage(UnauthorizedException::CREDENTIALS_MESSAGE);
         $instance->login($api_key);
-    }
-
-    public function testRefreshToken()
-    {
-        $expected_token = 'bar';
-        $this->parent->method('performAPICallWithJsonResponse')->willReturn(['token' => $expected_token]);
-        $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('get'),
-            static::equalTo('/refresh_token')
-        );
-        $instance = new AuthenticationRoute($this->parent);
-        $token = $instance->refreshToken();
-        static::assertEquals($expected_token, $token);
-    }
-
-    public function testRefreshMissingToken()
-    {
-        $this->parent->method('performAPICallWithJsonResponse')->willReturn(['error' => '']);
-        $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('get'),
-            static::equalTo('/refresh_token')
-        );
-        $instance = new AuthenticationRoute($this->parent);
-        static::expectException(UnauthorizedException::class);
-        static::expectExceptionMessage(UnauthorizedException::TOKEN_MESSAGE);
-        $instance->refreshToken();
     }
 }

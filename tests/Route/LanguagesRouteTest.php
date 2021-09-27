@@ -30,7 +30,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Route\LanguagesRoute;
  */
 class LanguagesRouteTest extends BaseRouteTest
 {
-    public function testGetAvailableLanguages()
+    public function testAllLanguages()
     {
         $this->parent->method('performAPICallWithJsonResponse')->willReturn([
             ['id' => 1, 'name' => 'Dutch'],
@@ -41,23 +41,7 @@ class LanguagesRouteTest extends BaseRouteTest
             static::equalTo('/languages')
         );
         $instance = new LanguagesRoute($this->parent);
-        $languages = $instance->getAvailable();
+        $languages = $instance->all();
         static::assertContainsOnlyInstancesOf(Language::class, $languages);
-    }
-
-    public function testGetLanguage()
-    {
-        $language_id = 1337;
-        $name = 'foo bar baz';
-        $this->parent->method('performAPICallWithJsonResponse')->willReturn(['id' => $language_id, 'name' => $name]);
-        $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
-            static::equalTo('get'),
-            static::equalTo('/languages/'.$language_id)
-        );
-        $instance = new LanguagesRoute($this->parent);
-        $language = $instance->getLanguage($language_id);
-        static::assertInstanceOf(Language::class, $language);
-        static::assertEquals($language_id, $language->id);
-        static::assertEquals($name, $language->name);
     }
 }

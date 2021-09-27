@@ -45,33 +45,29 @@ class AuthenticationRoute extends AbstractRoute
     /**
      * Returns a session token to be included in the rest of the requests.
      *
-     * @param string $apiKey   The API key to use
-     * @param string $username Username (optional)
-     * @param string $userKey  Account key (optional)
+     * @param string      $apiKey  The API key to use
+     * @param string|null $userPIN Account key (optional)
      *
      * @return string
      * @throws ParseException
      * @throws ResourceNotFoundException
      * @throws UnauthorizedException
      */
-    public function login(string $apiKey, string $username = null, string $userKey = null)
+    public function login(string $apiKey, string $userPIN = null): string
     {
         $this->parent->setToken();
 
         $arguments = ['apikey' => $apiKey];
-        if ($username !== null && $userKey !== null) {
-            $arguments['username'] = $username;
-            $arguments['userkey']  = $userKey;
-        } elseif ($username !== null || $userKey !== null) {
-            throw new \InvalidArgumentException('You need to specify both the username and user key, or neither one.');
+        if ($userPIN !== null) {
+            $arguments['pin'] = $userPIN;
         }
 
         $data = $this->parent->performAPICallWithJsonResponse(
             'post',
-            '/login',
+            'login',
             [
-            'body' => json_encode($arguments),
-            'http_errors' => true
+                'body'        => json_encode($arguments),
+                'http_errors' => true,
             ]
         );
 
@@ -82,22 +78,5 @@ class AuthenticationRoute extends AbstractRoute
         return $data['token'];
     }
 
-    /**
-     * Refreshes your current, valid JWT token and returns a new token.
-     *
-     * @return string
-     * @throws ParseException
-     * @throws ResourceNotFoundException
-     * @throws UnauthorizedException
-     */
-    public function refreshToken()
-    {
-        $data = $this->parent->performAPICallWithJsonResponse('get', '/refresh_token');
 
-        if (array_key_exists('token', $data)) {
-            return $data['token'];
-        }
-
-        throw UnauthorizedException::invalidToken();
-    }
 }

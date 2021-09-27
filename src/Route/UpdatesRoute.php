@@ -13,7 +13,7 @@
  *
  * Route that exposes the update methods of TheTVDb API.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Route
@@ -26,8 +26,13 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\UpdateInfo;
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EntityUpdate;
 use DateTime;
+use InvalidArgumentException;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
  * Class UpdatesRoute
@@ -40,25 +45,120 @@ use DateTime;
  */
 class UpdatesRoute extends AbstractRoute
 {
+    /**
+     * Contains possible types for updates.
+     *
+     * @var string[]
+     */
+    public static array $types = [
+        "artwork",
+        "award_nominees",
+        "companies",
+        "episodes",
+        "lists",
+        "people",
+        "seasons",
+        "series",
+        "seriespeople",
+        "artworktypes",
+        "award_categories",
+        "awards",
+        "company_types",
+        "content_ratings",
+        "countries",
+        "entity_types",
+        "genres",
+        "languages",
+        "movies",
+        "movie_genres",
+        "movie_status",
+        "peopletypes",
+        "seasontypes",
+        "sourcetypes",
+        "tag_options",
+        "tags",
+        "translatedcharacters",
+        "translatedcompanies",
+        "translatedepisodes",
+        "translatedlists",
+        "translatedmovies",
+        "translatedpeople",
+        "translatedseasons",
+        "translatedseries",
+    ];
 
 
     /**
-     * Fetches the series that were updated between the given timestamps. If the toTime variable is left null, the API
-     * will take the current timestamp for this.
+     * Fetches data that was updated between the given timestamps.
      *
-     * @param DateTime      $fromTime Fetch series that were updated after this timestamp.
-     * @param DateTime|null $toTime   Fetch series that were updated before this timestamp.
+     * @param DateTime $since  Fetch data that was updated after this timestamp.
+     * @param string   $type   The type of data to fetch.
+     * @param string   $action The action (delete or update).
+     * @param int      $page   The page to fetch.
      *
-     * @return array An array with UpdateInfo instances.
+     * @return array An array with Update instances.
+     * @throws ExceptionInterface
+     * @throws ParseException
+     * @throws ResourceNotFoundException
+     * @throws UnauthorizedException
      */
-    public function query(DateTime $fromTime, DateTime $toTime = null): array
+    public function query(DateTime $since, string $type = "", string $action = "", int $page = -1): array
     {
-        $options = ['query' => ['fromTime' => $fromTime->getTimestamp()]];
-        if ($toTime !== null) {
-            $options['query']['toTime'] = $toTime->getTimestamp();
+        $query = ['since' => $since->getTimestamp()];
+        if ($type !== "") {
+            if (in_array($type, static::$types) === false) {
+                throw new InvalidArgumentException("Type is not in the allowed list of types");
+            }
+            $query['type'] = $type;
         }
+        if ($action === "delete" || $action === "update") {
+            $query['action'] = $action;
+        }
+        if ($page >= 0) {
+            $query['page'] = $page;
+        }
+        $options = ['query' => $query];
 
-        $json = $this->parent->performAPICallWithJsonResponse('get', '/updated/query', $options);
-        return DataParser::parseDataArray($json, UpdateInfo::class);
+        $json = $this->parent->performAPICallWithJsonResponse('get', 'updates', $options);
+        return DataParser::parseDataArray($json, EntityUpdate::class);
     }
+
+    /**
+     * Fetches updates for series.
+     *
+     * @param DateTime $since  Fetch data that was updated after this timestamp.
+     * @param string   $action The action (delete or update).
+     * @param int      $page   The page to fetch.
+     *
+     * @return array An array with Update instances.
+     * @throws ExceptionInterface
+     * @throws ParseException
+     * @throws ResourceNotFoundException
+     * @throws UnauthorizedException
+     */
+    public function fetchSerieUpdates(DateTime $since, string $action = "", int $page = -1): array
+    {
+        return $this->query($since, "series", $action, $page);
+    }
+
+
+    /**
+     * Fetches updates for episodes.
+     *
+     * @param DateTime $since  Fetch data that was updated after this timestamp.
+     * @param string   $action The action (delete or update).
+     * @param int      $page   The page to fetch.
+     *
+     * @return array An array with Update instances.
+     * @throws ExceptionInterface
+     * @throws ParseException
+     * @throws ResourceNotFoundException
+     * @throws UnauthorizedException
+     */
+    public function fetchEpisodeUpdates(DateTime $since, string $action = "", int $page = -1): array
+    {
+        return $this->query($since, "episodes", $action, $page);
+    }
+
+
 }

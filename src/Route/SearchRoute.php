@@ -13,7 +13,7 @@
  *
  * Route that exposes the search methods of TheTVDb API.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Route
@@ -26,8 +26,12 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Route;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SearchResult;
 use InvalidArgumentException;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
  * Class SearchRoute
@@ -40,101 +44,46 @@ use InvalidArgumentException;
  */
 class SearchRoute extends AbstractRoute
 {
-    /**
-     * Parameter name for searching by name.
-     */
-    const SEARCH_NAME = 'name';
-    /**
-     * Parameter name for searching by IMDb id.
-     */
-    const SEARCH_IMDB = 'imdbId';
-    /**
-     * Parameter name for searching by zap2it id.
-     */
-    const SEARCH_ZAP2IT = 'zap2itId';
-    /**
-     * Parameter name for searching by slug.
-     */
-    const SEARCH_SLUG = 'slug';
 
 
     /**
-     * Checks if the given identifier can be used to search using the API.
+     * Checks if the given key is a valid search type.
      *
-     * @param string $identifier The identifier to validate.
+     * @param string $key The key type to check.
      *
-     * @return bool True if the identifier can be used to search, false if not.
+     * @return bool
      */
-    public static function isValidSearchIdentifier(string $identifier) : bool
+    public static function isValidOptionalParameter(string $key): bool
     {
-        $allowedSearchNames = [static::SEARCH_NAME, static::SEARCH_IMDB, static::SEARCH_ZAP2IT, static::SEARCH_SLUG];
-        return in_array($identifier, $allowedSearchNames);
+        return in_array($key, ["type", "year", "offset"]);
     }
 
     /**
      * Searches on theTVDb with a given query for an given identifier.
      *
-     * @param string $identifier  The identifier to search on.
-     * @param string $searchQuery The query to search for.
+     * @param string $searchQuery        The query to search for.
+     * @param array  $optionalParameters An optional array of search parameters
      *
-     * @return array A list of matching Series.
+     * @return array A list of matching SeriesExtendedRecord.
+     * @throws ExceptionInterface
+     * @throws ParseException
+     * @throws ResourceNotFoundException
+     * @throws UnauthorizedException
      */
-    public function search(string $identifier, string $searchQuery): array
+    public function search(string $searchQuery, array $optionalParameters = []): array
     {
-        if (static::isValidSearchIdentifier($identifier) === false) {
-            throw new InvalidArgumentException('Given search identifier is invalid!');
+        $options = ['query' => []];
+        foreach ($optionalParameters as $key => $value) {
+            if (static::isValidOptionalParameter($key) === false) {
+                throw new InvalidArgumentException($key." is not a valid search argument!");
+            }
+            $options['query'][$key] = $value;
         }
-        $options = ['query' => [$identifier => $searchQuery]];
+        $options['query']["q"] = $searchQuery;
 
-        $json = $this->parent->performAPICallWithJsonResponse('get', '/search/series', $options);
-        return DataParser::parseDataArray($json, BasicSeries::class);
+        $json = $this->parent->performAPICallWithJsonResponse('get', 'search', $options);
+        return DataParser::parseDataArray($json, SearchResult::class);
     }
 
-    /**
-     * Searches on theTVDb for (a) serie(s) with a given name.
-     *
-     * @param string $name The name to search for.
-     *
-     * @return array A list of matching Series.
-     */
-    public function searchByName(string $name): array
-    {
-        return $this->search(static::SEARCH_NAME, $name);
-    }
 
-    /**
-     * Searches on theTVDb for (a) serie(s) with a given IMDb id.
-     *
-     * @param string $imdbId The IMDb id to search for.
-     *
-     * @return array A list of matching Series.
-     */
-    public function searchByIMDbId(string $imdbId): array
-    {
-        return $this->search(static::SEARCH_IMDB, $imdbId);
-    }
-
-    /**
-     * Searches on theTVDb for (a) serie(s) with a given zap2it id.
-     *
-     * @param string $zap2itId The zap2it id to search for.
-     *
-     * @return array A list of matching Series.
-     */
-    public function searchByZap2ItId(string $zap2itId): array
-    {
-        return $this->search(static::SEARCH_ZAP2IT, $zap2itId);
-    }
-
-    /**
-     * Searches on theTVDb for (a) serie(s) with a given zap2it id.
-     *
-     * @param string $slug The zap2it id to search for.
-     *
-     * @return array A list of matching Series.
-     */
-    public function searchBySlug(string $slug): array
-    {
-        return $this->search(static::SEARCH_SLUG, $slug);
-    }
 }

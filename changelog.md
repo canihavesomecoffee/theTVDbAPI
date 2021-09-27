@@ -1,5 +1,91 @@
 # Changelog of theTVDbAPI
 
+## 2.x
+
+### 2.0.0 (27 September 2021)
+
+First stable release for support of v4 of the TVDb API.
+
+This version currently supports Authentication, Episodes, Series, Search, Update and Language API calls.
+Support for other endpoints will be added in future releases.
+
+* New: Minimal support for API v4.0.0 of theTVDb.
+* Changed: Minimal PHP version is now 7.4
+* Changed: Dependencies got bumped
+  * Guzzle version 7 or newer
+  * Symfony's components 5.3 or newer
+  * PHPUnit 9 or newer (developers)
+
+### 2.0.0b8 (26 September 2021)
+
+Ninth beta
+
+* Fix
+  * Issue with argument for series episode
+* New
+  * Re-introduce multiple-language routes for Series
+
+### 2.0.0b7 (25 September 2021)
+
+Eighth beta
+
+* Fix
+  * Last array parsing issues
+
+### 2.0.0b6 (25 September 2021)
+
+Seventh beta (it doesn't stop...)
+
+* Fix
+  * Double checked all models (again)...
+
+### 2.0.0b5 (25 September 2021)
+
+Sixth beta
+
+* Fix
+  * Translation arrays can be empty...
+
+### 2.0.0b4 (22 September 2021)
+
+Fifth beta
+
+* Fix
+  * Fix array parsing of models
+  * Update models to add correct model arrays
+
+### 2.0.0b3 (19 September 2021)
+
+Forth beta
+
+* New
+  * Series base and extended records have new fields and methods for average runtime & retrieving the imdb id.
+  * Episode base has new fields to match API.
+
+### 2.0.0b2 (18 September 2021)
+
+Third beta
+
+* Changed:
+  * Updated updates controller to the latest revision of the API.
+  * Updated series controller to the latest revision of the API.
+* New:
+  * SeriesAirDays now has a method to indicate if it airs every day, or no days at all.
+
+### 2.0.0b1 (17 September 2021)
+
+Second beta
+
+* Changed: Bumped dependencies (Fixes #19)
+
+### 2.0.0b (02 May 2021)
+
+Major release for the new API of theTVDb.
+
+* New: Beta support for API v4.0.0 of theTVDb.
+* Changed: Minimal PHP version is now 7.4
+* Changed: Dependencies got bumped
+
 ## 1.x
 
 ### 1.3.0 (17 September 2020)

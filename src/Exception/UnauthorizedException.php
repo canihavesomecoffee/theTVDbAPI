@@ -13,7 +13,7 @@
  *
  * Class that indicates a request returned a 401 Unauthorized status code.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Exception
@@ -67,4 +67,6 @@ class UnauthorizedException extends Exception
     {
         return new static(static::CREDENTIALS_MESSAGE);
     }
+
+
 }

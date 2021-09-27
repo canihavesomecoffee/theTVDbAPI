@@ -13,7 +13,7 @@
  *
  * Bootstrap for test suite.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
@@ -31,4 +31,3 @@ if (file_exists(__DIR__.'/../vendor/autoload.php')) {
 }
 
 require_once __DIR__.'/Route/BaseRouteTest.php';
-require_once __DIR__.'/MultiLanguageWrapper/Route/BaseRouteLanguageFallback.php';

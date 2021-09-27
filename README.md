@@ -1,28 +1,20 @@
 # CanIHaveSomeCoffee/TheTVDbAPI
 
 [![Packagist](https://img.shields.io/packagist/v/canihavesomecoffee/thetvdbapi.svg)](https://packagist.org/packages/canihavesomecoffee/thetvdbapi)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-green.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/packagist/php-v/canihavesomecoffee/theTVDbAPI)](https://php.net/)
 [![Build status](https://api.travis-ci.org/canihavesomecoffee/theTVDbAPI.svg?branch=master)](https://travis-ci.org/canihavesomecoffee/theTVDbAPI)
 [![codecov](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/canihavesomecoffee/theTVDbAPI)
 
-This is an API client for the thetvdb.com website. It's using the **3rd**, improved API version (RESTful). In order to be
- able to access this API you'll have to register on theTVDb first.
- 
- **Important notice: This API version (3) of theTVDb will be superseded by a new version early 2021 (unknown release date). No details are available on the new version as of yet, but we will look into making a new API wrapper available when these details become available.**
-
-This API implementation can be considered a mix between adrenth/thetvdb2 and Moinax/TvDb.
+This is an API client for the thetvdb.com website. It's using the **4th** version of the theTVDb API. In order to be
+ able to access this API you'll have to register on theTVDb first and obtain a project key.
 
 ## API Key Registration
 
 To use this PHP package, you need to request an API Key from the thetvdb.com website: [https://thetvdb.com/dashboard/account/apikeys](https://thetvdb.com/dashboard/account/apikeys).
 
-To use the API, there are a few guidelines (taken from [API information page](https://thetvdb.com/api-information)):
+> We have two models for API access, both that provide funding that allows us to continue running and improving the site. The first is our negotiated license model, which allows commercial companies to negotiate access with us. The second is a user-subscription model, which allows end users to access the API if they are subscribed. We reserve the right to change our interfaces, fees, or licensing terms at any point without notice.
 
-> Free, open source projects are welcome to use our API, images, and data as long as they provide attribution including a link to our site. If you sell your app, provide subscription based services, or sell advertising on your app or website, we consider you a commercial project. Commercial projects, both publicly and privately available to at least 10 users, are required to arrange a commercial license. Commercial projects are able to use our API without restriction during development. We often exclude projects from licensing fees until they are financially successful, but this is solely our decision.
->
-> We reserve the right to change our interfaces, fees, or licensing terms at any point without notice.
-
-Please keep these guidelines in mind when making use of this API client. For information on how to comply with attribution, please refer to the page linked above.
+To create an API key, create an account and visit the API keys page on your dashboard.
 
 ## Installation
 
@@ -34,28 +26,20 @@ $ composer require canihavesomecoffee/thetvdbapi
 
 ## Documentation
 
-The official API documentation can be found here: [https://api.thetvdb.com/swagger]().
+The official API documentation can be found here: [https://thetvdb.github.io/v4-api/]().
 
-For usage examples of the API, please refer to the examples folder.
+For usage examples of the API, please refer to the examples' folder.
 
 ### Authentication
 
 ````
 $theTVDbAPI = new \CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPI();
-$theTVDbAPI->setAcceptedLanguages(['nl']);
-// or set Dutch with English as fallback language
-$theTVDbAPI->setAcceptedLanguages(['nl', 'en']);
 
-// Obtain a token. There are two options:
-// 1. Series data only
+// Obtain a token. Optionally you can pass a user pin through as well.
 $token = $theTVDbAPI->authentication()->login($apiKey);
-// 2. Series and user options
-$token = $theTVDbAPI->authentication()->login($apiKey, $username, $userKey);
 
 // Set the token
 $theTVDbAPI->setToken($token);
-// Or refresh token
-$theTVDbAPI->refreshToken();
 ````
 
 ### Routes
@@ -65,35 +49,31 @@ The `TheTVDbAPI` offers access to the same routes that the API provides. A few u
 #### Authentication
 ````
 $theTVDbAPI->authentication()->login($apiKey);
-$theTVDbAPI->authentication()->refreshToken();
 ````
 
 #### Languages
 ````
 $theTVDbAPI->languages()->all();
-$theTVDbAPI->languages()->get($languageId);
 ````
 
 #### Episodes
 ````
-$theTVDbAPI->episodes()->get($episodeId);
+$theTVDbAPI->episodes()->simple(6347388);
+$theTVDbAPI->episodes()->extended(8366715);
+$theTVDbAPI->episodes()->translations(8366715, "nld");
 ````
 
 #### Series
 ````
-$theTVDbAPI->series()->get($seriesId);
-$theTVDbAPI->series()->getActors($seriesId);
-$theTVDbAPI->series()->getEpisodes($seriesId);
-$theTVDbAPI->series()->getImages($seriesId);
-$theTVDbAPI->series()->getLastModified($seriesId);
+$theTVDbAPI->series()->episodes(280258, 0);
+$theTVDbAPI->series()->translate(280258, 'eng');
 ````
 
 #### Search
 ````
-$theTVDbAPI->search()->seriesByName('lost');
-$theTVDbAPI->search()->seriesByImdbId('tt2243973');
-$theTVDbAPI->search()->seriesByZap2itId('EP015679352');
-$theTVDbAPI->search()->seriesBySlug('lost');
+$theTVDbAPI->search()->search("Ideale");
+$theTVDbAPI->search()->search("Ideale", ["year" => 2014]);
+$theTVDbAPI->search()->search("Ideale Wereld", ["type" => "series"]);
 ````
 
 #### Updates
@@ -101,24 +81,13 @@ $theTVDbAPI->search()->seriesBySlug('lost');
 Fetch a list of Series that have been recently updated:
 
 ````
-$theTVDbAPI->updates()->query($fromTime, $toTime);
-````
-
-#### Users
-
-````
-$theTVDbAPI->users()->get();
-$theTVDbAPI->users()->getFavorites();
-$theTVDbAPI->users()->addFavorite($identifier);
-$theTVDbAPI->users()->removeFavorite($identifier);
-$theTVDbAPI->users()->getRatings();
-$theTVDbAPI->users()->addRating($type, $itemId, $rating);
-$theTVDbAPI->users()->updateRating($type, $itemId, $rating);
-$theTVDbAPI->users()->removeRating($type, $itemId);
+$now = new DateTime();
+$now->sub(new DateInterval("PT2H"));
+$theTVDbAPI->updates()->query($now);
 ````
 
 ## Contributing
 
 While the aim is to provide a ready-to-use API, it's possible that things are missing or outdated. If you think 
-something is missing or you want to add something, feel free to open up an issue, or even better, make a Pull Request 
+something is missing, or you want to add something, feel free to open up an issue, or even better, make a Pull Request 
 (PR) with a fix or improvement. The PR's will be gladly accepted in order to improve this client API.

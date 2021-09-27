@@ -16,8 +16,9 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SearchResult;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
+use InvalidArgumentException;
 
 /**
  * Class SearchRouteTest
@@ -30,31 +31,11 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
  */
 class SearchRouteTest extends BaseRouteTest
 {
-    public function testNameIsAValidSearchIdentifier() {
-        static::assertTrue(SearchRoute::isValidSearchIdentifier(SearchRoute::SEARCH_NAME));
-    }
-
-    public function testIMDBIsAValidSearchIdentifier() {
-        static::assertTrue(SearchRoute::isValidSearchIdentifier(SearchRoute::SEARCH_IMDB));
-    }
-
-    public function testZapToITIsAValidSearchIdentifier() {
-        static::assertTrue(SearchRoute::isValidSearchIdentifier(SearchRoute::SEARCH_ZAP2IT));
-    }
-
-    public function testSlugIsAValidSearchIdentifier() {
-        static::assertTrue(SearchRoute::isValidSearchIdentifier(SearchRoute::SEARCH_SLUG));
-    }
-
-    public function testFooIsNotAValidSearchIdentifier() {
-        static::assertFalse(SearchRoute::isValidSearchIdentifier("foo"));
-    }
-
     public function testSearchInvalidSpecifier()
     {
         $instance = new SearchRoute($this->parent);
-        static::expectException(\InvalidArgumentException::class);
-        $instance->search('invalid', 'foo');
+        static::expectException(InvalidArgumentException::class);
+        $instance->search('invalid', ['foo' => 'bar']);
     }
 
     /**
@@ -70,7 +51,7 @@ class SearchRouteTest extends BaseRouteTest
         $this->parent->method('performAPICallWithJsonResponse')->willReturn($return);
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('get'),
-            static::equalTo('/search/series'),
+            static::equalTo('search'),
             static::equalTo($options)
         );
     }
@@ -79,55 +60,13 @@ class SearchRouteTest extends BaseRouteTest
     {
         $name = 'foo';
         $return = [
-            ['id' => 1, 'seriesName' => 'foo'],
-            ['id' => 3, 'seriesName' => 'foo bar']
+            ['id' => "1", 'seriesName' => 'foo'],
+            ['id' => "3", 'seriesName' => 'foo bar']
         ];
-        $options = ['query' => [SearchRoute::SEARCH_NAME => $name]];
+        $options = ['query' => ["q" => $name]];
         $this->setMockData($return, $options);
         $instance = new SearchRoute($this->parent);
-        $results = $instance->searchByName($name);
-        static::assertContainsOnlyInstancesOf(BasicSeries::class, $results);
-    }
-
-    public function testSearchByIMDb()
-    {
-        $name = 'tt123';
-        $return = [
-            ['id' => 1, 'seriesName' => 'foo'],
-            ['id' => 3, 'seriesName' => 'foo bar']
-        ];
-        $options = ['query' => [SearchRoute::SEARCH_IMDB => $name]];
-        $this->setMockData($return, $options);
-        $instance = new SearchRoute($this->parent);
-        $results = $instance->searchByIMDbId($name);
-        static::assertContainsOnlyInstancesOf(BasicSeries::class, $results);
-    }
-
-    public function testSearchByZap2It()
-    {
-        $name = 'z2it';
-        $return = [
-            ['id' => 1, 'seriesName' => 'foo'],
-            ['id' => 3, 'seriesName' => 'foo bar']
-        ];
-        $options = ['query' => [SearchRoute::SEARCH_ZAP2IT => $name]];
-        $this->setMockData($return, $options);
-        $instance = new SearchRoute($this->parent);
-        $results = $instance->searchByZap2ItId($name);
-        static::assertContainsOnlyInstancesOf(BasicSeries::class, $results);
-    }
-
-    public function testSearchBySlug()
-    {
-        $name = 'foo_slug_bar';
-        $return = [
-            ['id' => 1, 'seriesName' => 'foo'],
-            ['id' => 3, 'seriesName' => 'foo bar']
-        ];
-        $options = ['query' => [SearchRoute::SEARCH_SLUG => $name]];
-        $this->setMockData($return, $options);
-        $instance = new SearchRoute($this->parent);
-        $results = $instance->searchBySlug($name);
-        static::assertContainsOnlyInstancesOf(BasicSeries::class, $results);
+        $results = $instance->search($name);
+        static::assertContainsOnlyInstancesOf(SearchResult::class, $results);
     }
 }

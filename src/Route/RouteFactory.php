@@ -13,7 +13,7 @@
  *
  * Factory to generate route objects.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI\Route
@@ -44,7 +44,7 @@ class RouteFactory
      *
      * @var array
      */
-    private static $routeInstances = [];
+    private static array $routeInstances = [];
 
 
     /**
@@ -68,4 +68,6 @@ class RouteFactory
         }
         return static::$routeInstances[$routeClassName];
     }
+
+
 }

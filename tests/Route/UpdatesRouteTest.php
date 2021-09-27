@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests\Route;
 
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\UpdateInfo;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EntityUpdate;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\UpdatesRoute;
 use DateTime;
 
@@ -36,18 +36,14 @@ class UpdatesRouteTest extends BaseRouteTest
     public function testFetchUpdates()
     {
         $from_time = 1495295674;
-        $to_time = 1495295675;
-        $options = ['query' => ['fromTime' => $from_time]];
-        $options_both = ['query' => ['fromTime' => $from_time, 'toTime' => $to_time]];
-        $this->parent->expects(static::exactly(2))->method('performAPICallWithJsonResponse')->with(
+        $options = ['query' => ['since' => $from_time]];
+        $this->parent->expects(static::exactly(1))->method('performAPICallWithJsonResponse')->with(
             static::equalTo('get'),
-            static::equalTo('/updated/query'),
-            static::logicalOr($options, $options_both)
-        )->willReturn([['id' => 123, 'lastUpdated' => 1495295674], ['id' => 124, 'lastUpdated' => 1495295874]]);
+            static::equalTo('updates'),
+            static::logicalOr($options)
+        )->willReturn([['id' => 123, 'timeStamp' => 1495295674, 'action' => 'foo'], ['id' => 124, 'timeStamp' => 1495295874, 'action' => 'foo']]);
         $instance = new UpdatesRoute($this->parent);
         $results = $instance->query(DateTime::createFromFormat('U', $from_time.''));
-        static::assertContainsOnlyInstancesOf(UpdateInfo::class, $results);
-        $both_results = $instance->query(DateTime::createFromFormat('U', $from_time.''), DateTime::createFromFormat('U', $to_time.''));
-        static::assertContainsOnlyInstancesOf(UpdateInfo::class, $both_results);
+        static::assertContainsOnlyInstancesOf(EntityUpdate::class, $results);
     }
 }

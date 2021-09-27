@@ -17,10 +17,8 @@ declare(strict_types=1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicEpisode;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\BasicSeries;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\Image;
-use CanIHaveSomeCoffee\TheTVDbAPI\Model\RatingsInfo;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -37,32 +35,65 @@ class DataParserTest extends TestCase
     public function testParseBasicEpisodeData()
     {
         $json = [
-            json_decode('{"absoluteNumber": null, "airedEpisodeNumber": 0, "airedSeason": 0, "airedSeasonID": 0, "dvdEpisodeNumber": null, "dvdSeason": null, "episodeName": "string",  "firstAired": "2018-04-10", "id": 0, "language": { "episodeName": "en", "overview": "en" }, "lastUpdated": 1523605586, "overview": "string"}', true)
+            json_decode('{
+        "id": 7421162,
+        "seriesId": 280258,
+        "name": "Thibault Christiaensen",
+        "aired": "2019-10-29",
+        "runtime": 45,
+        "nameTranslations": [
+          "eng",
+          "nld"
+        ],
+        "overview": null,
+        "overviewTranslations": [
+          "nld"
+        ],
+        "image": "https://artworks.thetvdb.com/banners/series/280258/episodes/62076048.jpg",
+        "imageType": 11,
+        "isMovie": 0,
+        "seasons": null,
+        "number": 17,
+        "seasonNumber": 13,
+        "lastUpdated": "2020-02-08 21:20:50",
+        "finaleType": null
+      }', true)
         ];
-        $return = DataParser::parseDataArray($json, BasicEpisode::class);
-        static::assertContainsOnlyInstancesOf(BasicEpisode::class, $return);
+        $return = DataParser::parseDataArray($json, EpisodeBaseRecord::class);
+        static::assertContainsOnlyInstancesOf(EpisodeBaseRecord::class, $return);
     }
 
     public function testParseBasicSeriesData()
     {
+        $episodeJSON = '{
+        "id": 7421162,
+        "seriesId": 280258,
+        "name": "Thibault Christiaensen",
+        "aired": "2019-10-29",
+        "runtime": 45,
+        "nameTranslations": [
+          "eng",
+          "nld"
+        ],
+        "overview": null,
+        "overviewTranslations": [
+          "nld"
+        ],
+        "image": "https://artworks.thetvdb.com/banners/series/280258/episodes/62076048.jpg",
+        "imageType": 11,
+        "isMovie": 0,
+        "seasons": null,
+        "number": 17,
+        "seasonNumber": 13,
+        "lastUpdated": "2020-02-08 21:20:50",
+        "finaleType": null
+      }';
         $json = [
-            json_decode('{"added": "string", "airsDayOfWeek": "string", "airsTime": "string", "aliases": [ "string" ], "banner": "string", "firstAired": "string", "genre": [ "string" ], "id": 0, "imdbId": "string", "lastUpdated": 0, "network": "string", "networkId": "string", "overview": "string", "rating": "string", "runtime": "string", "seriesId": 0, "seriesName": "string", "siteRating": 0, "siteRatingCount": 0, "status": "string", "zap2itId": "string"}', true),
-            json_decode('{"added": "string", "airsDayOfWeek": "string", "airsTime": "string", "aliases": [ "string" ], "banner": "string", "firstAired": "string", "genre": [ "string" ], "id": 0, "imdbId": "string", "lastUpdated": 0, "network": "string", "networkId": "string", "overview": "string", "rating": "string", "runtime": "string", "seriesId": 0, "seriesName": "string", "siteRating": 0, "siteRatingCount": 0, "status": "string", "zap2itId": "string"}', true),
-            json_decode('{"added": "string", "airsDayOfWeek": "string", "airsTime": "string", "aliases": [ "string" ], "banner": "string", "firstAired": "string", "genre": [], "id": 0, "imdbId": "string", "lastUpdated": 0, "network": "string", "networkId": "string", "overview": null, "rating": "string", "runtime": "string", "seriesId": 0, "seriesName": null, "siteRating": 0, "siteRatingCount": 0, "status": "string", "zap2itId": "string"}', true)
+            json_decode($episodeJSON, true),
+            json_decode($episodeJSON, true),
+            json_decode($episodeJSON, true)
         ];
-        $return = DataParser::parseDataArray($json, BasicSeries::class);
-        static::assertContainsOnlyInstancesOf(BasicSeries::class, $return);
-    }
-
-    public function testParseImage()
-    {
-        $json   = [
-            json_decode('{ "id": 845571, "keyType": "series", "subKey": "graphical", "fileName": "graphical/236061-g.jpg", "resolution": "", "ratingsInfo": { "average": 8, "count": 5 }, "thumbnail": "_cache/graphical/236061-g.jpg"}', true),
-            json_decode('{ "id": 845571, "keyType": "series", "subKey": "graphical", "fileName": "graphical/236061-g.jpg", "resolution": "", "ratingsInfo": { "average": 8.5, "count": 5 }, "thumbnail": "_cache/graphical/236061-g.jpg"}', true)
-        ];
-        /** @var Image $return */
-        $return = DataParser::parseDataArray($json, Image::class);
-        static::assertContainsOnlyInstancesOf(Image::class, $return);
-        static::assertInstanceOf(RatingsInfo::class, $return[0]->ratingsInfo);
+        $return = DataParser::parseDataArray($json, SeriesBaseRecord::class);
+        static::assertContainsOnlyInstancesOf(SeriesBaseRecord::class, $return);
     }
 }

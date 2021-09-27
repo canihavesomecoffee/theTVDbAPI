@@ -13,7 +13,7 @@
  *
  * Class that processes json and converts it into class representations.
  *
- * PHP version 7.1
+ * PHP version 7.4
  *
  * @category TheTVDbAPI
  * @package  CanIHaveSomeCoffee\TheTVDbAPI
@@ -29,6 +29,9 @@ use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -46,9 +49,9 @@ class DataParser
     /**
      * The Serializer instance.
      *
-     * @var Serializer
+     * @var Serializer|null
      */
-    private static $serializer;
+    private static ?Serializer $serializer = null;
 
 
     /**
@@ -58,6 +61,7 @@ class DataParser
      * @param string $returnClass The expected return class
      *
      * @return mixed
+     * @throws ExceptionInterface
      */
     public static function parseData(array $json, string $returnClass)
     {
@@ -67,10 +71,11 @@ class DataParser
     /**
      * Parses the given JSON data into an array of return_class instances.
      *
-     * @param object $json        The JSON data. Must be valid
-     * @param string $returnClass The expected return class
+     * @param object|array $json        The JSON data. Must be valid
+     * @param string       $returnClass The expected return class
      *
      * @return array
+     * @throws ExceptionInterface
      */
     public static function parseDataArray($json, string $returnClass): array
     {
@@ -93,10 +98,12 @@ class DataParser
         if (static::$serializer === null) {
             $extractor          = new PropertyInfoExtractor([], [new PhpDocExtractor(), new ReflectionExtractor()]);
             static::$serializer = new Serializer(
-                [new ObjectNormalizer(null, null, null, $extractor)],
+                [new ArrayDenormalizer(), new DateTimeNormalizer(), new ObjectNormalizer(null, null, null, $extractor)],
                 [new JsonEncoder()]
             );
         }
         return static::$serializer;
     }
+
+
 }
