@@ -36,9 +36,9 @@ class TagOption
     /**
      * Text associated to this tag option?
      *
-     * @var string
+     * @var string|null
      */
-    public string $helpText;
+    public ?string $helpText;
     /**
      * The id for this TagOption.
      *

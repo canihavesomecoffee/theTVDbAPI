@@ -54,9 +54,9 @@ class SeasonBaseRecord
     /**
      * URL to an image of the season.
      *
-     * @var string
+     * @var string|null
      */
-    public string $image;
+    public ?string $image;
     /**
      * The image type for the image of the season.
      *

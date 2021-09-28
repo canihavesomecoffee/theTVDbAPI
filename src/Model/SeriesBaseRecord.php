@@ -47,9 +47,9 @@ class SeriesBaseRecord
     /**
      * The known aliases for this serie.
      *
-     * @var Alias[]
+     * @var Alias[]|null
      */
-    public array $aliases;
+    public ?array $aliases;
     /**
      * The country of the serie.
      *

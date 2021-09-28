@@ -45,7 +45,7 @@ class ArtworkStatus extends ArtworkBaseRecord
     /**
      * Name for the artwork status.
      *
-     * @var string
+     * @var string|null
      */
-    public string $name;
+    public ?string $name;
 }

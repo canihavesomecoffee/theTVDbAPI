@@ -39,9 +39,9 @@ class Company
     /**
      * The date the company was started.
      *
-     * @var string
+     * @var string|null
      */
-    public string $activeDate;
+    public ?string $activeDate;
     /**
      * Aliases for this company.
      *
@@ -51,9 +51,9 @@ class Company
     /**
      * The country the company resides in.
      *
-     * @var string
+     * @var string|null
      */
-    public string $country;
+    public ?string $country;
     /**
      * Identifier for this character.
      *
@@ -63,9 +63,9 @@ class Company
     /**
      * The date the company stopped.
      *
-     * @var string
+     * @var string|null
      */
-    public string $inactiveDate;
+    public ?string $inactiveDate;
     /**
      * Name of the company (original).
      *
