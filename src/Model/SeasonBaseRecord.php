@@ -66,9 +66,9 @@ class SeasonBaseRecord
     /**
      * Name of the season (original).
      *
-     * @var string
+     * @var string|null
      */
-    public string $name;
+    public ?string $name;
     /**
      * List of languages for which translated season names are available.
      *

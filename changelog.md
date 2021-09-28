@@ -2,6 +2,13 @@
 
 ## 2.x
 
+### 2.0.3 (28 September 2021)
+
+More bugfixes
+
+* Fix
+  * Nullable entries in other models
+
 ### 2.0.2 (28 September 2021)
 
 More bugfixes
