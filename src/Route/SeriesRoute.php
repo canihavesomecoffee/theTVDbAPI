@@ -190,7 +190,11 @@ class SeriesRoute extends AbstractRoute
         $options = ['query' => $arguments];
         $json    = $this->parent->performAPICallWithJsonResponse('get', $path, $options);
 
-        return DataParser::parseDataArray($json['episodes'], EpisodeBaseRecord::class);
+        $episodes = [];
+        if (isset($json['episodes'])) {
+            $episodes = $json['episodes'];
+        }
+        return DataParser::parseDataArray($episodes, EpisodeBaseRecord::class);
     }
 
     /**
