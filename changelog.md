@@ -2,6 +2,13 @@
 
 ## 2.x
 
+### 2.0.1 (28 September 2021)
+
+First bugfix release for the new API.
+
+* Fix
+  * Nullable entries in Characters (who could've though?)
+
 ### 2.0.0 (27 September 2021)
 
 First stable release for support of v4 of the TVDb API.

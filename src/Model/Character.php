@@ -39,9 +39,9 @@ class Character
     /**
      * Aliases for this character.
      *
-     * @var Alias[]
+     * @var Alias[]|null
      */
-    public array $aliases;
+    public ?array $aliases;
     /**
      * EpisodeExtendedRecord id if this character is present in there.
      *
@@ -57,9 +57,9 @@ class Character
     /**
      * URL to an image of the character.
      *
-     * @var string
+     * @var string|null
      */
-    public string $image;
+    public ?string $image;
     /**
      * Is this a featured character?
      *
