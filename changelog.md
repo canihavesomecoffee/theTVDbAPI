@@ -2,6 +2,13 @@
 
 ## 2.x
 
+### 2.0.4 (28 September 2021)
+
+More bugfixes
+
+* Fix
+  * Episodes are not always present when retrieving them, so pass empty array in that case.
+
 ### 2.0.3 (28 September 2021)
 
 More bugfixes
