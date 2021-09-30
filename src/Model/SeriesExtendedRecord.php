@@ -45,9 +45,9 @@ class SeriesExtendedRecord extends SeriesBaseRecord
     /**
      * Time when the series airs.
      *
-     * @var string
+     * @var string|null
      */
-    public string $airsTime;
+    public ?string $airsTime;
     /**
      * Artworks for this series.
      *

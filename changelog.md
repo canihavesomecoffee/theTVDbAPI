@@ -2,7 +2,14 @@
 
 ## 2.x
 
-### 2.0.4 (28 September 2021)
+### 2.0.6 (30 September 2021)
+
+Bugfix release
+
+* Fix
+  * Another nullable entry for SeriesExtendedRecord
+
+### 2.0.4 (28 September 2021) / 2.0.5
 
 More bugfixes
 
