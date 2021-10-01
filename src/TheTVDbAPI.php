@@ -30,6 +30,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Links;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\AuthenticationRoute;
+use CanIHaveSomeCoffee\TheTVDbAPI\Route\ArtworkRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\LanguagesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\RouteFactory;
@@ -199,6 +200,16 @@ class TheTVDbAPI implements TheTVDbAPIInterface
     public function updates(): UpdatesRoute
     {
         return RouteFactory::getRouteInstance($this, UpdatesRoute::class);
+    }
+
+    /**
+     * Get artwork extension
+     *
+     * @return ArtworkRoute
+     */
+    public function artwork(): ArtworkRoute
+    {
+        return RouteFactory::getRouteInstance($this, ArtworkRoute::class);
     }
 
     /**

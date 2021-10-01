@@ -16,6 +16,7 @@ declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Tests;
 
+use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPI;
 use Exception;
 use GuzzleHttp\Client;
@@ -28,7 +29,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\AuthenticationRoute;
-use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
+use CanIHaveSomeCoffee\TheTVDbAPI\Route\ArtworkRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\LanguagesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SeriesRoute;
@@ -89,6 +90,7 @@ class TheTVDbAPITest extends TestCase
         static::assertInstanceOf(SearchRoute::class, $instance->search());
         static::assertInstanceOf(UpdatesRoute::class, $instance->updates());
         static::assertInstanceOf(SeriesRoute::class, $instance->series());
+        static::assertInstanceOf(ArtworkRoute::class, $instance->artwork());
     }
 
     public function testIfHeadersAreReturned()
