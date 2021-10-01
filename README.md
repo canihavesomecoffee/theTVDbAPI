@@ -113,7 +113,7 @@ $theTVDbAPI->updates()->fetchSerieUpdates($now);
 $theTVDbAPI->updates()->fetchEpisodeUpdates($now);
 ````
 
-# Artwork
+#### Artwork
 ````
 $theTVDbAPI->artwork()->simple(62001533);
 $theTVDbAPI->artwork()->extended(62001533);
