@@ -30,6 +30,19 @@ The official API documentation can be found here: [https://thetvdb.github.io/v4-
 
 For usage examples of the API, please refer to the examples' folder.
 
+### API-wide translations
+
+You can pass a primary and secondary (fallback) language to the API constructor.
+
+For example, if you want translations in Dutch, but a fallback to English if no Dutch translations exist, you can set
+this as follows:
+
+````
+$theTVDbAPI = new \CanIHaveSomeCoffee\TheTVDbAPI\TheTVDbAPI("nld", "eng");
+````
+
+By default, the primary language is set to English without a fallback language.
+
 ### Authentication
 
 ````
@@ -49,6 +62,8 @@ The `TheTVDbAPI` offers access to the same routes that the API provides. A few u
 #### Authentication
 ````
 $theTVDbAPI->authentication()->login($apiKey);
+// or in case it's a project with user-specific subscriptions
+$theTVDbAPI->authentication()->login($apiKey, $pin);
 ````
 
 #### Languages
@@ -65,8 +80,12 @@ $theTVDbAPI->episodes()->translations(8366715, "nld");
 
 #### Series
 ````
-$theTVDbAPI->series()->episodes(280258, 0);
-$theTVDbAPI->series()->translate(280258, 'eng');
+$theTVDbAPI->series()->list();
+$theTVDbAPI->series()->simple(280258);
+$theTVDbAPI->series()->extended(280258);
+$theTVDbAPI->series()->translate(280258);
+$theTVDbAPI->series()->episodes(280258); // Paginated
+$theTVDbAPI->series()->allEpisodes(280258); // All episodes, translated
 ````
 
 #### Search
@@ -78,12 +97,20 @@ $theTVDbAPI->search()->search("Ideale Wereld", ["type" => "series"]);
 
 #### Updates
 
-Fetch a list of Series that have been recently updated:
+Fetch a list of entities that have been recently updated:
 
 ````
 $now = new DateTime();
 $now->sub(new DateInterval("PT2H"));
 $theTVDbAPI->updates()->query($now);
+````
+
+Some wrapper methods are available to restrict results:
+````
+$now = new DateTime();
+$now->sub(new DateInterval("PT2H"));
+$theTVDbAPI->updates()->fetchSerieUpdates($now);
+$theTVDbAPI->updates()->fetchEpisodeUpdates($now);
 ````
 
 ## Contributing
