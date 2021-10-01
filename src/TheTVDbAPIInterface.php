@@ -26,12 +26,13 @@ declare(strict_types = 1);
 namespace CanIHaveSomeCoffee\TheTVDbAPI;
 
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\AuthenticationRoute;
+use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
 use Exception;
 use GuzzleHttp\Psr7\Response;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
-use CanIHaveSomeCoffee\TheTVDbAPI\Route\EpisodesRoute;
+use CanIHaveSomeCoffee\TheTVDbAPI\Route\ArtworkRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\LanguagesRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SearchRoute;
 use CanIHaveSomeCoffee\TheTVDbAPI\Route\SeriesRoute;
@@ -100,6 +101,13 @@ interface TheTVDbAPIInterface
      * @return UpdatesRoute
      */
     public function updates(): UpdatesRoute;
+
+    /**
+     * Get artwork extension
+     *
+     * @return ArtworkRoute
+     */
+    public function artwork(): ArtworkRoute;
 
     /**
      * Makes a call to the API and return headers only.

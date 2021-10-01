@@ -2,6 +2,13 @@
 
 ## 2.x
 
+### 2.0.7 (xx October 2021)
+
+Feature improvements
+
+* New
+  * Artwork route
+
 ### 2.0.6 (30 September 2021)
 
 Bugfix release

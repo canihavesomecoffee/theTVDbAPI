@@ -113,6 +113,14 @@ $theTVDbAPI->updates()->fetchSerieUpdates($now);
 $theTVDbAPI->updates()->fetchEpisodeUpdates($now);
 ````
 
+# Artwork
+````
+$theTVDbAPI->artwork()->simple(62001533);
+$theTVDbAPI->artwork()->extended(62001533);
+$theTVDbAPI->artwork()->statuses();
+$theTVDbAPI->artwork()->types();
+````
+
 ## Contributing
 
 While the aim is to provide a ready-to-use API, it's possible that things are missing or outdated. If you think 
