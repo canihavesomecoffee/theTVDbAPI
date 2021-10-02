@@ -36,4 +36,9 @@ $theTVDbAPI->setToken($token);
 
 // Retrieve all episodes from The Big Bang Theory (> 100 episodes).
 $episodes = $theTVDbAPI->series()->allEpisodes(80379);
+var_dump(sizeof($episodes));
+
+// Retrieve all episodes from Casualty, more than 500 episodes.
+$episodes = $theTVDbAPI->series()->allEpisodes(71756);
+var_dump(sizeof($episodes));
 var_dump($episodes);

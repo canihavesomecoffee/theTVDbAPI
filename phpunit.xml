@@ -1,32 +1,28 @@
-<phpunit
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.4/phpunit.xsd"
-        bootstrap="tests/bootstrap.php"
-        verbose="true">
-
-    <testsuites>
-        <testsuite name="theTVDbAPI">
-            <directory>tests</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true" addUncoveredFilesFromWhitelist="true">
-            <directory>src</directory>
-            <exclude>
-                <directory suffix="Interface.php">src</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-
-    <logging>
-        <log type="coverage-html" target="build/php/coverage"/>
-        <log type="coverage-clover" target="build/php/coverage.xml"/>
-        <log type="junit" target="build/php/test-results.xml"/>
-    </logging>
-    <php>
-        <env name="API_KEY" value="" />
-        <env name="API_USER" value="" />
-        <env name="API_USER_KEY" value="" />
-    </php>
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" bootstrap="tests/bootstrap.php" verbose="true">
+  <coverage includeUncoveredFiles="true" processUncoveredFiles="true">
+    <include>
+      <directory>src</directory>
+    </include>
+    <exclude>
+      <directory suffix="Interface.php">src</directory>
+    </exclude>
+    <report>
+      <clover outputFile="build/php/coverage.xml"/>
+      <html outputDirectory="build/php/coverage"/>
+    </report>
+  </coverage>
+  <testsuites>
+    <testsuite name="theTVDbAPI">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <junit outputFile="build/php/test-results.xml"/>
+  </logging>
+  <php>
+    <env name="API_KEY" value=""/>
+    <env name="API_USER" value=""/>
+    <env name="API_USER_KEY" value=""/>
+  </php>
 </phpunit>

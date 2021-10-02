@@ -2,12 +2,17 @@
 
 ## 2.x
 
-### 2.0.7 (xx October 2021)
+### 2.0.7 (02 October 2021)
 
-Feature improvements
+Feature improvements, bugfix
 
 * New
   * Artwork route
+* Fix
+  * allEpisodes now returns all episodes. Apparently the limit in one page is 500 rather than 100, causing this to be
+    overlooked.
+* Change
+  * Bump format of phpunit.xml test.
 
 ### 2.0.6 (30 September 2021)
 
