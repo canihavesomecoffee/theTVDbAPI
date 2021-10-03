@@ -183,7 +183,7 @@ class SearchResult
     /**
      * Translations.
      *
-     * @var TranslationSimple[]
+     * @var array
      */
     public array $translations;
     /**
@@ -213,7 +213,34 @@ class SearchResult
     /**
      * Translated overviews.
      *
-     * @var TranslationSimple[]
+     * @var array
      */
     public array $overviews;
+
+
+    /**
+     * Get the localized name if available.
+     *
+     * @param string $lang The language to get the localized value from.
+     *
+     * @return string
+     */
+    public function getLocalizedName(string $lang) : string
+    {
+        return ($this->translations[$lang] ?? "");
+    }
+
+    /**
+     * Get the localized overview if available.
+     *
+     * @param string $lang The language to get the localized value from.
+     *
+     * @return string
+     */
+    public function getLocalizedOverview(string $lang) : string
+    {
+        return ($this->overviews[$lang] ?? "");
+    }
+
+
 }

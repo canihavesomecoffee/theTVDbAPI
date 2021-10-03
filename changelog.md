@@ -2,6 +2,15 @@
 
 ## 2.x
 
+### 2.0.8 (03 October 2021)
+
+Bugfix release
+
+* Fix
+  * Model class of SearchResults is not consistent with reality. (#24)
+* New
+  * Added methods to get localized name/overview in SearchResult model.
+
 ### 2.0.7 (02 October 2021)
 
 Feature improvements, bugfix
