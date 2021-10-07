@@ -2,6 +2,14 @@
 
 ## 2.x
 
+### 2.0.9 (07 October 2021)
+
+Bugfix release
+
+* Fix
+  * If episodes are not found in a fallback (or main) language, don't throw an exception. Only throw when both are
+    throwing exceptions.
+
 ### 2.0.8 (03 October 2021)
 
 Bugfix release

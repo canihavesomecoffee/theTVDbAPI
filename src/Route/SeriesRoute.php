@@ -214,31 +214,47 @@ class SeriesRoute extends AbstractRoute
     {
         $result = [];
 
+        // Boolean to catch throw.
+        $throwS = false;
+        $throwP = false;
+
         if ($this->parent->getSecondaryLanguage() !== "") {
             // Pre-fill results with fallback language, assuming the fallback language always has more results than the
             // translated, primary language.
+            try {
+                $page = 0;
+                do {
+                    $eps = $this->episodes($id, 0, $page, $seasonType, $this->parent->getSecondaryLanguage());
+                    foreach ($eps as $episode) {
+                        $result[$episode->id] = $episode;
+                    }
+                    $page++;
+                } while (sizeof($eps) === 500);
+            } catch (ResourceNotFoundException $exception) {
+                $throwS = true;
+            }
+        }
+        try {
             $page = 0;
             do {
-                $eps = $this->episodes($id, 0, $page, $seasonType, $this->parent->getSecondaryLanguage());
-                foreach ($eps as $episode) {
-                    $result[$episode->id] = $episode;
+                $translatedEpisodes = $this->episodes($id, 0, $page, $seasonType, $this->parent->getPrimaryLanguage());
+                foreach ($translatedEpisodes as $episode) {
+                    if (array_key_exists($episode->id, $result)) {
+                        $result[$episode->id]->name     = $episode->name;
+                        $result[$episode->id]->overview = $episode->overview;
+                    } else {
+                        $result[$episode->id] = $episode;
+                    }
                 }
                 $page++;
-            } while (sizeof($eps) === 500);
+            } while (sizeof($translatedEpisodes) === 500);
+        } catch (ResourceNotFoundException $exception) {
+            $throwP = true;
         }
-        $page = 0;
-        do {
-            $translatedEpisodes = $this->episodes($id, 0, $page, $seasonType, $this->parent->getPrimaryLanguage());
-            foreach ($translatedEpisodes as $episode) {
-                if (array_key_exists($episode->id, $result)) {
-                    $result[$episode->id]->name     = $episode->name;
-                    $result[$episode->id]->overview = $episode->overview;
-                } else {
-                    $result[$episode->id] = $episode;
-                }
-            }
-            $page++;
-        } while (sizeof($translatedEpisodes) === 500);
+
+        if ($throwS && $throwP) {
+            throw ResourceNotFoundException::noTranslationAvailable();
+        }
 
         return array_values($result);
     }
