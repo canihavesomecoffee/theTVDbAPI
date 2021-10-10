@@ -2,6 +2,13 @@
 
 ## 2.x
 
+### 2.0.10 (x October 2021)
+
+Bugfix release
+
+* Fix
+  * Name of an SeriesBaseRecord can also be nullable (*sigh*).
+
 ### 2.0.9 (07 October 2021)
 
 Bugfix release

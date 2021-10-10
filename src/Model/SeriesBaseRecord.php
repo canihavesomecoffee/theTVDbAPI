@@ -95,9 +95,9 @@ class SeriesBaseRecord
     /**
      * The name of the serie.
      *
-     * @var string
+     * @var string|null
      */
-    public string $name;
+    public ?string $name;
     /**
      * List of languages for which translated series names are available.
      *
