@@ -2,7 +2,7 @@
 
 ## 2.x
 
-### 2.0.10 (x October 2021)
+### 2.0.10 (10 October 2021)
 
 Bugfix release
 
