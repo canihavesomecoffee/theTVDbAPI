@@ -240,8 +240,8 @@ class SeriesRoute extends AbstractRoute
                 $translatedEpisodes = $this->episodes($id, 0, $page, $seasonType, $this->parent->getPrimaryLanguage());
                 foreach ($translatedEpisodes as $episode) {
                     if (array_key_exists($episode->id, $result)) {
-                        $result[$episode->id]->name     = $episode->name;
-                        $result[$episode->id]->overview = $episode->overview;
+                        $result[$episode->id]->name     = ($episode->name ?? $result[$episode->id]->name);
+                        $result[$episode->id]->overview = ($episode->overview ?? $result[$episode->id]->overview);
                     } else {
                         $result[$episode->id] = $episode;
                     }

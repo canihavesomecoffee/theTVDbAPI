@@ -2,6 +2,14 @@
 
 ## 2.x
 
+### 2.0.11 (12 October 2021)
+
+Bugfix release
+
+* Fix
+  * Following the nullable name of a SeriesBaseRecord, the merging decision for fetching translated episodes no longer 
+    operated correctly. This was corrected.
+
 ### 2.0.10 (10 October 2021)
 
 Bugfix release
