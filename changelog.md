@@ -2,6 +2,13 @@
 
 ## 2.x
 
+### 2.0.12 (20 October 2021)
+
+Feature improvements, bugfix
+
+* New
+  * Series route has method to retrieve episodes in original language.
+
 ### 2.0.11 (12 October 2021)
 
 Bugfix release

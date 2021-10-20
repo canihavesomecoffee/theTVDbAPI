@@ -260,6 +260,36 @@ class SeriesRoute extends AbstractRoute
     }
 
     /**
+     * Fetch all available episode for this series and season type, localized to the original language.
+     *
+     * @param SeriesBaseRecord $series     The series to retrieve episodes for.
+     * @param string           $seasonType The season type. Defaults to default.
+     *
+     * @return EpisodeBaseRecord[] An array of base episode records.
+     * @throws ExceptionInterface
+     * @throws ParseException
+     * @throws ResourceNotFoundException
+     * @throws UnauthorizedException
+     */
+    public function allEpisodesOriginalLanguage(
+        SeriesBaseRecord $series,
+        string $seasonType = self::SEASON_TYPE_DEFAULT
+    ) : array {
+        $result = [];
+
+        $page = 0;
+        do {
+            $eps = $this->episodes($series->id, 0, $page, $seasonType, $series->originalLanguage);
+            foreach ($eps as $episode) {
+                $result[$episode->id] = $episode;
+            }
+            $page++;
+        } while (sizeof($eps) === 500);
+
+        return array_values($result);
+    }
+
+    /**
      * Retrieves the possible parameters that can be used to search for episodes.
      *
      * @param int $id The id of the series.
