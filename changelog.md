@@ -2,6 +2,13 @@
 
 ## 2.x
 
+### 2.0.13 (21 October 2021)
+
+Bugfix release
+
+* Fix
+  * SeriesExtendedRecord also contains companies.
+
 ### 2.0.12 (20 October 2021)
 
 Feature improvements, bugfix

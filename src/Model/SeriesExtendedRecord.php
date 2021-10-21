@@ -84,6 +84,12 @@ class SeriesExtendedRecord extends SeriesBaseRecord
      * @var Trailer[]
      */
     public array $trailers;
+    /**
+     * List of companies for this series.
+     *
+     * @var Company[]
+     */
+    public array $companies;
 
 
     /**
