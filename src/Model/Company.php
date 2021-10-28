@@ -87,9 +87,9 @@ class Company
     /**
      * The primary type of this company.
      *
-     * @var integer
+     * @var integer|null
      */
-    public int $primaryCompanyType;
+    public ?int $primaryCompanyType;
     /**
      * The slug of this company.
      *

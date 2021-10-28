@@ -2,6 +2,13 @@
 
 ## 2.x
 
+### 2.0.14 (29 October 2021)
+
+Bugfix release
+
+* Fix
+  * Company primary type is nullable.
+
 ### 2.0.13 (21 October 2021)
 
 Bugfix release
