@@ -26,6 +26,8 @@ declare(strict_types=1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
+use DateTime;
+
 /**
  * Class MovieBaseRecord
  *
@@ -87,4 +89,16 @@ class MovieBaseRecord
      * @var Status
      */
     public Status $status;
+    /**
+     * The last updated timestamp.
+     *
+     * @var DateTime|null
+     */
+    public ?DateTime $lastUpdated;
+    /**
+     * Runtime of this episode in minutes
+     *
+     * @var float|integer|null
+     */
+    public $runtime;
 }

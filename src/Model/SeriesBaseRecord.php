@@ -152,4 +152,10 @@ class SeriesBaseRecord
      * @var DateTime|null
      */
     public ?DateTime $lastUpdated;
+    /**
+     * Episodes known for this series.
+     *
+     * @var EpisodeBaseRecord[]|null
+     */
+    public ?array $episodes;
 }

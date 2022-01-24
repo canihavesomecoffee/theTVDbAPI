@@ -55,7 +55,7 @@ class Company
      */
     public ?string $country;
     /**
-     * Identifier for this character.
+     * Identifier for this company.
      *
      * @var integer
      */
@@ -96,4 +96,16 @@ class Company
      * @var string
      */
     public string $slug;
+    /**
+     * Companies linked.
+     *
+     * @var Companies|null
+     */
+    public ?Companies $companies;
+    /**
+     * Parent company.
+     *
+     * @var ParentCompany|null
+     */
+    public ?ParentCompany $parentCompany;
 }

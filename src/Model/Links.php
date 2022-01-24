@@ -54,4 +54,16 @@ class Links
      * @var string|null
      */
     public ?string $next;
+    /**
+     * Total items that can be retrieved.
+     *
+     * @var integer
+     */
+    public int $total_items;
+    /**
+     * Items per page.
+     *
+     * @var integer
+     */
+    public int $page_size;
 }

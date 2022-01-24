@@ -41,11 +41,11 @@ class CompanyType
      *
      * @var integer
      */
-    public int $id;
+    public int $companyTypeId;
     /**
      * Name of the company (original).
      *
      * @var string
      */
-    public string $name;
+    public string $companyTypeName;
 }

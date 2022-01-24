@@ -108,4 +108,10 @@ class ArtworkExtendedRecord extends ArtworkBaseRecord
      * @var integer
      */
     public int $width;
+    /**
+     * Tag options.
+     *
+     * @var TagOption[]|null
+     */
+    public ?array $tagOptions;
 }

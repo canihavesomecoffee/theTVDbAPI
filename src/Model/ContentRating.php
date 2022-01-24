@@ -72,4 +72,10 @@ class ContentRating
      * @var string
      */
     public string $fullName;
+    /**
+     * Description for the content rating.
+     *
+     * @var string
+     */
+    public string $description;
 }

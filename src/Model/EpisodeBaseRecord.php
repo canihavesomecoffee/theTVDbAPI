@@ -128,4 +128,34 @@ class EpisodeBaseRecord
      * @var string|null
      */
     public ?string $overview;
+    /**
+     * Season name if known.
+     *
+     * @var string|null
+     */
+    public ?string $seasonName;
+    /**
+     * Type of finale (season, midseason or series).
+     *
+     * @var string|null
+     */
+    public ?string $finaleType;
+    /**
+     * Indicates if the special aired after said season.
+     *
+     * @var integer|float|null
+     */
+    public $airsAfterSeason;
+    /**
+     * Indicates if the special aired before said season.
+     *
+     * @var integer|float|null
+     */
+    public $airsBeforeSeason;
+    /**
+     * Indicates if a special aired before a certain episode.
+     *
+     * @var integer|float|null
+     */
+    public $airsBeforeEpisode;
 }

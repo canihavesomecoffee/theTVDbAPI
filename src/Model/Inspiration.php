@@ -53,7 +53,7 @@ class Inspiration
      *
      * @var string
      */
-    public string $typeName;
+    public string $type_name;
     /**
      * URL of the inspiration.
      *

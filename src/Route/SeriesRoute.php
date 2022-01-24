@@ -33,6 +33,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesExtendedRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\Translation;
+use DateTime;
 use InvalidArgumentException;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
@@ -157,11 +158,13 @@ class SeriesRoute extends AbstractRoute
      * Returns paginated episodes of the series with 100 results per page. If you pass a language, it will fetch
      * all episodes instead.
      *
-     * @param int    $id         The id of the series to retrieve.
-     * @param int    $season     The season to retrieve.
-     * @param int    $page       The page to start with (defaults to 1).
-     * @param string $seasonType The season type. Defaults to default.
-     * @param string $lang       The language for translated episodes.
+     * @param int           $id            The id of the series to retrieve.
+     * @param int           $season        The season to retrieve.
+     * @param int           $page          The page to start with (defaults to 1).
+     * @param string        $seasonType    The season type. Defaults to default.
+     * @param string        $lang          The language for translated episodes.
+     * @param int           $episodeNumber The episode number of an episode (optional).
+     * @param DateTime|null $airDate       The airdate of an episode (optional).
      *
      * @return EpisodeBaseRecord[] An array of base episode records. Empty if not enough episodes available.
      * @throws ParseException
@@ -174,7 +177,9 @@ class SeriesRoute extends AbstractRoute
         int $season = 0,
         int $page = 0,
         string $seasonType = self::SEASON_TYPE_DEFAULT,
-        string $lang = ""
+        string $lang = "",
+        int $episodeNumber = -1,
+        DateTime $airDate = null
     ): array {
         if (static::isValidSeasonType($seasonType) === false) {
             throw new InvalidArgumentException("Given season type is not valid");
@@ -186,6 +191,12 @@ class SeriesRoute extends AbstractRoute
             $path .= "/".$lang;
         } else {
             $arguments['season'] = $season;
+        }
+        if ($episodeNumber > -1) {
+            $arguments['episodeNumber'] = $episodeNumber;
+        }
+        if ($airDate !== null) {
+            $arguments['airDate'] = $airDate->format("Y-m-d");
         }
         $options = ['query' => $arguments];
         $json    = $this->parent->performAPICallWithJsonResponse('get', $path, $options);

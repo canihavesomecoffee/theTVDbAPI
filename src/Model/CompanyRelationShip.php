@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2020, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * Copyright (c) 2021, Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
  *
  * Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby
  * granted, provided that the above copyright notice and this permission notice appear in all copies.
@@ -11,7 +11,7 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- *
+ * Provides a class for a relationship between companies.
  *
  * PHP version 7.4
  *
@@ -21,40 +21,31 @@
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class SeasonType
+ * Class CompanyRelationShip
  *
- * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
+ * @category TheTVDbAPI
+ * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
+ * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * @license  See start of document
+ * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class SeasonType
+class CompanyRelationShip
 {
     /**
-     * The id of the season type.
+     * Identifier for this relationship.
      *
      * @var integer
      */
     public int $id;
     /**
-     * The name of the season type.
+     * Name of the relationship.
      *
      * @var string
      */
-    public string $name;
-    /**
-     * The type of the season type.
-     *
-     * @var string
-     */
-    public string $type;
-    /**
-     * Alternate name if available.
-     *
-     * @var string|null
-     */
-    public ?string $alternateName;
+    public string $typeName;
 }

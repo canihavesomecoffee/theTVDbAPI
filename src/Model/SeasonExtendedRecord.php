@@ -52,15 +52,27 @@ class SeasonExtendedRecord extends SeasonBaseRecord
      */
     public array $trailers;
     /**
-     * List of companies.
-     *
-     * @var Companies
-     */
-    public Companies $companies;
-    /**
      * Tags.
      *
      * @var TagOption[]
      */
     public array $tagOptions;
+    /**
+     * Slug of the season.
+     *
+     * @var string
+     */
+    public string $slug;
+    /**
+     * The abbreviation of the season.
+     *
+     * @var string
+     */
+    public string $abbreviation;
+    /**
+     * The country of the season.
+     *
+     * @var string
+     */
+    public string $country;
 }

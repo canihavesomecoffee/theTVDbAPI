@@ -60,4 +60,10 @@ class EntityUpdate
      * @var integer
      */
     public int $timeStamp;
+    /**
+     * Only present for episodes records.
+     *
+     * @var integer
+     */
+    public int $seriesId;
 }

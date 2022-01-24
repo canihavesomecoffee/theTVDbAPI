@@ -2,6 +2,76 @@
 
 ## 2.x
 
+### 2.1.0 (24 January 2022)
+
+API additions
+
+* Routes
+  * SeriesRoute
+    * allows passing episode id when searching
+    * allows passing airdate when searching
+* Models
+  * EntityUpdate
+    * New field: seriesId (for episode updates)
+  * CompanyType
+    * Changed field: id -> companyTypeId
+    * Changed field: name -> companyTypeName
+  * Links
+    * New field: total_items
+    * New field: page_size
+  * Series
+    * Base (and extended)
+      * New field: episodes
+    * Extended
+      * New field: originalNetwork
+      * New field: latestNetwork
+      * New field: translations
+      * New field: tags
+  * Episodes
+    * Base (and extended)
+      * New field: seasonName
+      * New field: finaleType
+    * Extended
+      * New field: companies
+    * airsAfterSeason, airsBeforeSeason and airsBeforeEpisode have moved from the extended to the base record
+  * Artwork
+    * Extended
+      * New field: tagOptions
+  * Company
+    * New field: companies
+    * New field: parentCompany
+  * SeasonType
+    * New field: alternateName
+  * New model: ParentCompany
+  * New mode: CompanyRelationShip
+  * Character
+    * New field: personImgURL
+  * ListExtendedRecord
+    * New field: image
+    * New field: imageIsFallback
+  * ContentRating
+    * New field: description
+  * EntityType
+    * Removed field: seriesId
+    * New field: hasSpecials
+  * ListBaseRecord
+    * New field: score
+  * MovieBaseRecord (and extended)
+    * New field: runtime
+    * New field: lastUpdated
+  * PeopleBaseRecord
+    * New field: nameTranslations
+    * New field: overviewTranslations
+  * PeopleExtendedRecord
+    * New field: slug
+  * SeasonBaseRecord (remain in Extended Record)
+    * Removed field: abbreviation
+    * Removed field: country
+    * Removed field: slug
+    * New field: companies
+  * Inspiration
+    * Renamed field: typeName -> type_name
+
 ### 2.0.14 (29 October 2021)
 
 Bugfix release

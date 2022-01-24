@@ -45,4 +45,16 @@ class ListExtendedRecord extends ListBaseRecord
      * @var integer
      */
     public int $score;
+    /**
+     * URL to an image.
+     *
+     * @var string|null
+     */
+    public ?string $image;
+    /**
+     * Is image fallback?
+     *
+     * @var boolean
+     */
+    public bool $imageIsFallback;
 }

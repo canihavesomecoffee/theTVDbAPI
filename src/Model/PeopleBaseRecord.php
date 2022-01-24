@@ -63,4 +63,16 @@ class PeopleBaseRecord
      * @var integer
      */
     public int $score;
+    /**
+     * List of languages for which translated people names are available.
+     *
+     * @var string[]|null
+     */
+    public ?array $nameTranslations;
+    /**
+     * List of languages for which translated people overviews are available.
+     *
+     * @var string[]|null
+     */
+    public ?array $overviewTranslations;
 }

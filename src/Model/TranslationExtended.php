@@ -11,7 +11,7 @@
  * IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  *
- *
+ * Provides a class with the extended data about a translation.
  *
  * PHP version 7.4
  *
@@ -21,40 +21,38 @@
  * @license  See start of document
  * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 
 /**
- * Class SeasonType
+ * Class TranslationExtended
  *
- * @package CanIHaveSomeCoffee\TheTVDbAPI\Model
+ * @category TheTVDbAPI
+ * @package  CanIHaveSomeCoffee\TheTVDbAPI\Model
+ * @author   Willem Van Iseghem (canihavesomecoffee) <theTVDbAPI@canihavesome.coffee>
+ * @license  See start of document
+ * @link     https://canihavesome.coffee/projects/theTVDbAPI
  */
-class SeasonType
+class TranslationExtended
 {
     /**
-     * The id of the season type.
+     * Name translations.
      *
-     * @var integer
+     * @var Translation[]
      */
-    public int $id;
+    public array $nameTranslations;
     /**
-     * The name of the season type.
+     * Overviewtranslations.
      *
-     * @var string
+     * @var Translation[]
      */
-    public string $name;
+    public array $overviewTranslations;
     /**
-     * The type of the season type.
+     * List of alias strings.
      *
-     * @var string
+     * @var string[]
      */
-    public string $type;
-    /**
-     * Alternate name if available.
-     *
-     * @var string|null
-     */
-    public ?string $alternateName;
+    public array $alias;
+
 }

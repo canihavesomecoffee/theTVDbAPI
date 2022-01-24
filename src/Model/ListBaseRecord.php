@@ -81,4 +81,10 @@ class ListBaseRecord
      * @var string
      */
     public string $url;
+    /**
+     * The id of the parent studio (if available).
+     *
+     * @var integer|null|float
+     */
+    public $score;
 }

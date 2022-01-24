@@ -49,9 +49,9 @@ class EntityType
      */
     public string $name;
     /**
-     * Series ID for this entity.
+     * Has this entity specials?
      *
-     * @var integer
+     * @var boolean
      */
-    public int $seriesId;
+    public bool $hasSpecials;
 }

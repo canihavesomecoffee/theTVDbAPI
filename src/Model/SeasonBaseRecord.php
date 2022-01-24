@@ -34,18 +34,6 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 class SeasonBaseRecord
 {
     /**
-     * The abbreviation of the season.
-     *
-     * @var string
-     */
-    public string $abbreviation;
-    /**
-     * The country of the season.
-     *
-     * @var string
-     */
-    public string $country;
-    /**
      * Identifier for this character.
      *
      * @var integer
@@ -94,15 +82,15 @@ class SeasonBaseRecord
      */
     public $seriesId;
     /**
-     * Slug of the season.
-     *
-     * @var string
-     */
-    public string $slug;
-    /**
      * Type of the season.
      *
      * @var SeasonType
      */
     public SeasonType $type;
+    /**
+     * List of companies.
+     *
+     * @var Companies
+     */
+    public Companies $companies;
 }

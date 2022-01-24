@@ -93,4 +93,10 @@ class PeopleExtendedRecord extends PeopleBaseRecord
      * @var TagOption[]
      */
     public array $tagOptions;
+    /**
+     * The slug of this person.
+     *
+     * @var string
+     */
+    public string $slug;
 }

@@ -126,6 +126,12 @@ class Character
      * @var string
      */
     public string $personName;
+    /**
+     * The url of this character?
+     *
+     * @var string
+     */
+    public string $personImgURL;
 
 
 }

@@ -38,24 +38,6 @@ namespace CanIHaveSomeCoffee\TheTVDbAPI\Model;
 class EpisodeExtendedRecord extends EpisodeBaseRecord
 {
     /**
-     * Indicates if the special aired after said season.
-     *
-     * @var integer|float|null
-     */
-    public $airsAfterSeason;
-    /**
-     * Indicates if the special aired before said season.
-     *
-     * @var integer|float|null
-     */
-    public $airsBeforeSeason;
-    /**
-     * Indicates if a special aired before a certain episode.
-     *
-     * @var integer|float|null
-     */
-    public $airsBeforeEpisode;
-    /**
      * List of awards this episode got.
      *
      * @var AwardBaseRecord[] Entries are of type AwardBaseRecord.
@@ -97,4 +79,10 @@ class EpisodeExtendedRecord extends EpisodeBaseRecord
      * @var InspirationType[] Entries are of type Trailer.
      */
     public array $trailers;
+    /**
+     * List of companies for this series.
+     *
+     * @var Company[]
+     */
+    public array $companies;
 }

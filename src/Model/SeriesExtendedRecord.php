@@ -90,6 +90,30 @@ class SeriesExtendedRecord extends SeriesBaseRecord
      * @var Company[]
      */
     public array $companies;
+    /**
+     * THe original network.
+     *
+     * @var Company
+     */
+    public Company $originalNetwork;
+    /**
+     * THe latest network.
+     *
+     * @var Company
+     */
+    public Company $latestNetwork;
+    /**
+     * Translations.
+     *
+     * @var TranslationExtended[]|null
+     */
+    public ?array $translations;
+    /**
+     * Tags.
+     *
+     * @var TagOption[]|null
+     */
+    public ?array $tags;
 
 
     /**
