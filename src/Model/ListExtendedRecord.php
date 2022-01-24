@@ -40,12 +40,6 @@ class ListExtendedRecord extends ListBaseRecord
      */
     public array $entities;
     /**
-     * Assigned score.
-     *
-     * @var integer
-     */
-    public int $score;
-    /**
      * URL to an image.
      *
      * @var string|null
