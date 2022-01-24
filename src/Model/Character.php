@@ -129,9 +129,9 @@ class Character
     /**
      * The url of this character?
      *
-     * @var string
+     * @var string|null
      */
-    public string $personImgURL;
+    public ?string $personImgURL;
 
 
 }

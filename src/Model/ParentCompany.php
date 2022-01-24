@@ -39,19 +39,19 @@ class ParentCompany
     /**
      * Identifier for this parent company.
      *
-     * @var integer
+     * @var integer|null
      */
-    public int $id;
+    public ?int $id;
     /**
      * Name of the company (original).
      *
-     * @var string
+     * @var string|null
      */
-    public string $name;
+    public ?string $name;
     /**
      * The relationship to the other company.
      *
-     * @var CompanyRelationShip
+     * @var CompanyRelationShip|null
      */
-    public CompanyRelationShip $relation;
+    public ?CompanyRelationShip $relation;
 }

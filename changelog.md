@@ -2,6 +2,15 @@
 
 ## 2.x
 
+### 2.1.1 (24 January 2022)
+
+Bugfix release
+
+* Fix
+  * all fields in ParentCompany are nullable.
+  * all fields in CompanyRelationShip are nullable.
+  * Character's personImgUrl is nullable.
+
 ### 2.1.0 (24 January 2022)
 
 API additions

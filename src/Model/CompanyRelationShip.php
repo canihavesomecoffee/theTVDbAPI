@@ -39,13 +39,13 @@ class CompanyRelationShip
     /**
      * Identifier for this relationship.
      *
-     * @var integer
+     * @var integer|null
      */
-    public int $id;
+    public ?int $id;
     /**
      * Name of the relationship.
      *
-     * @var string
+     * @var string|null
      */
-    public string $typeName;
+    public ?string $typeName;
 }
