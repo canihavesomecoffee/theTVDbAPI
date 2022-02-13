@@ -2,6 +2,13 @@
 
 ## 2.x
 
+### 2.1.2 (13 February 2022)
+
+Bugfix release
+
+* Fix
+  * Add phpdocumentor/reflection-docblock as it's not installed when using `composer install --no-dev` (i.e. in production)
+
 ### 2.1.1 (24 January 2022)
 
 Bugfix release
