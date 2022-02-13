@@ -12,11 +12,12 @@
   ],
   "require": {
     "php": ">=7.4",
+    "ext-json": "*",
     "guzzlehttp/guzzle": "^7.0",
     "symfony/serializer": "^5.3",
     "symfony/property-access": "^5.3",
     "symfony/property-info": "^5.3",
-    "ext-json": "*"
+    "phpdocumentor/reflection-docblock": "^5.3"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.0"
