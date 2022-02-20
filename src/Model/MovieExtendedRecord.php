@@ -126,9 +126,9 @@ class MovieExtendedRecord extends MovieBaseRecord
     /**
      * Content ratings.
      *
-     * @var ContentRating[]
+     * @var ContentRating[]|null
      */
-    public array $contentRatings;
+    public ?array $contentRatings;
     /**
      * First release info.
      *
@@ -138,19 +138,19 @@ class MovieExtendedRecord extends MovieBaseRecord
     /**
      * Inspirations?
      *
-     * @var Inspiration[]
+     * @var Inspiration[]|null
      */
-    public array $inspirations;
+    public ?array $inspirations;
     /**
      * Production countries.
      *
-     * @var ProductionCountry[]
+     * @var ProductionCountry[]|null
      */
-    public array $production_countries;
+    public ?array $production_countries;
     /**
      * Spoken languages.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $spoken_languages;
+    public ?array $spoken_languages;
 }

@@ -2,6 +2,10 @@
 
 ## 2.x
 
+### 2.1.5 (20 February 2022)
+
+Bugfix release (nullable types again)
+
 ### 2.1.4 (20 February 2022)
 
 Bugfix release (nullable types again)

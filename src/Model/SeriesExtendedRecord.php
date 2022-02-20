@@ -123,9 +123,9 @@ class SeriesExtendedRecord extends SeriesBaseRecord
     /**
      * Content ratings this series received.
      *
-     * @var ContentRating[] Entries are of type ContentRating.
+     * @var ContentRating[]|null
      */
-    public array $contentRatings;
+    public ?array $contentRatings;
     /**
      * The overview if provided.
      *

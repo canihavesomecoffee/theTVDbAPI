@@ -52,9 +52,9 @@ class EpisodeExtendedRecord extends EpisodeBaseRecord
     /**
      * Content ratings this episode received.
      *
-     * @var ContentRating[] Entries are of type ContentRating.
+     * @var ContentRating[]|null
      */
-    public array $contentRatings;
+    public ?array $contentRatings;
     /**
      * The network that recorded this episode.
      *
@@ -76,19 +76,19 @@ class EpisodeExtendedRecord extends EpisodeBaseRecord
     /**
      * Trailers that are available for this episode.
      *
-     * @var InspirationType[] Entries are of type Trailer.
+     * @var Trailer[]|null
      */
-    public array $trailers;
+    public ?array $trailers;
     /**
      * List of companies for this series.
      *
-     * @var Company[]
+     * @var Company[]|null
      */
-    public array $studios;
+    public ?array $studios;
     /**
      * Nominations for this episode.
      *
-     * @var AwardNomineeBaseRecord[]
+     * @var AwardNomineeBaseRecord[]|null
      */
-    public array $nominations;
+    public ?array $nominations;
 }
