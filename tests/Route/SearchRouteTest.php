@@ -63,7 +63,7 @@ class SearchRouteTest extends BaseRouteTest
             ['id' => "1", 'seriesName' => 'foo'],
             ['id' => "3", 'seriesName' => 'foo bar']
         ];
-        $options = ['query' => ["q" => $name]];
+        $options = ['query' => ["query" => $name]];
         $this->setMockData($return, $options);
         $instance = new SearchRoute($this->parent);
         $results = $instance->search($name);
