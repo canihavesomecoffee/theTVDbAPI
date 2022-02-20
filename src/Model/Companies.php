@@ -42,25 +42,25 @@ class Companies
     /**
      * Network.
      *
-     * @var Company[]
+     * @var Company[]|null
      */
-    public array $network;
+    public ?array $network;
     /**
      * Production.
      *
-     * @var Company[]
+     * @var Company[]|null
      */
-    public array $production;
+    public ?array $production;
     /**
      * Distributor.
      *
-     * @var Company[]
+     * @var Company[]|null
      */
-    public array $distributor;
+    public ?array $distributor;
     /**
      * Special effects.
      *
-     * @var Company[]
+     * @var Company[]|null
      */
-    public array $special_effects;
+    public ?array $special_effects;
 }
