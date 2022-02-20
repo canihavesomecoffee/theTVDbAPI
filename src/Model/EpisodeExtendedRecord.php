@@ -58,9 +58,9 @@ class EpisodeExtendedRecord extends EpisodeBaseRecord
     /**
      * The network that recorded this episode.
      *
-     * @var NetworkBaseRecord
+     * @var Company
      */
-    public NetworkBaseRecord $network;
+    public Company $network;
     /**
      * The production code for this episode.
      *
@@ -84,5 +84,11 @@ class EpisodeExtendedRecord extends EpisodeBaseRecord
      *
      * @var Company[]
      */
-    public array $companies;
+    public array $studios;
+    /**
+     * Nominations for this episode.
+     *
+     * @var AwardNomineeBaseRecord[]
+     */
+    public array $nominations;
 }

@@ -58,18 +58,6 @@ class SeasonExtendedRecord extends SeasonBaseRecord
      */
     public array $tagOptions;
     /**
-     * Slug of the season.
-     *
-     * @var string
-     */
-    public string $slug;
-    /**
-     * The abbreviation of the season.
-     *
-     * @var string
-     */
-    public string $abbreviation;
-    /**
      * The country of the season.
      *
      * @var string

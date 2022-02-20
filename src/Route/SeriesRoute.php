@@ -29,6 +29,7 @@ use CanIHaveSomeCoffee\TheTVDbAPI\DataParser;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ParseException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\ResourceNotFoundException;
 use CanIHaveSomeCoffee\TheTVDbAPI\Exception\UnauthorizedException;
+use CanIHaveSomeCoffee\TheTVDbAPI\Model\ArtworkBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\EpisodeBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesBaseRecord;
 use CanIHaveSomeCoffee\TheTVDbAPI\Model\SeriesExtendedRecord;
@@ -325,6 +326,37 @@ class SeriesRoute extends AbstractRoute
             );
         }
         return DataParser::parseData($json, Translation::class);
+    }
+
+    /**
+     * Retrieves artwork for a series
+     *
+     * @param int    $id   The id of the series.
+     * @param string $lang The languages to look for artwork. (comma separated)
+     * @param int    $type The type of artwork.
+     *
+     * @return ArtworkBaseRecord[]
+     * @throws ParseException
+     * @throws ResourceNotFoundException
+     * @throws UnauthorizedException
+     * @throws ExceptionInterface
+     */
+    public function artworks(int $id, string $lang = "", int $type = -1): array
+    {
+        $arguments = [];
+        if ($lang !== "") {
+            $arguments['lang'] = $lang;
+        }
+        if ($type > -1) {
+            $arguments['type'] = $type;
+        }
+        $options  = ['query' => $arguments];
+        $json     = $this->parent->performAPICallWithJsonResponse('get', 'series/'.$id.'/artworks', $options);
+        $artworks = [];
+        if (isset($json['artworks'])) {
+            $artworks = $json['artworks'];
+        }
+        return DataParser::parseDataArray($artworks, ArtworkBaseRecord::class);
     }
 
 

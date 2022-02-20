@@ -127,11 +127,21 @@ class Character
      */
     public string $personName;
     /**
-     * The url of this character?
+     * Artwork url of this character
      *
      * @var string|null
      */
     public ?string $personImgURL;
-
-
+    /**
+     * People type of this character.
+     *
+     * @var string|null
+     */
+    public ?string $peopleType;
+    /**
+     * Tags.
+     *
+     * @var TagOption[]
+     */
+    public array $tagOptions;
 }

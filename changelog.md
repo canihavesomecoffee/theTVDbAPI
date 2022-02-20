@@ -2,6 +2,32 @@
 
 ## 2.x
 
+### 2.1.3 (20 February 2022)
+
+**Breaking API changes update**
+
+Note: If you were using this API for **movie artwork**, beware that as of the 23rd it'll change from relative to absolute!
+
+* Routes
+  * Changed
+    * SearchRoute
+      * Updated valid optional search arguments
+  * New
+    * SeriesRoute
+      * Retrieve all artworks for serie
+* Models
+  * ArtworkExtendedRecord: status field
+  * Character: peopleType and tagOptions fields
+  * Company: companies removed, tagOptions added
+  * EpisodeExtendedRecord: network is now a Company, nominations & studios added, companies removed
+  * ListBaseRecord: image and imageIsFallback moved up from Extended record
+  * MovieExtendedRecord: added companies, contentRatings, first_release, inspirations, production_countries, spoken_languages
+  * NetworkBaseRecord: deleted
+  * SearchResult: first_air_time, objectID, slug, studios added
+  * SeasonExtendedRecord: deleted slug, abbreviation
+  * SeriesExtendedRecord: airsTimeUTC, contentRatings, overview, seasonTypes added
+  * Company: corrected fields (all are arrays of Company entries), specialEffects renamed to special_effects
+
 ### 2.1.2 (13 February 2022)
 
 Bugfix release

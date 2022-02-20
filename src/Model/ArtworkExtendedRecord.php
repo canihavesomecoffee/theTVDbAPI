@@ -114,4 +114,10 @@ class ArtworkExtendedRecord extends ArtworkBaseRecord
      * @var TagOption[]|null
      */
     public ?array $tagOptions;
+    /**
+     * Status of the artwork.
+     *
+     * @var ArtworkStatus
+     */
+    public ArtworkStatus $status;
 }

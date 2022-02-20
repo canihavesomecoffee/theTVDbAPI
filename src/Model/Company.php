@@ -97,15 +97,15 @@ class Company
      */
     public string $slug;
     /**
-     * Companies linked.
-     *
-     * @var Companies|null
-     */
-    public ?Companies $companies;
-    /**
      * Parent company.
      *
      * @var ParentCompany|null
      */
     public ?ParentCompany $parentCompany;
+    /**
+     * Tags.
+     *
+     * @var TagOption[]
+     */
+    public array $tagOptions;
 }

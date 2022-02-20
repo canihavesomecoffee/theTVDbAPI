@@ -87,4 +87,16 @@ class ListBaseRecord
      * @var integer|null|float
      */
     public $score;
+    /**
+     * URL to an image.
+     *
+     * @var string|null
+     */
+    public ?string $image;
+    /**
+     * Is image fallback?
+     *
+     * @var boolean
+     */
+    public bool $imageIsFallback;
 }

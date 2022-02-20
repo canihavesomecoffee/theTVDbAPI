@@ -49,6 +49,12 @@ class SeriesExtendedRecord extends SeriesBaseRecord
      */
     public ?string $airsTime;
     /**
+     * Time when the series airs in UTC.
+     *
+     * @var string|null
+     */
+    public ?string $airsTimeUTC;
+    /**
      * Artworks for this series.
      *
      * @var ArtworkBaseRecord[]
@@ -114,6 +120,24 @@ class SeriesExtendedRecord extends SeriesBaseRecord
      * @var TagOption[]|null
      */
     public ?array $tags;
+    /**
+     * Content ratings this series received.
+     *
+     * @var ContentRating[] Entries are of type ContentRating.
+     */
+    public array $contentRatings;
+    /**
+     * The overview if provided.
+     *
+     * @var string|null
+     */
+    public ?string $overview;
+    /**
+     * Season types.
+     *
+     * @var SeasonType[]
+     */
+    public array $seasonTypes;
 
 
     /**

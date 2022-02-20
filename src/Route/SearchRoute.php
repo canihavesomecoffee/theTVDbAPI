@@ -55,7 +55,20 @@ class SearchRoute extends AbstractRoute
      */
     public static function isValidOptionalParameter(string $key): bool
     {
-        return in_array($key, ["type", "year", "offset"]);
+        $validParameters = [
+            "type",
+            "year",
+            "offset",
+            "company",
+            "country",
+            "director",
+            "language",
+            "primaryType",
+            "network",
+            "remote_id",
+            "limit",
+        ];
+        return in_array($key, $validParameters);
     }
 
     /**
@@ -79,7 +92,7 @@ class SearchRoute extends AbstractRoute
             }
             $options['query'][$key] = $value;
         }
-        $options['query']["q"] = $searchQuery;
+        $options['query']["query"] = $searchQuery;
 
         $json = $this->parent->performAPICallWithJsonResponse('get', 'search', $options);
         return DataParser::parseDataArray($json, SearchResult::class);

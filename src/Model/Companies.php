@@ -36,31 +36,31 @@ class Companies
     /**
      * Studio.
      *
-     * @var Company
+     * @var Company[]
      */
-    public Company $studio;
+    public array $studio;
     /**
      * Network.
      *
-     * @var Company
+     * @var Company[]
      */
-    public Company $network;
+    public array $network;
     /**
      * Production.
      *
-     * @var Company
+     * @var Company[]
      */
-    public Company $production;
+    public array $production;
     /**
      * Distributor.
      *
-     * @var Company
+     * @var Company[]
      */
-    public Company $distributor;
+    public array $distributor;
     /**
      * Special effects.
      *
-     * @var Company
+     * @var Company[]
      */
-    public Company $specialEffects;
+    public array $special_effects;
 }

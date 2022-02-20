@@ -101,7 +101,7 @@ class SearchResult
      *
      * @var string
      */
-    public string $nameTranslated;
+    public string $name_translated;
     /**
      * The Official list
      *
@@ -197,7 +197,7 @@ class SearchResult
      *
      * @var RemoteID[]
      */
-    public array $remoteIds;
+    public array $remote_ids;
     /**
      * Network.
      *
@@ -216,7 +216,30 @@ class SearchResult
      * @var array
      */
     public array $overviews;
-
+    /**
+     * First air time.
+     *
+     * @var string|null
+     */
+    public ?string $first_air_time;
+    /**
+     * Object ID.
+     *
+     * @var string
+     */
+    public string $objectID;
+    /**
+     * Slug.
+     *
+     * @var string
+     */
+    public string $slug;
+    /**
+     * Studios.
+     *
+     * @var string[]
+     */
+    public array $studios;
 
     /**
      * Get the localized name if available.

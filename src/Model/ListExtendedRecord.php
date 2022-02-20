@@ -39,16 +39,4 @@ class ListExtendedRecord extends ListBaseRecord
      * @var Entity[]
      */
     public array $entities;
-    /**
-     * URL to an image.
-     *
-     * @var string|null
-     */
-    public ?string $image;
-    /**
-     * Is image fallback?
-     *
-     * @var boolean
-     */
-    public bool $imageIsFallback;
 }
