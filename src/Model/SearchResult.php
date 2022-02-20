@@ -237,9 +237,9 @@ class SearchResult
     /**
      * Studios.
      *
-     * @var string[]
+     * @var string[]|null
      */
-    public array $studios;
+    public ?array $studios;
 
     /**
      * Get the localized name if available.

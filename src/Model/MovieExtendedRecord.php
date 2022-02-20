@@ -102,9 +102,9 @@ class MovieExtendedRecord extends MovieBaseRecord
     /**
      * Studios for this movie.
      *
-     * @var StudioBaseRecord[]
+     * @var StudioBaseRecord[]|null
      */
-    public array $studios;
+    public ?array $studios;
     /**
      * Subtitle languages for this movie.
      *

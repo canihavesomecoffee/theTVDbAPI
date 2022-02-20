@@ -36,9 +36,9 @@ class Companies
     /**
      * Studio.
      *
-     * @var Company[]
+     * @var Company[]|null
      */
-    public array $studio;
+    public ?array $studio;
     /**
      * Network.
      *
