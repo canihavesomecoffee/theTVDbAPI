@@ -70,9 +70,9 @@ class EpisodeExtendedRecord extends EpisodeBaseRecord
     /**
      * Tag options for this episode.
      *
-     * @var TagOption[] Entries are of type TagOption.
+     * @var TagOption[]|null
      */
-    public array $tagOptions;
+    public ?array $tagOptions;
     /**
      * Trailers that are available for this episode.
      *

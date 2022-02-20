@@ -54,9 +54,9 @@ class SeasonExtendedRecord extends SeasonBaseRecord
     /**
      * Tags.
      *
-     * @var TagOption[]
+     * @var TagOption[]|null
      */
-    public array $tagOptions;
+    public ?array $tagOptions;
     /**
      * The country of the season.
      *
