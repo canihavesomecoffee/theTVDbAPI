@@ -12,15 +12,15 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: ['7.4', '8.0']
+        php-versions: ['7.4', '8.0', '8.1', '8.2']
         experimental: [false]
         include:
-          - php-versions: '8.1'
+          - php-versions: '8.3'
             operating-system: ubuntu-latest
             experimental: true
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
@@ -32,7 +32,7 @@ jobs:
 
       - name: Cache Composer packages
         id: composer-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
