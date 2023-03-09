@@ -2,6 +2,10 @@
 
 ## 2.x
 
+### 2.1.8 (9 March 2023)
+
+Dependencies bump release; make Symfony components support both 5.4 and 6.x branches
+
 ### 2.1.7 (20 February 2022)
 
 Bugfix release (nullable types again)
