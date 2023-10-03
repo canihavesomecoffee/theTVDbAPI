@@ -75,7 +75,7 @@ class ContentRating
     /**
      * Description for the content rating.
      *
-     * @var string
+     * @var string|null
      */
-    public string $description;
+    public ?string $description;
 }
