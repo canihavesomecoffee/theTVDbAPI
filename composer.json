@@ -15,7 +15,7 @@
     "ext-json": "*",
     "guzzlehttp/guzzle": "^7.0",
     "symfony/serializer": "^5.4|^6.0",
-    "symfony/property-access": "^5.4|^6.0",
+    "symfony/property-access": "^5.4|^6.0|^7.0",
     "symfony/property-info": "^5.4|^6.0",
     "phpdocumentor/reflection-docblock": "^5.3"
   },
