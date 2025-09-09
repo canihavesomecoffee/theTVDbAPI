@@ -103,7 +103,7 @@ class TheTVDbAPI implements TheTVDbAPIInterface
      * @param Client|null $client            Optional parameter. If you pass one in you need to ensure that 'base_uri'
      *                                       and the content-type of the headers are set in the options.
      */
-    public function __construct(string $primaryLanguage = "eng", string $secondaryLanguage = "", Client $client = null)
+    public function __construct(string $primaryLanguage = "eng", string $secondaryLanguage = "", ?Client $client = null)
     {
         $this->primaryLanguage   = $primaryLanguage;
         $this->secondaryLanguage = $secondaryLanguage;
@@ -127,7 +127,7 @@ class TheTVDbAPI implements TheTVDbAPIInterface
      *
      * @return void
      */
-    public function setToken(string $token = null)
+    public function setToken(?string $token = null)
     {
         $this->token = $token;
     }
