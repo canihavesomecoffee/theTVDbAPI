@@ -58,7 +58,7 @@ interface TheTVDbAPIInterface
      *
      * @return void
      */
-    public function setToken(string $token = null);
+    public function setToken(?string $token = null);
 
     /**
      * Get authentication extension
