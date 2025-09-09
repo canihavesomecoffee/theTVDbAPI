@@ -180,7 +180,7 @@ class SeriesRoute extends AbstractRoute
         string $seasonType = self::SEASON_TYPE_DEFAULT,
         string $lang = "",
         int $episodeNumber = -1,
-        DateTime $airDate = null
+        ?DateTime $airDate = null
     ): array {
         if (static::isValidSeasonType($seasonType) === false) {
             throw new InvalidArgumentException("Given season type is not valid");
