@@ -62,7 +62,7 @@ class ResourceNotFoundException extends Exception
      *
      * @return string
      */
-    public static function createErrorMessage(string $baseMessage, string $path = null, array $parameters = []): string
+    public static function createErrorMessage(string $baseMessage, ?string $path = null, array $parameters = []): string
     {
         $errorMessage = $baseMessage;
         if ($path !== null) {
@@ -83,7 +83,7 @@ class ResourceNotFoundException extends Exception
      *
      * @return ResourceNotFoundException
      */
-    public static function notFound(string $path = null, array $options = []): ResourceNotFoundException
+    public static function notFound(?string $path = null, array $options = []): ResourceNotFoundException
     {
         $query = [];
         if (array_key_exists('query', $options)) {
@@ -100,7 +100,7 @@ class ResourceNotFoundException extends Exception
      *
      * @return ResourceNotFoundException
      */
-    public static function noTranslationAvailable(string $path = null, array $options = []): ResourceNotFoundException
+    public static function noTranslationAvailable(?string $path = null, array $options = []): ResourceNotFoundException
     {
         $query = [];
         if (array_key_exists('query', $options)) {
