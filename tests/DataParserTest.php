@@ -66,7 +66,7 @@ class DataParserTest extends TestCase
     public function testParseBasicSeriesData()
     {
         $episodeJSON = '{
-        "id": 7421162,
+        "id": "7421162",
         "seriesId": 280258,
         "name": "Thibault Christiaensen",
         "aired": "2019-10-29",

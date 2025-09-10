@@ -33,7 +33,7 @@ class SeriesRouteTest extends BaseRouteTest
 {
     public function testSimple()
     {
-        $series_id = 1337;
+        $series_id = "1337";
         $overview = 'foo bar baz';
         $this->parent->expects(static::once())->method('performAPICallWithJsonResponse')->with(
             static::equalTo('get'),
@@ -47,7 +47,7 @@ class SeriesRouteTest extends BaseRouteTest
 
     public function testGetEpisodes()
     {
-        $series_id = 1337;
+        $series_id = "1337";
         $page = 1;
         $season = 0;
         $options = ['query' => ['page' => $page, 'season' => $season]];
