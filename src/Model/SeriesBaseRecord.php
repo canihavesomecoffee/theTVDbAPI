@@ -71,9 +71,9 @@ class SeriesBaseRecord
     /**
      * The id of the serie.
      *
-     * @var integer
+     * @var string
      */
-    public int $id;
+    public string $id;
     /**
      * The image related to this series.
      *

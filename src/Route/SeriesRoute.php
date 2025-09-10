@@ -124,7 +124,7 @@ class SeriesRoute extends AbstractRoute
     /**
      * Returns a series record that contains all information known about a particular series ID.
      *
-     * @param int $id The id of the series.
+     * @param string $id The id of the series.
      *
      * @return SeriesBaseRecord
      * @throws ParseException
@@ -132,7 +132,7 @@ class SeriesRoute extends AbstractRoute
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function simple(int $id): SeriesBaseRecord
+    public function simple(string $id): SeriesBaseRecord
     {
         $json = $this->parent->performAPICallWithJsonResponse('get', 'series/'.$id);
         return DataParser::parseData($json, SeriesBaseRecord::class);
@@ -141,7 +141,7 @@ class SeriesRoute extends AbstractRoute
     /**
      * Returns a series record that contains all information known about a particular series ID.
      *
-     * @param int $id The id of the series.
+     * @param string $id The id of the series.
      *
      * @return SeriesExtendedRecord
      * @throws ParseException
@@ -149,7 +149,7 @@ class SeriesRoute extends AbstractRoute
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function extended(int $id): SeriesExtendedRecord
+    public function extended(string $id): SeriesExtendedRecord
     {
         $json = $this->parent->performAPICallWithJsonResponse('get', 'series/'.$id.'/extended');
         return DataParser::parseData($json, SeriesExtendedRecord::class);
@@ -159,7 +159,7 @@ class SeriesRoute extends AbstractRoute
      * Returns paginated episodes of the series with 100 results per page. If you pass a language, it will fetch
      * all episodes instead.
      *
-     * @param int           $id            The id of the series to retrieve.
+     * @param string           $id            The id of the series to retrieve.
      * @param int           $season        The season to retrieve.
      * @param int           $page          The page to start with (defaults to 1).
      * @param string        $seasonType    The season type. Defaults to default.
@@ -174,7 +174,7 @@ class SeriesRoute extends AbstractRoute
      * @throws ExceptionInterface
      */
     public function episodes(
-        int $id,
+        string $id,
         int $season = 0,
         int $page = 0,
         string $seasonType = self::SEASON_TYPE_DEFAULT,
@@ -213,7 +213,7 @@ class SeriesRoute extends AbstractRoute
      * Fetch all available episode for this series and season type, localized to primary language. Will merge in
      * episodes in the fallback language if this is specified.
      *
-     * @param int    $id         The id of the series to retrieve.
+     * @param string $id         The id of the series to retrieve.
      * @param string $seasonType The season type. Defaults to default.
      *
      * @return EpisodeBaseRecord[] An array of base episode records. Empty if not enough episodes available.
@@ -222,7 +222,7 @@ class SeriesRoute extends AbstractRoute
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function allEpisodes(int $id, string $seasonType = self::SEASON_TYPE_DEFAULT) : array
+    public function allEpisodes(string $id, string $seasonType = self::SEASON_TYPE_DEFAULT) : array
     {
         $result = [];
 
@@ -304,7 +304,7 @@ class SeriesRoute extends AbstractRoute
     /**
      * Retrieves the possible parameters that can be used to search for episodes.
      *
-     * @param int $id The id of the series.
+     * @param string $id The id of the series.
      *
      * @return Translation The translated series info.
      * @throws ParseException
@@ -312,7 +312,7 @@ class SeriesRoute extends AbstractRoute
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function translate(int $id): Translation
+    public function translate(string $id): Translation
     {
         try {
             $json = $this->parent->performAPICallWithJsonResponse(
@@ -331,7 +331,7 @@ class SeriesRoute extends AbstractRoute
     /**
      * Retrieves artwork for a series
      *
-     * @param int    $id   The id of the series.
+     * @param string $id   The id of the series.
      * @param string $lang The languages to look for artwork. (comma separated)
      * @param int    $type The type of artwork.
      *
@@ -341,7 +341,7 @@ class SeriesRoute extends AbstractRoute
      * @throws UnauthorizedException
      * @throws ExceptionInterface
      */
-    public function artworks(int $id, string $lang = "", int $type = -1): array
+    public function artworks(string $id, string $lang = "", int $type = -1): array
     {
         $arguments = [];
         if ($lang !== "") {
