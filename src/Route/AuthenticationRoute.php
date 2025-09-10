@@ -53,7 +53,7 @@ class AuthenticationRoute extends AbstractRoute
      * @throws ResourceNotFoundException
      * @throws UnauthorizedException
      */
-    public function login(string $apiKey, string $userPIN = null): string
+    public function login(string $apiKey, ?string $userPIN = null): string
     {
         $this->parent->setToken();
 
