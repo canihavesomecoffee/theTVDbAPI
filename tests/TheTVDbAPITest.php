@@ -64,7 +64,7 @@ class TheTVDbAPITest extends TestCase
     private function createPathErrorClient() : Client
     {
         return $this->createClientWithMockHandler([
-            new Response(404, ['Content-Length' => 0]),
+            new Response(404, ['Content-Length' => '0']),
             new RequestException("Error Communicating with Server", new Request('GET', 'test'))
         ]);
     }
@@ -75,7 +75,7 @@ class TheTVDbAPITest extends TestCase
     private function createTokenErrorClient() : Client
     {
         return $this->createClientWithMockHandler([
-            new Response(401, ['Content-Length' => 0]),
+            new Response(401, ['Content-Length' => '0']),
             new RequestException("Error Communicating with Server", new Request('GET', 'test'))
         ]);
     }
