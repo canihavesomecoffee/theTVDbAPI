@@ -13,7 +13,7 @@
   "require": {
     "php": ">=7.4",
     "ext-json": "*",
-    "guzzlehttp/guzzle": "^7.0",
+    "guzzlehttp/guzzle": "^7.0 || ^8.5.5",
     "symfony/serializer": "^5.4|^6.0|^8.1.11",
     "symfony/property-access": "^5.4|^6.0|^8.1.11",
     "symfony/property-info": "^5.4|^6.0|^8.1.11",
